@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>使用指南 · X-META 补贴政策助手</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:   #0b1120;
+  --bg2:  #0f1628;
+  --bg3:  #131d30;
+  --teal: #1a9e7a;
+  --teal2:#0f6350;
+  --gold: #b88c0a;
+  --t1:   #b8ccc8;
+  --t2:   #7a9490;
+  --t3:   #4a6460;
+  --line: rgba(26,158,122,0.16);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--t1);
+  font-family:'Noto Sans SC',sans-serif;
+  font-weight:300;
+  -webkit-font-smoothing:antialiased;
+  line-height:1.7;
+}
+
+/* grid bg */
+body::before{
+  content:'';
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:72px 72px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 20%,black 20%,transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 80% at 50% 20%,black 20%,transparent 75%);
+}
+
+#wrap{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:0 40px 80px;}
+
+/* header */
+.top-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:28px 0 24px;
+  border-bottom:1px solid var(--line);
+  margin-bottom:64px;
+}
+.logo-area{display:flex;align-items:center;gap:12px;}
+.logo-area img{height:26px;width:auto;mix-blend-mode:screen;opacity:.88;}
+.logo-sub{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2.5px;color:var(--t3);}
+.back-btn{
+  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;
+  color:var(--t3);text-decoration:none;
+  display:flex;align-items:center;gap:6px;
+  transition:color .2s;
+}
+.back-btn:hover{color:var(--teal);}
+
+/* hero */
+.hero{margin-bottom:72px;}
+.hero-label{
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;
+  color:var(--gold);text-transform:uppercase;
+  margin-bottom:20px;
+  display:flex;align-items:center;gap:10px;
+}
+.hero-label::before{content:'';width:20px;height:1px;background:var(--gold);}
+.hero h1{
+  font-family:'Noto Serif SC',serif;
+  font-size:clamp(32px,4vw,48px);
+  font-weight:300;line-height:1.2;
+  margin-bottom:16px;color:var(--t1);
+}
+.hero h1 strong{font-weight:600;color:var(--teal);}
+.hero-desc{font-size:14px;color:var(--t2);max-width:520px;line-height:1.9;}
+
+/* section */
+.sec{margin-bottom:64px;}
+.sec-hd{
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:32px;
+}
+.sec-hd-label{
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;
+  color:var(--t3);text-transform:uppercase;white-space:nowrap;
+}
+.sec-hd-line{flex:1;height:1px;background:var(--line);}
+
+/* feature blocks */
+.feat{
+  border:1px solid var(--line);
+  border-radius:10px;
+  overflow:hidden;
+  margin-bottom:16px;
+  transition:border-color .25s;
+}
+.feat:hover{border-color:rgba(26,158,122,.35);}
+.feat-header{
+  display:flex;align-items:flex-start;gap:20px;
+  padding:28px 28px 24px;
+  cursor:pointer;
+  user-select:none;
+}
+.feat-num{
+  font-family:'DM Mono',monospace;
+  font-size:22px;font-weight:500;
+  color:rgba(26,158,122,.25);
+  line-height:1;flex-shrink:0;
+  padding-top:3px;
+  transition:color .25s;
+}
+.feat:hover .feat-num{color:rgba(26,158,122,.5);}
+.feat-meta{flex:1;}
+.feat-title{
+  font-family:'Noto Serif SC',serif;
+  font-size:18px;font-weight:600;
+  color:var(--t1);margin-bottom:6px;
+}
+.feat-tagline{font-size:13px;color:var(--t2);}
+.feat-arrow{
+  font-size:11px;color:var(--t3);
+  transition:transform .25s;
+  padding-top:4px;
+  flex-shrink:0;
+}
+.feat.open .feat-arrow{transform:rotate(90deg);}
+
+.feat-body{
+  display:none;
+  padding:0 28px 28px 68px;
+  border-top:1px solid var(--line);
+  padding-top:24px;
+}
+.feat.open .feat-body{display:block;}
+
+/* steps */
+.steps{display:flex;flex-direction:column;gap:0;margin-bottom:20px;}
+.step{display:flex;gap:16px;position:relative;padding-bottom:20px;}
+.step::before{
+  content:'';position:absolute;left:15px;top:32px;
+  width:1px;height:calc(100% - 8px);
+  background:var(--line);
+}
+.step:last-child::before{display:none;}
+.step:last-child{padding-bottom:0;}
+.step-dot{
+  width:30px;height:30px;border-radius:50%;
+  border:1px solid rgba(26,158,122,.4);
+  background:var(--bg2);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'DM Mono',monospace;font-size:11px;
+  color:var(--teal);flex-shrink:0;
+  position:relative;z-index:1;
+}
+.step-content{padding-top:4px;}
+.step-title{font-size:13px;font-weight:500;color:var(--t1);margin-bottom:4px;}
+.step-desc{font-size:12.5px;color:var(--t2);line-height:1.65;}
+
+/* tips box */
+.tips-box{
+  background:var(--bg3);
+  border:1px solid var(--line);
+  border-left:3px solid var(--teal);
+  border-radius:0 6px 6px 0;
+  padding:14px 16px;
+  margin-top:16px;
+}
+.tips-box-title{
+  font-family:'DM Mono',monospace;
+  font-size:9px;letter-spacing:2px;
+  color:var(--teal);text-transform:uppercase;
+  margin-bottom:8px;
+}
+.tips-box li{
+  font-size:12px;color:var(--t2);
+  list-style:none;padding-left:14px;
+  position:relative;margin-bottom:4px;line-height:1.6;
+}
+.tips-box li::before{content:'◦';position:absolute;left:0;color:var(--teal);}
+
+/* warn box */
+.warn-box{
+  background:rgba(184,140,10,.06);
+  border:1px solid rgba(184,140,10,.2);
+  border-left:3px solid var(--gold);
+  border-radius:0 6px 6px 0;
+  padding:14px 16px;
+  margin-top:16px;
+  font-size:12px;color:var(--t2);line-height:1.65;
+}
+.warn-box strong{color:var(--t1);}
+
+/* screenshot placeholder */
+.screenshot{
+  background:var(--bg3);
+  border:1px solid var(--line);
+  border-radius:8px;
+  height:200px;
+  display:flex;align-items:center;justify-content:center;
+  margin:16px 0;
+  font-family:'DM Mono',monospace;
+  font-size:10px;letter-spacing:2px;
+  color:var(--t3);
+  position:relative;overflow:hidden;
+}
+.screenshot::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(26,158,122,.03) 0%,transparent 70%);
+}
+
+/* faq */
+.faq-item{
+  border-bottom:1px solid var(--line);
+  padding:20px 0;
+}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{
+  font-family:'Noto Serif SC',serif;
+  font-size:14px;font-weight:600;
+  color:var(--t1);margin-bottom:10px;
+  display:flex;align-items:flex-start;gap:10px;
+}
+.faq-q::before{
+  content:'Q';
+  font-family:'DM Mono',monospace;
+  font-size:9px;color:var(--teal);
+  border:1px solid rgba(26,158,122,.4);
+  padding:2px 6px;border-radius:2px;
+  flex-shrink:0;margin-top:2px;
+}
+.faq-a{font-size:13px;color:var(--t2);line-height:1.8;padding-left:28px;}
+
+/* contact */
+.contact-card{
+  background:var(--bg2);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:32px;
+  text-align:center;
+}
+.contact-card h3{
+  font-family:'Noto Serif SC',serif;
+  font-size:18px;font-weight:600;
+  color:var(--t1);margin-bottom:8px;
+}
+.contact-card p{font-size:13px;color:var(--t2);margin-bottom:24px;}
+.contact-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 28px;
+  background:var(--teal);color:#060a10;
+  border-radius:3px;text-decoration:none;
+  font-size:13px;font-weight:500;letter-spacing:1px;
+  transition:background .2s,transform .15s;
+}
+.contact-btn:hover{background:#1db891;transform:translateY(-2px);}
+
+@media(max-width:640px){
+  #wrap{padding:0 20px 60px;}
+  .feat-body{padding-left:20px;}
+  .top-bar{flex-direction:column;align-items:flex-start;gap:16px;}
+}
+</style>
+</head>
+<body>
+<div id="wrap">
+
+  <div class="top-bar">
+    <div class="logo-area">
+      <img src="x-meta_logo.png" alt="X-META">
+      <span class="logo-sub">补贴政策助手</span>
+    </div>
+    <a class="back-btn" href="index.html">← 返回首页</a>
+  </div>
+
+  <div class="hero">
+    <div class="hero-label">使用指南 · User Guide</div>
+    <h1>四步完成<br><strong>政策申报全流程</strong></h1>
+    <p class="hero-desc">本指南帮助你快速上手 X-META 补贴政策助手，从查询政策到核对材料，全程 AI 辅助，无需专业背景。</p>
+  </div>
+
+  <!-- 功能详解 -->
+  <div class="sec">
+    <div class="sec-hd">
+      <span class="sec-hd-label">功能详解</span>
+      <div class="sec-hd-line"></div>
+    </div>
+
+    <!-- 功能1 -->
+    <div class="feat open" id="f1">
+      <div class="feat-header" onclick="toggle('f1')">
+        <div class="feat-num">01</div>
+        <div class="feat-meta">
+          <div class="feat-title">查询匹配政策</div>
+          <div class="feat-tagline">告诉助手你的城市，AI 自动检索并分析匹配度</div>
+        </div>
+        <div class="feat-arrow">▶</div>
+      </div>
+      <div class="feat-body">
+        <div class="steps">
+          <div class="step">
+            <div class="step-dot">1</div>
+            <div class="step-content">
+              <div class="step-title">打开对话框，输入你的加盟城市</div>
+              <div class="step-desc">例如：「帮我查一下上海有哪些适合全感VR项目的补贴政策」或直接输入「深圳的政策」</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-dot">2</div>
+            <div class="step-content">
+              <div class="step-title">AI 自动检索知识库并分析匹配度</div>
+              <div class="step-desc">助手会列出该城市已收录的政策，每条标注「高度匹配 / 条件匹配 / 参考价值」以及匹配原因</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-dot">3</div>
+            <div class="step-content">
+              <div class="step-title">追问某条政策的详细信息</div>
+              <div class="step-desc">例如「第一条的申报条件具体是什么？」「我们公司注册在深圳南山区，符合条件吗？」</div>
+            </div>
+          </div>
+        </div>
+        <div class="screenshot">[ 截图：查询城市政策的对话示例 ]</div>
+        <div class="tips-box">
+          <div class="tips-box-title">💡 提问技巧</div>
+          <ul>
+            <li>可以直接用快捷按钮提问，无需手动输入</li>
+            <li>指定城市区域效果更好，如「深圳南山区」比「深圳」更精准</li>
+            <li>可以问「现在还有哪些政策在受理期内」筛选时效性政策</li>
+            <li>知识库每月自动更新，建议每月初查询一次</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 功能2 -->
+    <div class="feat" id="f2">
+      <div class="feat-header" onclick="toggle('f2')">
+        <div class="feat-num">02</div>
+        <div class="feat-meta">
+          <div class="feat-title">上传政策文件分析</div>
+          <div class="feat-tagline">上传红头文件，AI 自动筛选最适合申报的条款</div>
+        </div>
+        <div class="feat-arrow">▶</div>
+      </div>
+      <div class="feat-body">
+        <div class="steps">
+          <div class="step">
+            <div class="step-dot">1</div>
+            <div class="step-content">
+              <div class="step-title">点击对话框右侧的📎图标上传文件</div>
+              <div class="step-desc">支持 PDF、Word（.docx）、TXT 格式，单个文件不超过 15MB</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-dot">2</div>
+            <div class="step-content">
+              <div class="step-title">发送「帮我分析适合申请的方向」</div>
+              <div class="step-desc">AI 会通读全文，从中识别所有可供企业申报的补贴/资助/奖励条款</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-dot">3</div>
+            <div class="step-content">
+              <div class="step-title">查看结构化分析报告</div>
+              <div class="step-desc">AI 输出「高度匹配 / 条件匹配」两档，每条列明补贴金额、申报条件、匹配理由和注意事项</div>
+            </div>
+          </div>
+        </div>
+        <div class="screenshot">[ 截图：上传文件后的分析报告示例 ]</div>
+        <div class="tips-box">
+          <div class="tips-box-title">📎 适合上传的文件类型</div>
+          <ul>
+            <li>政府发布的政策红头文件（含多个申报方向的综合性文件）</li>
+            <li>地方产业扶持若干措施、实施细则</li>
+            <li>年度申报指南、操作规程</li>
+          </ul>
+        </div>
+        <div class="warn-box">
+          <strong>⚠️ 注意：</strong>AI 分析结果仅供参考，建议申报前人工核实原文件的具体条款和最新截止时间。
+        </div>
+      </div>
+    </div>
+
+    <!-- 功能3 -->
+    <div class="feat" id="f3">
+      <div class="feat-header" onclick="toggle('f3')">
+        <div class="feat-num">03</div>
+        <div class="feat-meta">
+          <div class="feat-title">核对申报材料清单</div>
+          <div class="feat-tagline">逐项核查，找出缺失材料，避免申报失败</div>
+        </div>
+        <div class="feat-arrow">▶</div>
+      </div>
+      <div class="feat-body">
+        <div class="steps">
+          <div class="step">
+            <div class="step-dot">1</div>
+            <div class="step-content">
+              <div class="step-title">确认想申报的政策后，发起材料核对</div>
+              <div class="step-desc">输入「我想申报这个政策，帮我核对需要准备的材料」或「帮我列一下申报材料清单」</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-dot">2</div>
+            <div class="step-content">
+              <div class="step-title">AI 输出带复选框的材料清单</div>
+              <div class="step-desc">每项材料说明用途、在哪里开具，以及常见的办理周期</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-dot">3</div>
+            <div class="step-content">
+              <div class="step-title">逐项告知已备情况，AI 生成缺口清单</div>
+              <div class="step-desc">对「待准备」的材料，AI 给出办理建议（如「软著可联系知识产权代理，约1-2个月）</div>
+            </div>
+          </div>
+        </div>
+        <div class="screenshot">[ 截图：材料核对清单示例 ]</div>
+      </div>
+    </div>
+
+    <!-- 功能4 -->
+    <div class="feat" id="f4">
+      <div class="feat-header" onclick="toggle('f4')">
+        <div class="feat-num">04</div>
+        <div class="feat-meta">
+          <div class="feat-title">申报起草辅助</div>
+          <div class="feat-tagline">获取申请书框架和要点建议（功能完善中）</div>
+        </div>
+        <div class="feat-arrow">▶</div>
+      </div>
+      <div class="feat-body">
+        <div class="steps">
+          <div class="step">
+            <div class="step-dot">1</div>
+            <div class="step-content">
+              <div class="step-title">材料备齐后，请求起草建议</div>
+              <div class="step-desc">输入「帮我起草这个政策的申请书」或「申请书应该包含哪些内容」</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-dot">2</div>
+            <div class="step-content">
+              <div class="step-title">AI 提供申请书结构框架</div>
+              <div class="step-desc">包含各部分的撰写要点、政策要求的关键词、注意事项等</div>
+            </div>
+          </div>
+        </div>
+        <div class="warn-box">
+          <strong>🚧 功能说明：</strong>申请书自动生成功能正在完善中，目前提供框架建议和要点指引。如需完整起草服务，请联系总部获取支持。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="sec">
+    <div class="sec-hd">
+      <span class="sec-hd-label">常见问题</span>
+      <div class="sec-hd-line"></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">知识库里的政策是最新的吗？</div>
+      <div class="faq-a">知识库每月1日自动更新一次，覆盖上海、深圳、南京、哈尔滨、武汉、济南等城市及国家级政策。页面顶部状态栏会显示最近更新时间，建议每月初查询一次获取最新信息。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">我的城市没有收录怎么办？</div>
+      <div class="faq-a">可以将当地政府发布的政策文件（PDF 或 Word）直接上传给助手，使用「文件分析」功能进行筛选。同时可以联系总部，我们会将该城市纳入下次知识库更新范围。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">AI 的分析结果准确吗？可以直接用于申报吗？</div>
+      <div class="faq-a">AI 分析基于政策原文，准确度较高，但政策条款可能随时更新，建议申报前务必核对官方原文和最新通知。AI 的结果作为参考和辅助，最终决策请结合人工判断。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">上传的文件内容会被保存吗？</div>
+      <div class="faq-a">上传的文件仅在本次对话中使用，不会永久保存到知识库。每次新对话需要重新上传。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">遇到问题或发现政策信息有误怎么反馈？</div>
+      <div class="faq-a">请联系 X-META 总部运营团队，我们会及时核实并更新知识库。你的反馈对提升系统质量非常重要。</div>
+    </div>
+  </div>
+
+  <!-- 联系 -->
+  <div class="contact-card">
+    <h3>还有疑问？</h3>
+    <p>如需人工协助或申报支持，请联系 X-META 总部运营团队</p>
+    <a class="contact-btn" href="https://udify.app/chatbot/gu49G2wdPn2pbr3u" target="_blank">立即开始咨询 ↗</a>
+  </div>
+
+</div>
+
+<script>
+function toggle(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('open');
+}
+</script>
+</body>
+</html>
