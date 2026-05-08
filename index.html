@@ -331,49 +331,8 @@ h1 strong::after {
 }
 
 /* ─── EMBED SECTION ─── */
-.embed-sec { padding: 0 56px 80px; }
-.embed-frame {
-  height: 82vh;
-  min-height: 700px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--bg2);
-  position: relative;
-  overflow: hidden;
-  transition: border-color .3s;
-}
-.embed-frame iframe {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-  border-radius: 7px;
-}
-.embed-frame:hover { border-color: rgba(26,158,122,.28); }
-.embed-frame::before {
-  content: '';
-  position: absolute; inset: 0;
-  background:
-    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(26,158,122,.04) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 50% at 100% 100%, rgba(184,140,10,.02) 0%, transparent 60%);
-  pointer-events: none;
-}
-.embed-ph {
-  text-align: center; z-index: 1;
-  font-family: 'DM Mono', monospace;
-  color: rgba(216,230,226,.18);
-}
-.embed-ph-icon {
-  font-size: 22px; margin-bottom: 16px; display: block;
-  animation: breathe 3.5s ease-in-out infinite;
-}
-@keyframes breathe {
-  0%,100% { opacity:.18; }
-  50%      { opacity:.4; }
-}
-.embed-ph p { font-size: 10px; letter-spacing: 2px; margin-bottom: 6px; }
-.embed-ph small { font-size: 9px; opacity: .5; }
+
+
 
 /* ─── FOOTER ─── */
 footer {
@@ -395,7 +354,7 @@ footer {
 
 /* ─── RESPONSIVE ─── */
 @media (max-width: 768px) {
-  header, .status, .hero, .cards-sec, .embed-sec, footer { padding-left: 20px; padding-right: 20px; }
+  header, .status, .hero, .cards-sec, footer { padding-left: 20px; padding-right: 20px; }
   .rule { margin-left: 20px; margin-right: 20px; }
   nav { display: none; }
   .hero { padding-top: 60px; }
@@ -448,7 +407,7 @@ footer {
     <h1>找准补贴<br><strong>精准申报</strong></h1>
     <p class="hero-p">覆盖上海、深圳、南京、哈尔滨等城市的 VR 元宇宙数字文旅政府补贴政策，AI 智能匹配分析，辅助加盟商全流程申报</p>
     <div class="cta-row">
-      <button class="cta-main" onclick="document.getElementById('chat').scrollIntoView({behavior:'smooth'})">开始查询政策</button>
+      <bua class="cta-main" href="https://udify.app/chatbot/gu49G2wdPn2pbr3u" target="_blank" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;">开始查询政策 ↗</a
       <button class="cta-ghost">查看城市覆盖</button>
     </div>
   </section>
@@ -516,19 +475,6 @@ footer {
   <hr class="rule">
 
   <!-- CHAT EMBED -->
-  <section class="embed-sec reveal" id="chat">
-    <div class="sec-hd" style="margin-bottom:20px">
-      <span class="sec-hd-label">智能对话 · 直接查询</span>
-      <div class="sec-hd-line"></div>
-    </div>
-    <div class="embed-frame">
-      <iframe
-        src="https://udify.app/chatbot/gu49G2wdPn2pbr3u"
-        frameborder="0"
-        allow="microphone">
-      </iframe>
-    </div>
-  </section>
 
   <footer>
     <span>X-META · 全感VR游戏补贴政策助手</span>
@@ -589,6 +535,6 @@ document.querySelectorAll('.pcard').forEach(card => {
 });
 </script>
 
-<!-- Dify iframe 嵌入 -->
+
 </body>
 </html>
