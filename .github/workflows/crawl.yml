@@ -30,7 +30,7 @@ jobs:
 
       - name: 上传运行日志
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: crawler-log-${{ github.run_number }}
           path: crawler_log.txt
