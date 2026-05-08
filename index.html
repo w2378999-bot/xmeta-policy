@@ -400,7 +400,7 @@ h1 strong::after {
 .cc-desc { font-size: 11px; color: var(--t3); line-height: 1.5; }
 
 /* ─── 使用指南 ─── */
-.guide-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.guide-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 .guide-step {
   padding: 28px 24px;
   border: 1px solid var(--line);
@@ -442,7 +442,7 @@ h1 strong::after {
 
 @media (max-width: 900px) {
   .city-layout { grid-template-columns: 1fr; }
-  .guide-steps { grid-template-columns: 1fr; }
+  .guide-steps { grid-template-columns: repeat(2, 1fr); }
   .guide-step::after { display: none; }
   .page-sec { padding: 48px 20px; }
 }
@@ -734,6 +734,16 @@ footer {
       </div>
       <div class="guide-step">
         <div class="gs-num">02</div>
+        <div class="gs-title">上传政策文件分析</div>
+        <div class="gs-desc">直接上传政府红头文件（PDF / Word），AI 自动通读全文，从中筛选出适合全感VR项目申报的条款，输出结构化分析报告。</div>
+        <div class="gs-tips">
+          <div class="gs-tip">支持 PDF / Word / TXT 格式</div>
+          <div class="gs-tip">自动识别可申报条款</div>
+          <div class="gs-tip">标注匹配度与注意事项</div>
+        </div>
+      </div>
+      <div class="guide-step">
+        <div class="gs-num">03</div>
         <div class="gs-title">核对申报材料</div>
         <div class="gs-desc">确认目标政策后，助手逐项列出申报所需材料，帮你快速找出已有和缺失的部分，避免因材料不全导致申报失败。</div>
         <div class="gs-tips">
@@ -743,7 +753,7 @@ footer {
         </div>
       </div>
       <div class="guide-step">
-        <div class="gs-num">03</div>
+        <div class="gs-num">04</div>
         <div class="gs-title">辅助申报起草</div>
         <div class="gs-desc">材料备齐后，助手可根据政策要求和企业信息，提供申请书框架和要点建议，降低撰写门槛。</div>
         <div class="gs-tips">
