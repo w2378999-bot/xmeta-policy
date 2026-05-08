@@ -23,31 +23,36 @@ from urllib.parse import urlparse, urljoin
 # 配置区（只需改这里）
 # ============================================================
 
-# 知识库专用API Key（格式：dataset-xxx，在Dify知识库页面右上角「API」按钮里找）
-# 注意：不是应用的 app-xxx Key，要用知识库的 dataset-xxx Key
-DIFY_API_KEY = "dataset-ZoagQCnXGulqcfFJp08cj7pL"
-DIFY_DATASET_ID = "37b890bd-a667-4188-a02f-2ee75124fccb"
-DIFY_BASE_URL = "https://api.dify.ai/v1"
+import os
 
-# 全自动模式：LLM过滤→填字段→直接上传，不需要人工确认
-# 设为 False 则退回交互审核模式
+# ── API Key 配置 ──
+# 本地运行：直接在下面填写（或设置环境变量）
+# GitHub Actions：从 Secrets 自动读取，不需要改这里
+DIFY_API_KEY    = os.environ.get("DIFY_API_KEY",    "dataset-你的知识库APIKey填这里")
+SERPER_API_KEY  = os.environ.get("SERPER_API_KEY",  "你的SerperKey填这里")
+LLM_API_KEY     = os.environ.get("LLM_API_KEY",     "你的通义千问Key填这里")
+
+DIFY_DATASET_ID = "37b890bd-a667-4188-a02f-2ee75124fccb"
+DIFY_BASE_URL   = "https://api.dify.ai/v1"
+
+# 全自动模式：LLM过滤→填字段→直接上传
 AUTO_MODE = True
 
 # ---- 方案B：Serper 搜索API ----
 # 已注册：serper.dev，注册即送2500次免费调用
 # 填入Key后把 SERPER_ENABLED 改为 True 即可
-SERPER_API_KEY = "c331e2123de725de3de8afe6404395f1911b79e5"
+# SERPER_API_KEY 已在上方从环境变量读取
 SERPER_SEARCH_URL = "https://google.serper.dev/search"
-SERPER_ENABLED = True   # 填入Key后改为 True
+SERPER_ENABLED = True   # GitHub Actions 自动启用
 
 # ---- LLM自动填字段 ----
 # 推荐通义千问Qwen-Plus（国内直连，约¥0.004/千token，每条政策约¥0.01）
 # 申请地址：https://dashscope.aliyun.com → 开通DashScope → 获取API Key
 # 也可以用 OpenAI/Claude，把 LLM_BASE_URL 和 LLM_MODEL 换掉即可
-LLM_API_KEY = "sk-d9f8a67dc92c4c79a1dce796c450715e"
+# LLM_API_KEY 已在上方从环境变量读取
 LLM_BASE_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1"
-LLM_MODEL = "qwen-plus-2025-07-28"  # 免费额度版本，100万token
-LLM_ENABLED = True   # 填入Key后改为 True
+LLM_MODEL = "qwen-plus-2025-07-28"
+LLM_ENABLED = True   # GitHub Actions 自动启用
 
 CACHE_FILE = "crawled_cache.json"
 LOG_FILE = "crawler_log.txt"
