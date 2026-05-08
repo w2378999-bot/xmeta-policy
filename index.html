@@ -333,13 +333,18 @@ h1 strong::after {
 /* ─── EMBED SECTION ─── */
 .embed-sec { padding: 0 56px 80px; }
 .embed-frame {
-  height: 520px;
+  height: 80vh;
+  min-height: 640px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--bg2);
-  display: flex; align-items: center; justify-content: center;
+  display: flex; align-items: stretch; justify-content: center;
   position: relative; overflow: hidden;
   transition: border-color .3s;
+}
+/* iframe 本身允许内部滚动 */
+.embed-frame iframe {
+  border-radius: 7px;
 }
 .embed-frame:hover { border-color: rgba(26,158,122,.28); }
 .embed-frame::before {
@@ -403,12 +408,15 @@ footer {
 
   <!-- HEADER -->
   <header>
-    <a class="logo" href="#">
-      <div class="logo-mark">XM</div>
-      <div class="logo-texts">
-        <span class="logo-name">X-META</span>
-        <span class="logo-sub">补贴政策助手</span>
-      </div>
+    <a class="logo" href="#" style="gap:12px;">
+      <img
+        src="x-meta_logo.png"
+        alt="X-META"
+        style="height:30px;width:auto;mix-blend-mode:screen;opacity:.88;transition:opacity .2s;"
+        onmouseover="this.style.opacity=1"
+        onmouseout="this.style.opacity=.88"
+      >
+      <span class="logo-sub" style="align-self:flex-end;padding-bottom:1px;">补贴政策助手</span>
     </a>
     <nav>
       <a class="nav-link" href="#">政策库</a>
@@ -512,7 +520,7 @@ footer {
     <div class="embed-frame">
       <iframe
         src="https://udify.app/chatbot/gu49G2wdPn2pbr3u"
-        style="width:100%;height:100%;border:none;"
+        style="width:100%;height:100%;min-height:700px;border:none;border-radius:7px;"
         frameborder="0"
         allow="microphone">
       </iframe>
@@ -577,5 +585,7 @@ document.querySelectorAll('.pcard').forEach(card => {
   });
 });
 </script>
+
+<!-- Dify iframe 嵌入 -->
 </body>
 </html>
