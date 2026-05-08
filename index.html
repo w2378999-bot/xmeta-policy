@@ -334,6 +334,119 @@ h1 strong::after {
 
 
 
+
+/* ─── SECTION SHARED ─── */
+.page-sec {
+  padding: 72px 52px;
+  border-bottom: 1px solid var(--line);
+}
+.page-sec .sec-hd { margin-bottom: 40px; }
+.sec-hd-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 3px; color: var(--t3); text-transform: uppercase; white-space: nowrap; }
+.sec-hd-line { flex: 1; height: 1px; background: var(--line); }
+
+/* ─── 政策库 ─── */
+.policy-table { width: 100%; border-collapse: collapse; }
+.policy-table th {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 2px;
+  color: var(--t3); text-transform: uppercase;
+  padding: 0 16px 14px 0;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+}
+.policy-table td {
+  padding: 16px 16px 16px 0;
+  font-size: 13px;
+  border-bottom: 1px solid rgba(26,158,122,.07);
+  vertical-align: top;
+  color: var(--t2);
+}
+.policy-table tr:hover td { color: var(--t1); background: rgba(26,158,122,.03); }
+.city-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 1px;
+  padding: 3px 8px; border-radius: 2px;
+  border: 1px solid var(--line);
+  color: var(--teal);
+  display: inline-block;
+  white-space: nowrap;
+}
+.dept-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; padding: 2px 7px; border-radius: 2px;
+  display: inline-block; margin: 2px 2px 0 0;
+  background: rgba(26,158,122,.06);
+  border: 1px solid rgba(26,158,122,.15);
+  color: var(--t2);
+}
+
+/* ─── 城市覆盖 ─── */
+.city-layout { display: grid; grid-template-columns: 1fr 340px; gap: 40px; align-items: start; }
+#china-map { width: 100%; height: 460px; }
+.city-cards { display: flex; flex-direction: column; gap: 10px; }
+.city-card {
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: border-color .2s, transform .15s;
+}
+.city-card:hover { border-color: rgba(26,158,122,.4); transform: translateX(4px); }
+.city-card.active { border-color: var(--teal); background: rgba(26,158,122,.06); }
+.cc-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.cc-name { font-family: 'Noto Serif SC', serif; font-size: 14px; font-weight: 600; color: var(--t1); }
+.cc-count { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--teal); }
+.cc-desc { font-size: 11px; color: var(--t3); line-height: 1.5; }
+
+/* ─── 使用指南 ─── */
+.guide-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.guide-step {
+  padding: 28px 24px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  position: relative;
+  transition: border-color .25s;
+}
+.guide-step:hover { border-color: rgba(26,158,122,.35); }
+.guide-step::after {
+  content: '→';
+  position: absolute;
+  right: -18px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--t3);
+  font-size: 16px;
+}
+.guide-step:last-child::after { display: none; }
+.gs-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 28px; font-weight: 500;
+  color: rgba(26,158,122,.2);
+  margin-bottom: 16px;
+  line-height: 1;
+}
+.gs-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 16px; font-weight: 600;
+  color: var(--t1); margin-bottom: 10px;
+}
+.gs-desc { font-size: 13px; color: var(--t2); line-height: 1.75; }
+.gs-tips { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); }
+.gs-tip {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; color: var(--t3);
+  display: flex; align-items: center; gap: 6px;
+  margin-bottom: 5px;
+}
+.gs-tip::before { content: '◦'; color: var(--teal); }
+
+@media (max-width: 900px) {
+  .city-layout { grid-template-columns: 1fr; }
+  .guide-steps { grid-template-columns: 1fr; }
+  .guide-step::after { display: none; }
+  .page-sec { padding: 48px 20px; }
+}
+
 /* ─── FOOTER ─── */
 footer {
   margin-top: auto;
@@ -382,9 +495,9 @@ footer {
       <span class="logo-sub" style="align-self:flex-end;padding-bottom:1px;">补贴政策助手</span>
     </a>
     <nav>
-      <a class="nav-link" href="#">政策库</a>
-      <a class="nav-link" href="#">城市覆盖</a>
-      <a class="nav-link" href="#">使用指南</a>
+      <a class="nav-link" href="#sec-policies">政策库</a>
+      <a class="nav-link" href="#sec-cities">城市覆盖</a>
+      <a class="nav-link" href="#sec-guide">使用指南</a>
       <a class="nav-btn" href="#chat">进入对话 →</a>
     </nav>
   </header>
@@ -408,7 +521,7 @@ footer {
     <p class="hero-p">覆盖上海、深圳、南京、哈尔滨等城市的 VR 元宇宙数字文旅政府补贴政策，AI 智能匹配分析，辅助加盟商全流程申报</p>
     <div class="cta-row">
       <a class="cta-main" href="https://udify.app/chatbot/gu49G2wdPn2pbr3u" target="_blank" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;cursor:pointer;">开始查询政策 ↗</a>
-      <button class="cta-ghost">查看城市覆盖</button>
+      <button class="cta-ghost" onclick="document.getElementById('sec-cities').scrollIntoView({behavior:'smooth'})">查看城市覆盖</button>
     </div>
   </section>
 
@@ -474,7 +587,173 @@ footer {
 
   <hr class="rule">
 
-  <!-- CHAT EMBED -->
+  <!-- 政策库 -->
+  <section class="page-sec reveal" id="sec-policies">
+    <div class="sec-hd" style="display:flex;align-items:center;gap:14px;">
+      <span class="sec-hd-label">政策库 · 当前收录</span>
+      <div class="sec-hd-line"></div>
+    </div>
+    <table class="policy-table">
+      <thead>
+        <tr>
+          <th style="width:100px">城市</th>
+          <th>政策名称</th>
+          <th>归口部门</th>
+          <th>补贴类型</th>
+          <th>匹配度</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="city-tag">深圳</span></td>
+          <td>数字创意产业高质量发展若干措施</td>
+          <td><span class="dept-tag">文旅口</span></td>
+          <td>资金资助</td>
+          <td><span class="badge bh">高度匹配</span></td>
+        </tr>
+        <tr>
+          <td><span class="city-tag">深圳</span></td>
+          <td>数字创意产业集群扶持计划操作规程</td>
+          <td><span class="dept-tag">文旅口</span></td>
+          <td>事后资助</td>
+          <td><span class="badge bh">高度匹配</span></td>
+        </tr>
+        <tr>
+          <td><span class="city-tag">上海</span></td>
+          <td>元宇宙技术研发专项补贴</td>
+          <td><span class="dept-tag">科创科委口</span></td>
+          <td>研发资助</td>
+          <td><span class="badge bh">高度匹配</span></td>
+        </tr>
+        <tr>
+          <td><span class="city-tag">上海</span></td>
+          <td>文旅元宇宙数字文娱新空间创新应用场景</td>
+          <td><span class="dept-tag">文旅局口</span></td>
+          <td>荣誉资源</td>
+          <td><span class="badge bh">高度匹配</span></td>
+        </tr>
+        <tr>
+          <td><span class="city-tag">上海</span></td>
+          <td>促进服务消费提质扩容实施方案</td>
+          <td><span class="dept-tag">商委口</span></td>
+          <td>综合补贴</td>
+          <td><span class="badge bm">条件匹配</span></td>
+        </tr>
+        <tr>
+          <td><span class="city-tag">南京</span></td>
+          <td>玄武区数字文旅产业发展补贴</td>
+          <td><span class="dept-tag">文旅局口</span></td>
+          <td>资金补贴</td>
+          <td><span class="badge bh">高度匹配</span></td>
+        </tr>
+        <tr>
+          <td><span class="city-tag">哈尔滨</span></td>
+          <td>支持新技术新业态创新应用（冰雪经济）</td>
+          <td><span class="dept-tag">文旅局口</span></td>
+          <td>营收奖补</td>
+          <td><span class="badge bh">高度匹配</span></td>
+        </tr>
+        <tr>
+          <td><span class="city-tag">哈尔滨</span></td>
+          <td>支持冰雪旅游设备更新改造升级</td>
+          <td><span class="dept-tag">文旅局口</span></td>
+          <td>贷款贴息</td>
+          <td><span class="badge bm">条件匹配</span></td>
+        </tr>
+        <tr>
+          <td><span class="city-tag">国家级</span></td>
+          <td>2025年元宇宙典型案例推荐</td>
+          <td><span class="dept-tag">工信部</span></td>
+          <td>荣誉资源</td>
+          <td><span class="badge bh">高度匹配</span></td>
+        </tr>
+        <tr>
+          <td><span class="city-tag">广东省</span></td>
+          <td>加快推动人工智能赋能实体经济</td>
+          <td><span class="dept-tag">科创科委口</span></td>
+          <td>综合措施</td>
+          <td><span class="badge bm">条件匹配</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 城市覆盖 -->
+  <section class="page-sec reveal" id="sec-cities">
+    <div class="sec-hd" style="display:flex;align-items:center;gap:14px;">
+      <span class="sec-hd-label">城市覆盖 · 政策地图</span>
+      <div class="sec-hd-line"></div>
+    </div>
+    <div class="city-layout">
+      <div id="china-map"></div>
+      <div class="city-cards" id="city-cards">
+        <div class="city-card active" data-city="shanghai">
+          <div class="cc-top"><span class="cc-name">上海</span><span class="cc-count">8 条政策</span></div>
+          <div class="cc-desc">科创科委口 · 文旅局口 · 商委口 · 覆盖元宇宙、数字文娱、服务消费</div>
+        </div>
+        <div class="city-card" data-city="shenzhen">
+          <div class="cc-top"><span class="cc-name">深圳</span><span class="cc-count">6 条政策</span></div>
+          <div class="cc-desc">文旅口 · 科创科委口 · 覆盖数字创意产业全链条</div>
+        </div>
+        <div class="city-card" data-city="nanjing">
+          <div class="cc-top"><span class="cc-name">南京</span><span class="cc-count">3 条政策</span></div>
+          <div class="cc-desc">文旅局口 · 商委口 · 玄武区数字文旅专项</div>
+        </div>
+        <div class="city-card" data-city="harbin">
+          <div class="cc-top"><span class="cc-name">哈尔滨</span><span class="cc-count">3 条政策</span></div>
+          <div class="cc-desc">文旅局口 · 冰雪经济专项 · VR/AR 设备补贴</div>
+        </div>
+        <div class="city-card" data-city="wuhan">
+          <div class="cc-top"><span class="cc-name">武汉</span><span class="cc-count">1 条政策</span></div>
+          <div class="cc-desc">文旅局口 · 文旅元宇宙三年行动方案</div>
+        </div>
+        <div class="city-card" data-city="jinan">
+          <div class="cc-top"><span class="cc-name">济南</span><span class="cc-count">1 条政策</span></div>
+          <div class="cc-desc">商委口 · 消费新业态新场景补贴</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 使用指南 -->
+  <section class="page-sec reveal" id="sec-guide">
+    <div class="sec-hd" style="display:flex;align-items:center;gap:14px;">
+      <span class="sec-hd-label">使用指南 · 三步申报</span>
+      <div class="sec-hd-line"></div>
+    </div>
+    <div class="guide-steps">
+      <div class="guide-step">
+        <div class="gs-num">01</div>
+        <div class="gs-title">查询匹配政策</div>
+        <div class="gs-desc">告诉助手你的加盟城市，AI 自动从知识库中检索相关政策，分析匹配度并给出优先申报建议。</div>
+        <div class="gs-tips">
+          <div class="gs-tip">支持城市/区域精确查询</div>
+          <div class="gs-tip">按匹配度高低排序</div>
+          <div class="gs-tip">区分「高度匹配」与「条件匹配」</div>
+        </div>
+      </div>
+      <div class="guide-step">
+        <div class="gs-num">02</div>
+        <div class="gs-title">核对申报材料</div>
+        <div class="gs-desc">确认目标政策后，助手逐项列出申报所需材料，帮你快速找出已有和缺失的部分，避免因材料不全导致申报失败。</div>
+        <div class="gs-tips">
+          <div class="gs-tip">逐项核查材料清单</div>
+          <div class="gs-tip">提示材料办理渠道</div>
+          <div class="gs-tip">估算准备周期</div>
+        </div>
+      </div>
+      <div class="guide-step">
+        <div class="gs-num">03</div>
+        <div class="gs-title">辅助申报起草</div>
+        <div class="gs-desc">材料备齐后，助手可根据政策要求和企业信息，提供申请书框架和要点建议，降低撰写门槛。</div>
+        <div class="gs-tips">
+          <div class="gs-tip">申请书结构建议</div>
+          <div class="gs-tip">关键要点提炼</div>
+          <div class="gs-tip">功能持续完善中</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <footer>
     <span>X-META · 全感VR游戏补贴政策助手</span>
@@ -529,10 +808,163 @@ document.querySelectorAll('.pcard').forEach(card => {
     const y = ((e.clientY - r.top)  / r.height * 100).toFixed(1);
     card.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(26,158,122,.07) 0%, var(--bg) 65%)`;
   });
-  card.addEventListener('mouseleave', () => {
-    card.style.background = '';
-  });
+  card.addEventListener('mouseleave', () => { card.style.background = ''; });
 });
+
+// ── 网格交叉点发光 ──
+(function() {
+  const GAP = 72; // 与 CSS 网格间距一致
+  const RADIUS = 120;
+  const canvas = document.createElement('canvas');
+  canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:2;';
+  document.body.appendChild(canvas);
+  const ctx = canvas.getContext('2d');
+  let W, H, points = [], mouseX = -999, mouseY = -999;
+
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+    points = [];
+    const cols = Math.ceil(W / GAP) + 1;
+    const rows = Math.ceil(H / GAP) + 1;
+    for (let c = 0; c <= cols; c++) {
+      for (let r = 0; r <= rows; r++) {
+        points.push({ x: c * GAP, y: r * GAP });
+      }
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    points.forEach(p => {
+      const dx = p.x - mouseX, dy = p.y - mouseY;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < RADIUS) {
+        const alpha = (1 - dist / RADIUS) * 0.75;
+        const size = (1 - dist / RADIUS) * 3.5 + 0.5;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(26,158,122,${alpha})`;
+        ctx.fill();
+        // 光晕
+        const grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, size * 5);
+        grd.addColorStop(0, `rgba(26,158,122,${alpha * 0.4})`);
+        grd.addColorStop(1, 'transparent');
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, size * 5, 0, Math.PI * 2);
+        ctx.fillStyle = grd;
+        ctx.fill();
+      }
+    });
+    requestAnimationFrame(draw);
+  }
+
+  document.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
+  document.addEventListener('mouseleave', () => { mouseX = -999; mouseY = -999; });
+  window.addEventListener('resize', resize);
+  resize();
+  draw();
+})();
+
+// ── ECharts 中国地图 ──
+(function loadECharts() {
+  if (!document.getElementById('china-map')) return;
+
+  const script1 = document.createElement('script');
+  script1.src = 'https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js';
+  script1.onload = function() {
+    const script2 = document.createElement('script');
+    script2.src = 'https://cdn.jsdelivr.net/npm/echarts/map/js/china.js';
+    script2.onload = initMap;
+    document.head.appendChild(script2);
+  };
+  document.head.appendChild(script1);
+})();
+
+function initMap() {
+  const el = document.getElementById('china-map');
+  if (!el || typeof echarts === 'undefined') return;
+
+  const chart = echarts.init(el, null, { renderer: 'canvas' });
+
+  // 已覆盖城市对应的省份
+  const coveredProvinces = ['上海', '广东', '江苏', '黑龙江', '湖北', '山东'];
+  const data = coveredProvinces.map(name => ({ name, value: 1 }));
+
+  chart.setOption({
+    backgroundColor: 'transparent',
+    tooltip: {
+      trigger: 'item',
+      backgroundColor: 'rgba(11,18,32,0.9)',
+      borderColor: 'rgba(26,158,122,.3)',
+      borderWidth: 1,
+      textStyle: { color: '#b8ccc8', fontFamily: 'Noto Sans SC', fontSize: 12 },
+      formatter: p => {
+        const covered = coveredProvinces.includes(p.name);
+        return covered
+          ? `<b>${p.name}</b><br/>✅ 已覆盖政策`
+          : `<b>${p.name}</b><br/>暂未收录，敬请期待`;
+      }
+    },
+    series: [{
+      type: 'map',
+      map: 'china',
+      roam: false,
+      aspectScale: 0.85,
+      label: {
+        show: false,
+        color: '#4a6460',
+        fontSize: 10,
+      },
+      emphasis: {
+        label: { show: true, color: '#b8ccc8', fontSize: 11 },
+        itemStyle: { areaColor: '#1a9e7a', borderColor: '#1a9e7a' }
+      },
+      select: { disabled: true },
+      itemStyle: {
+        areaColor: '#0d1828',
+        borderColor: 'rgba(26,158,122,.2)',
+        borderWidth: 0.8,
+      },
+      data: data.map(d => ({
+        name: d.name,
+        itemStyle: {
+          areaColor: 'rgba(26,158,122,.22)',
+          borderColor: 'rgba(26,158,122,.6)',
+          borderWidth: 1,
+          shadowColor: 'rgba(26,158,122,.3)',
+          shadowBlur: 8,
+        },
+        emphasis: {
+          itemStyle: {
+            areaColor: 'rgba(26,158,122,.5)',
+            borderColor: '#1a9e7a',
+            shadowBlur: 16,
+          }
+        }
+      }))
+    }]
+  });
+
+  // 点击城市卡片高亮地图
+  document.querySelectorAll('.city-card').forEach(card => {
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.city-card').forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+    });
+  });
+
+  window.addEventListener('resize', () => chart.resize());
+}
+
+// scroll reveal（包含新区块）
+const allReveals = document.querySelectorAll('.reveal');
+const revealIO = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); revealIO.unobserve(e.target); }
+  });
+}, { threshold: 0.05 });
+allReveals.forEach(el => revealIO.observe(el));
 </script>
 
 
