@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>X-META · 补贴政策助手</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600&family=Noto+Sans+SC:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:     #080c14;
+  --bg2:    #0c1220;
+  --teal:   #1a9e7a;
+  --teal-d: #0f6350;
+  --gold:   #b88c0a;
+  --paper:  #d8e6e2;
+  --muted:  rgba(216,230,226,0.4);
+  --faint:  rgba(216,230,226,0.12);
+  --line:   rgba(26,158,122,0.14);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--paper);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  cursor: none;
+  overflow-x: hidden;
+}
+
+/* ─── CURSOR ─── */
+#cur {
+  position: fixed; pointer-events: none; z-index: 9999;
+  width: 5px; height: 5px;
+  background: var(--teal);
+  border-radius: 50%;
+  transform: translate(-50%,-50%);
+  transition: width .15s, height .15s, background .2s, opacity .2s;
+  will-change: transform;
+}
+#cur-o {
+  position: fixed; pointer-events: none; z-index: 9998;
+  width: 32px; height: 32px;
+  border: 1px solid rgba(26,158,122,.35);
+  border-radius: 50%;
+  transform: translate(-50%,-50%);
+  transition: width .3s, height .3s, border-color .3s, transform .08s linear;
+  will-change: transform;
+}
+body:has(a:hover) #cur, body:has(button:hover) #cur { width:8px; height:8px; background: var(--gold); }
+body:has(a:hover) #cur-o, body:has(button:hover) #cur-o { width:48px; height:48px; border-color: rgba(184,140,10,.4); }
+body:has(.pcard:hover) #cur { background: var(--teal); width:10px; height:10px; }
+body:has(.pcard:hover) #cur-o { width:54px; height:54px; }
+
+/* ─── GRAIN ─── */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)' opacity='.03'/%3E%3C/svg%3E");
+  background-size: 280px;
+  opacity: .55;
+}
+
+/* ─── SUBTLE GRID ─── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 40%, black 20%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 40%, black 20%, transparent 75%);
+}
+
+/* ─── PAGE SHELL ─── */
+#page { position: relative; z-index: 10; min-height: 100vh; display: flex; flex-direction: column; }
+
+/* ─── HEADER ─── */
+header {
+  padding: 28px 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+}
+.logo { display: flex; align-items: center; gap: 16px; text-decoration: none; }
+.logo-mark {
+  width: 36px; height: 36px;
+  border: 1px solid rgba(26,158,122,.5);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; letter-spacing: -1px;
+  color: var(--teal);
+  transition: border-color .25s, box-shadow .25s;
+}
+.logo:hover .logo-mark {
+  border-color: var(--teal);
+  box-shadow: 0 0 16px rgba(26,158,122,.15);
+}
+.logo-texts { display: flex; flex-direction: column; gap: 2px; }
+.logo-name {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 14px; font-weight: 600;
+  letter-spacing: 5px; color: var(--paper);
+}
+.logo-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 2.5px;
+  color: rgba(216,230,226,.25);
+}
+
+nav { display: flex; align-items: center; gap: 40px; }
+.nav-link {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 2px;
+  color: rgba(216,230,226,.38);
+  text-decoration: none;
+  position: relative; padding-bottom: 2px;
+  transition: color .25s;
+}
+.nav-link::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0;
+  width: 0; height: 1px;
+  background: var(--teal);
+  transition: width .3s ease;
+}
+.nav-link:hover { color: rgba(216,230,226,.75); }
+.nav-link:hover::after { width: 100%; }
+
+.nav-btn {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 2px;
+  color: var(--teal);
+  text-decoration: none;
+  padding: 8px 20px;
+  border: 1px solid rgba(26,158,122,.35);
+  border-radius: 3px;
+  transition: background .2s, border-color .2s, box-shadow .2s;
+}
+.nav-btn:hover {
+  background: rgba(26,158,122,.08);
+  border-color: rgba(26,158,122,.6);
+  box-shadow: 0 0 20px rgba(26,158,122,.08);
+}
+
+/* ─── STATUS BAR ─── */
+.status {
+  padding: 8px 56px;
+  display: flex; align-items: center; gap: 18px;
+  border-bottom: 1px solid var(--line);
+  font-family: 'DM Mono', monospace;
+  font-size: 9.5px; letter-spacing: 1.5px;
+  color: rgba(216,230,226,.25);
+}
+.dot-live {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 6px rgba(26,158,122,.6);
+  animation: livepulse 2.4s ease-in-out infinite;
+}
+@keyframes livepulse {
+  0%,100% { opacity:1; }
+  50%      { opacity:.35; }
+}
+.status-sep { width:1px; height:9px; background: var(--faint); }
+
+/* ─── HERO ─── */
+.hero {
+  padding: 110px 56px 80px;
+  max-width: 680px;
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: 'DM Mono', monospace;
+  font-size: 9.5px; letter-spacing: 3px;
+  color: var(--gold); text-transform: uppercase;
+  margin-bottom: 32px;
+  opacity: 0; animation: rise .8s .2s ease forwards;
+}
+.hero-tag::before { content: ''; width: 20px; height: 1px; background: var(--gold); }
+
+h1 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: clamp(44px, 6vw, 76px);
+  font-weight: 300;
+  line-height: 1.1; letter-spacing: -1px;
+  margin-bottom: 28px;
+  opacity: 0; animation: rise .9s .4s ease forwards;
+}
+h1 strong {
+  font-weight: 600;
+  color: var(--teal);
+  display: inline-block;
+  position: relative;
+}
+h1 strong::after {
+  content: '';
+  position: absolute; left: 0; bottom: -4px; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--teal), transparent);
+}
+
+.hero-p {
+  font-size: 14.5px; line-height: 2;
+  color: rgba(216,230,226,.42);
+  max-width: 420px; margin-bottom: 52px;
+  font-weight: 300;
+  opacity: 0; animation: rise .9s .6s ease forwards;
+}
+
+.cta-row {
+  display: flex; gap: 16px; align-items: center;
+  opacity: 0; animation: rise .9s .8s ease forwards;
+}
+.cta-main {
+  padding: 13px 32px;
+  background: var(--teal);
+  color: #060a10;
+  border: none; border-radius: 3px;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 13px; font-weight: 500; letter-spacing: 1px;
+  cursor: none;
+  transition: background .2s, transform .15s, box-shadow .25s;
+}
+.cta-main:hover {
+  background: #1db891;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(26,158,122,.22);
+}
+.cta-main:active { transform: translateY(0); }
+
+.cta-ghost {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 2px;
+  color: rgba(216,230,226,.38);
+  background: none; border: none; cursor: none;
+  display: flex; align-items: center; gap: 6px;
+  transition: color .2s, gap .2s;
+}
+.cta-ghost:hover { color: rgba(216,230,226,.7); gap: 10px; }
+.cta-ghost::after { content: '→'; }
+
+@keyframes rise {
+  from { opacity:0; transform: translateY(18px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+
+/* ─── DIVIDER ─── */
+.rule {
+  margin: 0 56px;
+  border: none; border-top: 1px solid var(--line);
+}
+
+/* ─── CARDS SECTION ─── */
+.cards-sec {
+  padding: 56px 56px 72px;
+  opacity: 0; animation: rise .9s 1s ease forwards;
+}
+.sec-hd {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 28px;
+}
+.sec-hd-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 3px;
+  color: rgba(216,230,226,.22); text-transform: uppercase;
+}
+.sec-hd-line { flex: 1; height: 1px; background: var(--line); }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.pcard {
+  background: var(--bg);
+  padding: 24px 22px;
+  cursor: none;
+  transition: background .2s;
+  position: relative;
+  overflow: hidden;
+}
+.pcard::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--teal), transparent);
+  transform: scaleX(0);
+  transition: transform .4s ease;
+}
+.pcard:hover { background: rgba(26,158,122,.04); }
+.pcard:hover::before { transform: scaleX(1); }
+
+.pc-top {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 14px;
+}
+.pc-city {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 1.5px;
+  color: var(--gold); text-transform: uppercase;
+}
+.badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 8px; padding: 2px 7px; border-radius: 2px;
+  letter-spacing: .5px;
+}
+.bh { color: var(--teal); border: 1px solid rgba(26,158,122,.3); }
+.bm { color: var(--gold); border: 1px solid rgba(184,140,10,.3); }
+
+.pc-name {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 13px; font-weight: 400; line-height: 1.6;
+  color: rgba(216,230,226,.78);
+  margin-bottom: 18px;
+}
+.pc-amt {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; color: rgba(216,230,226,.35);
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+}
+
+/* ─── EMBED SECTION ─── */
+.embed-sec { padding: 0 56px 80px; }
+.embed-frame {
+  height: 520px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg2);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  transition: border-color .3s;
+}
+.embed-frame:hover { border-color: rgba(26,158,122,.28); }
+.embed-frame::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(26,158,122,.04) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 100% 100%, rgba(184,140,10,.02) 0%, transparent 60%);
+  pointer-events: none;
+}
+.embed-ph {
+  text-align: center; z-index: 1;
+  font-family: 'DM Mono', monospace;
+  color: rgba(216,230,226,.18);
+}
+.embed-ph-icon {
+  font-size: 22px; margin-bottom: 16px; display: block;
+  animation: breathe 3.5s ease-in-out infinite;
+}
+@keyframes breathe {
+  0%,100% { opacity:.18; }
+  50%      { opacity:.4; }
+}
+.embed-ph p { font-size: 10px; letter-spacing: 2px; margin-bottom: 6px; }
+.embed-ph small { font-size: 9px; opacity: .5; }
+
+/* ─── FOOTER ─── */
+footer {
+  margin-top: auto;
+  padding: 22px 56px;
+  border-top: 1px solid var(--line);
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 1.5px;
+  color: rgba(216,230,226,.18);
+}
+
+/* ─── SCROLL REVEAL ─── */
+.reveal {
+  opacity: 0; transform: translateY(16px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 768px) {
+  header, .status, .hero, .cards-sec, .embed-sec, footer { padding-left: 20px; padding-right: 20px; }
+  .rule { margin-left: 20px; margin-right: 20px; }
+  nav { display: none; }
+  .hero { padding-top: 60px; }
+  h1 { font-size: 38px; }
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-o"></div>
+
+<div id="page">
+
+  <!-- HEADER -->
+  <header>
+    <a class="logo" href="#">
+      <div class="logo-mark">XM</div>
+      <div class="logo-texts">
+        <span class="logo-name">X-META</span>
+        <span class="logo-sub">补贴政策助手</span>
+      </div>
+    </a>
+    <nav>
+      <a class="nav-link" href="#">政策库</a>
+      <a class="nav-link" href="#">城市覆盖</a>
+      <a class="nav-link" href="#">使用指南</a>
+      <a class="nav-btn" href="#chat">进入对话 →</a>
+    </nav>
+  </header>
+
+  <!-- STATUS -->
+  <div class="status">
+    <div class="dot-live"></div>
+    <span>知识库在线</span>
+    <div class="status-sep"></div>
+    <span>最近更新 · 2026-04-29</span>
+    <div class="status-sep"></div>
+    <span>覆盖城市 · 8+</span>
+    <div class="status-sep"></div>
+    <span>政策条目 · 40+</span>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-tag">全感VR游戏 · 政府补贴智能查询</div>
+    <h1>找准补贴<br><strong>精准申报</strong></h1>
+    <p class="hero-p">覆盖上海、深圳、南京、哈尔滨等城市的 VR 元宇宙数字文旅政府补贴政策，AI 智能匹配分析，辅助加盟商全流程申报</p>
+    <div class="cta-row">
+      <button class="cta-main" onclick="document.getElementById('chat').scrollIntoView({behavior:'smooth'})">开始查询政策</button>
+      <button class="cta-ghost">查看城市覆盖</button>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- CARDS -->
+  <section class="cards-sec reveal">
+    <div class="sec-hd">
+      <span class="sec-hd-label">本月推荐 · 高匹配政策</span>
+      <div class="sec-hd-line"></div>
+    </div>
+    <div class="grid">
+      <div class="pcard">
+        <div class="pc-top">
+          <span class="pc-city">深圳 · 文旅口</span>
+          <span class="badge bh">高度匹配</span>
+        </div>
+        <div class="pc-name">数字创意产业高质量发展若干措施</div>
+        <div class="pc-amt">按项目评估</div>
+      </div>
+      <div class="pcard">
+        <div class="pc-top">
+          <span class="pc-city">上海 · 科创科委口</span>
+          <span class="badge bh">高度匹配</span>
+        </div>
+        <div class="pc-name">元宇宙技术研发专项补贴</div>
+        <div class="pc-amt">最高 1840 万</div>
+      </div>
+      <div class="pcard">
+        <div class="pc-top">
+          <span class="pc-city">上海 · 文旅局口</span>
+          <span class="badge bh">高度匹配</span>
+        </div>
+        <div class="pc-name">文旅元宇宙数字文娱新空间创新场景</div>
+        <div class="pc-amt">资源对接</div>
+      </div>
+      <div class="pcard">
+        <div class="pc-top">
+          <span class="pc-city">南京 · 文旅局口</span>
+          <span class="badge bh">高度匹配</span>
+        </div>
+        <div class="pc-name">玄武区数字文旅产业发展补贴</div>
+        <div class="pc-amt">最高 100 万</div>
+      </div>
+      <div class="pcard">
+        <div class="pc-top">
+          <span class="pc-city">哈尔滨 · 文旅局口</span>
+          <span class="badge bm">条件匹配</span>
+        </div>
+        <div class="pc-name">冰雪经济 VR / AR 沉浸式新经济补贴</div>
+        <div class="pc-amt">最高 50 万</div>
+      </div>
+      <div class="pcard">
+        <div class="pc-top">
+          <span class="pc-city">国家级 · 工信部</span>
+          <span class="badge bh">高度匹配</span>
+        </div>
+        <div class="pc-name">2025 年元宇宙典型案例推荐</div>
+        <div class="pc-amt">资源 + 背书</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- CHAT EMBED -->
+  <section class="embed-sec reveal" id="chat">
+    <div class="sec-hd" style="margin-bottom:20px">
+      <span class="sec-hd-label">智能对话 · 直接查询</span>
+      <div class="sec-hd-line"></div>
+    </div>
+    <div class="embed-frame">
+      <iframe
+        src="https://udify.app/chatbot/gu49G2wdPn2pbr3u"
+        style="width:100%;height:100%;border:none;"
+        frameborder="0"
+        allow="microphone">
+      </iframe>
+    </div>
+  </section>
+
+  <footer>
+    <span>X-META · 全感VR游戏补贴政策助手</span>
+    <span>知识库每月自动更新 · 如有疑问请联系总部</span>
+  </footer>
+
+</div>
+
+<script>
+// 光标跟随
+const cur = document.getElementById('cur');
+const curO = document.getElementById('cur-o');
+let mx = 0, my = 0, ox = 0, oy = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cur.style.left = mx + 'px';
+  cur.style.top  = my + 'px';
+});
+
+// 外环缓动跟随
+function followCursor() {
+  ox += (mx - ox) * 0.1;
+  oy += (my - oy) * 0.1;
+  curO.style.left = ox + 'px';
+  curO.style.top  = oy + 'px';
+  requestAnimationFrame(followCursor);
+}
+followCursor();
+
+// 页面离开/进入
+document.addEventListener('mouseleave', () => { cur.style.opacity = '0'; curO.style.opacity = '0'; });
+document.addEventListener('mouseenter', () => { cur.style.opacity = '1'; curO.style.opacity = '1'; });
+
+// scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(el => io.observe(el));
+
+// 卡片：鼠标位置高光
+document.querySelectorAll('.pcard').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = ((e.clientX - r.left) / r.width  * 100).toFixed(1);
+    const y = ((e.clientY - r.top)  / r.height * 100).toFixed(1);
+    card.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(26,158,122,.07) 0%, var(--bg) 65%)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.background = '';
+  });
+});
+</script>
+</body>
+</html>
