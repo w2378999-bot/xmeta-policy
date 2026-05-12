@@ -101,6 +101,13 @@ SEARCH_QUERIES = [
     {"query": "武汉 数字文旅 元宇宙 申报 扶持 2026 site:wuhan.gov.cn", "city": "武汉", "dept": "文旅局口"},
     {"query": "济南 消费新业态 沉浸式 元宇宙 补贴 2026", "city": "济南", "dept": "商委口"},
     {"query": "济南 VR 数字文旅 文化创意 补贴 申报 2026", "city": "济南", "dept": "文旅局口"},
+
+    # ===== 长春（新增）=====
+    {"query": "长春 冰雪经济 VR 沉浸式 文旅 补贴 2026", "city": "长春", "dept": "文旅局口"},
+    {"query": "长春 元宇宙 数字创意 数字文旅 补贴 申报 2026", "city": "长春", "dept": "文旅局口"},
+    {"query": "长春 数字经济 VR XR 沉浸式 产业扶持 2026", "city": "长春", "dept": "科创科委口"},
+    {"query": "长春 文旅融合 新业态 元宇宙 补贴 奖励 2026", "city": "长春", "dept": "文旅局口"},
+    {"query": "吉林省 冰雪文旅 数字 VR 沉浸式 补贴 2026", "city": "长春", "dept": "文旅局口"},
 ]
 
 # ============================================================
@@ -109,10 +116,29 @@ SEARCH_QUERIES = [
 
 TARGET_SITES = [
 
-    # ===== 国家级 =====
+    # ===== 长春市（新增）=====
     {
-        "city": "国家级", "department": "科创科委口",
-        "name": "工业和信息化部",
+        "city": "长春", "department": "文旅局口",
+        "name": "长春市文化和旅游局",
+        "url": "https://whlv.changchun.gov.cn/xxgk/zcwj/",
+        "keywords": ["VR", "AR", "元宇宙", "沉浸式", "冰雪", "数字文旅", "文旅融合", "补贴", "奖励", "扶持", "数字创意"],
+        "list_selector": ".list li a, .article-list li a, ul li a, .news-list li a",
+        "title_selector": "h1, .article-title",
+        "content_selector": ".article-content, .TRS_Editor, #content, .content",
+        "encoding": "utf-8",
+    },
+    {
+        "city": "长春", "department": "科创科委口",
+        "name": "长春市工业和信息化局",
+        "url": "https://gxj.changchun.gov.cn/xxgk/zcwj/",
+        "keywords": ["VR", "XR", "元宇宙", "沉浸式", "数字", "人工智能", "文创", "补贴", "奖励", "扶持"],
+        "list_selector": ".list li a, .article-list li a, ul li a, .news-list li a",
+        "title_selector": "h1, .article-title",
+        "content_selector": ".article-content, .TRS_Editor, #content, .content",
+        "encoding": "utf-8",
+    },
+
+
         "url": "https://www.miit.gov.cn/xwfb/zxzc/index.html",
         "keywords": ["元宇宙", "VR", "XR", "数字文娱", "沉浸式", "虚拟现实", "人工智能"],
         "list_selector": ".uni-main .xw-item a, .list-content li a, ul.zxzc-list li a",
@@ -1043,6 +1069,7 @@ def run_crawler(auto_upload=False, mode="both", interactive=False):
 
     if not new_policies:
         log("✅ 无新政策，知识库无需更新")
+        generate_data_json([])  # 仍然刷新 data.json（更新时间戳）
         return
 
     if AUTO_MODE and LLM_ENABLED:
@@ -1075,6 +1102,9 @@ def run_crawler(auto_upload=False, mode="both", interactive=False):
         log(f"   1. 打开 {review_file}，确认字段内容")
         log(f"   2. python crawler.py upload {review_file}")
 
+    # ── 无论哪种模式，最后都生成 data.json ──
+    generate_data_json(new_policies)
+
 def upload_reviewed_file(filepath):
     if not os.path.exists(filepath):
         print(f"❌ 文件不存在：{filepath}")
@@ -1098,6 +1128,150 @@ def upload_reviewed_file(filepath):
         time.sleep(5)  # 免费版限流，5秒间隔
 
     log(f"✅ 完成：{success}/{len(blocks)} 条成功")
+
+# ============================================================
+# data.json 生成（供前端动态读取）
+# ============================================================
+
+# 首页写死的历史政策（知识库中已有，爬虫无法重新拉取结构化数据）
+# 每次爬虫跑完后，这批数据会和新爬取的合并，一起写入 data.json
+EXISTING_POLICIES = [
+    {"city":"深圳","province":"广东","dept":"文旅口","name":"数字创意产业高质量发展若干措施","match":"高度匹配","amount":"—","unit":"按项目评估","url":"https://www.sz.gov.cn/"},
+    {"city":"深圳","province":"广东","dept":"文旅口","name":"数字创意产业集群扶持计划操作规程","match":"高度匹配","amount":"—","unit":"事后资助","url":"https://www.sz.gov.cn/"},
+    {"city":"上海","province":"上海","dept":"科创科委口","name":"元宇宙技术研发专项补贴","match":"高度匹配","amount":"1840","unit":"万元上限","url":"https://stcsm.sh.gov.cn/"},
+    {"city":"上海","province":"上海","dept":"文旅局口","name":"文旅元宇宙数字文娱新空间创新应用场景","match":"高度匹配","amount":"—","unit":"荣誉资源","url":"https://whlyj.sh.gov.cn/"},
+    {"city":"上海","province":"上海","dept":"商委口","name":"促进服务消费提质扩容实施方案","match":"条件匹配","amount":"—","unit":"综合补贴","url":"https://www.sh.gov.cn/"},
+    {"city":"南京","province":"江苏","dept":"文旅局口","name":"玄武区数字文旅产业发展补贴","match":"高度匹配","amount":"100","unit":"万元上限","url":"https://www.nanjing.gov.cn/"},
+    {"city":"哈尔滨","province":"黑龙江","dept":"文旅局口","name":"支持新技术新业态创新应用（冰雪经济）","match":"高度匹配","amount":"—","unit":"营收奖补","url":"https://wlt.hlj.gov.cn/"},
+    {"city":"哈尔滨","province":"黑龙江","dept":"文旅局口","name":"支持冰雪旅游设备更新改造升级","match":"条件匹配","amount":"—","unit":"贷款贴息","url":"https://wlt.hlj.gov.cn/"},
+    {"city":"国家级","province":"—","dept":"工信部","name":"2025年元宇宙典型案例推荐","match":"高度匹配","amount":"—","unit":"荣誉资源","url":"https://www.miit.gov.cn/"},
+    {"city":"广东省","province":"广东","dept":"科创科委口","name":"加快推动人工智能赋能实体经济","match":"条件匹配","amount":"—","unit":"综合措施","url":"https://gdii.gd.gov.cn/"},
+]
+
+# 城市 → 省份映射（用于 ECharts 地图高亮）
+CITY_PROVINCE_MAP = {
+    "上海": "上海", "深圳": "广东", "南京": "江苏", "苏州": "江苏",
+    "哈尔滨": "黑龙江", "武汉": "湖北", "济南": "山东",
+    "长春": "吉林", "广东省": "广东", "黑龙江省": "黑龙江",
+    "江苏省": "江苏", "国家级": "—",
+}
+
+def parse_chunk_to_policy(chunk_text, source_city=None):
+    """从知识库 chunk 文本中解析出结构化政策字段"""
+    def extract(label):
+        for line in chunk_text.split("\n"):
+            if line.startswith(f"【{label}】"):
+                return line.replace(f"【{label}】", "").strip()
+        return ""
+
+    city_raw = extract("城市/区域") or source_city or ""
+    city = city_raw.split("·")[0].strip() if "·" in city_raw else city_raw.strip()
+
+    name    = extract("政策名称")
+    dept    = extract("归口部门")
+    match   = extract("与全感VR匹配度")
+    amount  = extract("补贴金额/力度")
+    url     = extract("申报入口")
+
+    # 规范化匹配度
+    if "高度" in match:   match = "高度匹配"
+    elif "条件" in match: match = "条件匹配"
+    else:                 match = "参考价值"
+
+    # 金额拆分为数字+单位
+    amt_num  = "—"
+    amt_unit = amount if amount else "待确认"
+    import re as _re
+    m = _re.search(r'(\d[\d,\.]*)\s*万', amount)
+    if m:
+        amt_num  = m.group(1)
+        amt_unit = "万元上限"
+
+    province = CITY_PROVINCE_MAP.get(city, "")
+
+    return {
+        "city": city, "province": province,
+        "dept": dept, "name": name,
+        "match": match, "amount": amt_num, "unit": amt_unit,
+        "url": url,
+    }
+
+def generate_data_json(new_policies):
+    """
+    合并历史政策 + 本次新爬取政策，生成 data.json。
+    top_policies: 高度匹配优先，最多 6 条
+    all_policies: 全量，按城市 + 匹配度排序
+    """
+    log("\n📄 生成 data.json...")
+
+    # 解析新爬取的政策
+    parsed_new = []
+    for p in new_policies:
+        try:
+            parsed = parse_chunk_to_policy(p["chunk"], source_city=p.get("city",""))
+            if parsed["name"]:
+                parsed_new.append(parsed)
+        except Exception:
+            pass
+
+    # 合并：已有 + 新爬取（去重：按政策名称）
+    all_policies = list(EXISTING_POLICIES)
+    existing_names = {p["name"] for p in all_policies}
+    for p in parsed_new:
+        if p["name"] and p["name"] not in existing_names:
+            all_policies.append(p)
+            existing_names.add(p["name"])
+
+    # 排序：高度匹配 > 条件匹配 > 参考价值
+    match_order = {"高度匹配": 0, "条件匹配": 1, "参考价值": 2}
+    all_policies.sort(key=lambda x: match_order.get(x.get("match",""), 3))
+
+    # top 6：高度匹配优先
+    top6 = [p for p in all_policies if p.get("match") == "高度匹配"][:6]
+    if len(top6) < 6:
+        top6 += [p for p in all_policies if p.get("match") != "高度匹配"][:6-len(top6)]
+
+    # 覆盖城市列表（去重，排除国家级/省级）
+    skip = {"国家级", "全国", "广东省", "黑龙江省", "江苏省"}
+    cities = []
+    seen = set()
+    for p in all_policies:
+        c = p.get("city","")
+        if c and c not in skip and c not in seen:
+            cities.append(c)
+            seen.add(c)
+
+    # 覆盖省份（用于地图高亮）
+    provinces = list({
+        CITY_PROVINCE_MAP.get(p.get("city",""), "")
+        for p in all_policies
+        if CITY_PROVINCE_MAP.get(p.get("city",""), "") not in ("", "—")
+    })
+
+    # 城市政策统计（供城市卡片显示条数）
+    city_stats = {}
+    for p in all_policies:
+        c = p.get("city","")
+        if c:
+            city_stats[c] = city_stats.get(c, 0) + 1
+
+    data = {
+        "updated_at": datetime.now().strftime("%Y-%m-%d"),
+        "policy_count": len(all_policies),
+        "city_count": len(cities),
+        "cities": cities,
+        "provinces": provinces,
+        "city_stats": city_stats,
+        "top_policies": top6,
+        "all_policies": all_policies,
+    }
+
+    with open("data.json", "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+    log(f"✅ data.json 已生成：{len(all_policies)} 条政策，{len(cities)} 个城市，Top6 已选出")
+    return data
+
 
 # ============================================================
 # 入口
