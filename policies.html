@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>完整政策库 · X-META 补贴政策助手</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600&family=Noto+Sans+SC:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f3ef;--bg2:#eceae4;--teal:#0f5c44;--teal-l:#1a9e7a;--teal-d:#0a3d2d;
+  --gold:#b88c0a;--ink:#111510;--t1:#1c2018;--t2:#4a5245;--t3:#7a8575;
+  --line:rgba(0,0,0,.08);--line2:rgba(0,0,0,.04);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--t1);font-family:'Noto Sans SC',sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;cursor:none}
+
+/* CURSOR */
+#cur{position:fixed;pointer-events:none;z-index:9999;width:5px;height:5px;border-radius:50%;background:var(--teal);transform:translate(-50%,-50%);transition:width .15s,height .15s,background .2s,opacity .2s}
+#cur-o{position:fixed;pointer-events:none;z-index:9998;width:30px;height:30px;border-radius:50%;border:1px solid rgba(15,92,68,.22);transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s}
+body:has(a:hover) #cur,body:has(button:hover) #cur{width:8px;height:8px;background:var(--gold)}
+body:has(a:hover) #cur-o,body:has(button:hover) #cur-o{width:46px;height:46px;border-color:rgba(184,140,10,.3)}
+
+/* BG */
+#bg-stage{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;opacity:.4;
+  -webkit-mask-image:linear-gradient(to bottom,black 0%,black 20%,transparent 50%);
+  mask-image:linear-gradient(to bottom,black 0%,black 20%,transparent 50%)}
+.bg-skew{position:absolute;top:-30%;left:-10%;right:-10%;bottom:-30%;transform:skewY(-7deg);display:flex;flex-direction:column;gap:10px;padding:10px 0}
+.bg-row{display:flex;gap:10px;flex-shrink:0;will-change:transform}
+.bg-cell{flex-shrink:0;width:180px;height:88px;border-radius:12px;background:rgba(220,218,212,.5);border:1px solid rgba(255,255,255,.65)}
+#grain{position:fixed;inset:0;z-index:2;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)' opacity='.025'/%3E%3C/svg%3E");background-size:280px;opacity:.4;mix-blend-mode:multiply}
+
+/* LAYOUT */
+#wrap{position:relative;z-index:10;max-width:1100px;margin:0 auto;padding:0 56px 100px}
+
+/* HEADER */
+.top-bar{display:flex;align-items:center;justify-content:space-between;padding:24px 0 22px;border-bottom:1px solid var(--line);margin-bottom:52px}
+.logo-area{display:flex;align-items:center;gap:12px}
+.logo-area img{height:26px;width:auto;mix-blend-mode:multiply;filter:invert(1) sepia(.15) saturate(.8) hue-rotate(100deg);opacity:.9;transition:opacity .2s}
+.logo-sub{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2.5px;color:var(--t3);align-self:flex-end;padding-bottom:1px}
+.back-btn{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;color:var(--t2);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .2s}
+.back-btn:hover{color:var(--teal)}
+
+/* PAGE HERO */
+.page-hero{margin-bottom:48px;opacity:0;filter:blur(6px);animation:blurIn .8s .1s ease forwards}
+.page-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3.5px;color:var(--gold);text-transform:uppercase;margin-bottom:16px;display:inline-flex;align-items:center;gap:10px}
+.page-tag::before{content:'';width:20px;height:1px;background:var(--gold)}
+.page-h1{font-family:'Noto Serif SC',serif;font-size:clamp(28px,4vw,44px);font-weight:300;line-height:1.15;letter-spacing:-1px;color:var(--ink);margin-bottom:8px}
+.page-h1 strong{font-weight:600;color:var(--teal)}
+.page-desc{font-size:13.5px;color:var(--t2);line-height:1.8}
+@keyframes blurIn{to{opacity:1;filter:blur(0)}}
+
+/* FILTERS */
+.filters{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  margin-bottom:32px;padding-bottom:24px;border-bottom:1px solid var(--line);
+  opacity:0;animation:blurIn .8s .25s ease forwards;
+}
+.filter-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--t3);text-transform:uppercase;margin-right:4px}
+.filter-btn{
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;
+  color:var(--t2);padding:5px 14px;border:1px solid var(--line);border-radius:2px;
+  background:transparent;cursor:pointer;transition:all .18s;
+}
+.filter-btn:hover{border-color:rgba(15,92,68,.3);color:var(--teal)}
+.filter-btn.active{background:var(--teal);color:#f5f3ef;border-color:var(--teal)}
+
+/* SEARCH */
+.search-row{display:flex;gap:10px;margin-bottom:28px;opacity:0;animation:blurIn .8s .35s ease forwards}
+.search-input{
+  flex:1;font-family:'Noto Sans SC',sans-serif;font-size:13px;font-weight:300;
+  padding:10px 16px;border:1px solid var(--line);border-radius:4px;
+  background:var(--bg2);color:var(--t1);outline:none;
+  transition:border-color .2s,box-shadow .2s;
+}
+.search-input::placeholder{color:var(--t3)}
+.search-input:focus{border-color:rgba(15,92,68,.4);box-shadow:0 0 0 3px rgba(15,92,68,.06)}
+.result-count{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--t3);align-self:center;white-space:nowrap}
+
+/* TABLE */
+.policy-table{width:100%;border-collapse:collapse;opacity:0;animation:blurIn .8s .4s ease forwards}
+.policy-table th{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--t2);text-transform:uppercase;padding:0 16px 14px 0;text-align:left;border-bottom:1px solid var(--line)}
+.policy-table td{padding:15px 16px 15px 0;font-size:13.5px;border-bottom:1px solid var(--line2);vertical-align:middle;color:var(--t2)}
+.policy-table tr:hover td{color:var(--t1);background:rgba(15,92,68,.02)}
+.policy-table tr.filtered-out{display:none}
+.city-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;padding:3px 8px;border-radius:2px;border:1px solid var(--line);color:var(--teal);display:inline-block;white-space:nowrap;background:rgba(15,92,68,.04)}
+.dept-tag{font-family:'DM Mono',monospace;font-size:9px;padding:2px 7px;border-radius:2px;display:inline-block;margin:2px 2px 0 0;background:rgba(15,92,68,.04);border:1px solid rgba(15,92,68,.12);color:var(--t2)}
+.badge{font-family:'DM Mono',monospace;font-size:8px;padding:2px 7px;border-radius:2px;letter-spacing:.5px}
+.bh{color:var(--teal);border:1px solid rgba(15,92,68,.25);background:rgba(15,92,68,.06)}
+.bm{color:var(--gold);border:1px solid rgba(184,140,10,.25);background:rgba(184,140,10,.06)}
+.policy-link{color:var(--teal);text-decoration:none;font-size:11px;font-family:'DM Mono',monospace;letter-spacing:.5px;opacity:.7;transition:opacity .2s}
+.policy-link:hover{opacity:1}
+
+/* EMPTY STATE */
+.empty-state{padding:60px 0;text-align:center;display:none}
+.empty-state.visible{display:block}
+.empty-state p{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--t3)}
+
+/* CTA */
+.page-cta{
+  margin-top:48px;padding:32px;
+  background:var(--bg2);border:1px solid var(--line);border-radius:10px;
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+  opacity:0;animation:blurIn .8s .5s ease forwards;
+}
+.cta-text h3{font-family:'Noto Serif SC',serif;font-size:17px;font-weight:600;color:var(--t1);margin-bottom:4px}
+.cta-text p{font-size:13px;color:var(--t2)}
+.cta-btn{padding:12px 28px;background:var(--teal);color:#f5f3ef;border-radius:4px;text-decoration:none;font-size:13px;font-weight:500;letter-spacing:1px;white-space:nowrap;transition:background .2s,transform .15s}
+.cta-btn:hover{background:var(--teal-d);transform:translateY(-1px)}
+
+/* FOOTER */
+.page-footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;color:var(--t3)}
+
+@media(max-width:768px){
+  #wrap{padding:0 20px 60px}
+  .top-bar{flex-direction:column;align-items:flex-start;gap:16px}
+  .page-cta{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+<div id="cur"></div>
+<div id="cur-o"></div>
+<div id="bg-stage"><div class="bg-skew" id="bg-skew"></div></div>
+<div id="grain"></div>
+
+<div id="wrap">
+
+  <div class="top-bar">
+    <div class="logo-area">
+      <img src="x-meta_logo.png" alt="X-META">
+      <span class="logo-sub">补贴政策助手</span>
+    </div>
+    <a class="back-btn" href="index.html">← 返回首页</a>
+  </div>
+
+  <div class="page-hero">
+    <div class="page-tag">政策库 · Policy Database</div>
+    <h1 class="page-h1">完整政策库<br><strong>全量收录 · 持续更新</strong></h1>
+    <p class="page-desc">知识库每月 1 日自动同步，覆盖上海、深圳、南京、哈尔滨、武汉、济南、长春等城市及国家级政策<br>
+    最近更新：<span id="updated-at">—</span> &nbsp;·&nbsp; 共收录 <span id="total-count">—</span> 条政策</p>
+  </div>
+
+  <!-- 城市筛选 -->
+  <div class="filters" id="filters">
+    <span class="filter-label">城市</span>
+    <button class="filter-btn active" data-city="全部" onclick="filterCity(this)">全部</button>
+    <!-- 其余按钮由 JS 动态生成 -->
+  </div>
+
+  <!-- 搜索 -->
+  <div class="search-row">
+    <input class="search-input" id="search-input" type="text" placeholder="搜索政策名称、关键词…" oninput="filterSearch()">
+    <span class="result-count" id="result-count"></span>
+  </div>
+
+  <!-- 政策表格 -->
+  <table class="policy-table">
+    <thead><tr>
+      <th style="width:90px">城市</th>
+      <th>政策名称</th>
+      <th style="width:120px">归口部门</th>
+      <th style="width:100px">匹配度</th>
+      <th style="width:100px">补贴金额</th>
+      <th style="width:60px">原文</th>
+    </tr></thead>
+    <tbody id="policy-tbody"></tbody>
+  </table>
+  <div class="empty-state" id="empty-state"><p>NO RESULTS · 暂无匹配政策</p></div>
+
+  <!-- 底部 CTA -->
+  <div class="page-cta">
+    <div class="cta-text">
+      <h3>想了解某条政策的申报条件？</h3>
+      <p>直接告诉 AI 助手，获取匹配分析和申报材料清单</p>
+    </div>
+    <a class="cta-btn" href="https://udify.app/chatbot/gu49G2wdPn2pbr3u" target="_blank">进入对话 ↗</a>
+  </div>
+
+  <div class="page-footer">
+    <span>X-META · 完整政策库</span>
+    <span>知识库每月自动更新</span>
+  </div>
+
+</div>
+
+<script>
+/* CURSOR */
+const cur=document.getElementById('cur'),curO=document.getElementById('cur-o');
+let mx=0,my=0,ox=0,oy=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function f(){ox+=(mx-ox)*.1;oy+=(my-oy)*.1;curO.style.left=ox+'px';curO.style.top=oy+'px';requestAnimationFrame(f)})();
+document.addEventListener('mouseleave',()=>{cur.style.opacity='0';curO.style.opacity='0'});
+document.addEventListener('mouseenter',()=>{cur.style.opacity='1';curO.style.opacity='1'});
+
+/* BG */
+(function(){
+  const skew=document.getElementById('bg-skew');
+  const CW=180,GAP=10,NROWS=6;
+  const SPEEDS=[0.22,-0.18,0.26,-0.20,0.18,-0.24];
+  const cols=Math.ceil((window.innerWidth*1.6)/(CW+GAP))+4;
+  const rows=[];
+  for(let r=0;r<NROWS;r++){
+    const row=document.createElement('div');row.className='bg-row';
+    for(let c=0;c<cols*2;c++){const cell=document.createElement('div');cell.className='bg-cell';row.appendChild(cell)}
+    skew.appendChild(row);
+    rows.push({el:row,x:-(cols*(CW+GAP)*0.5),speed:SPEEDS[r]});
+  }
+  const loopW=cols*(CW+GAP);
+  (function tick(){
+    rows.forEach(row=>{
+      row.x+=row.speed;
+      if(row.x>0)row.x-=loopW;
+      if(row.x<-loopW)row.x+=loopW;
+      row.el.style.transform=`translateX(${row.x}px)`;
+    });
+    requestAnimationFrame(tick);
+  })();
+})();
+
+/* DATA */
+const MATCH_LABELS={'高度匹配':'bh','条件匹配':'bm','参考价值':'bm'};
+let allPolicies=[];
+let currentCity='全部';
+let currentSearch='';
+
+// 默认兜底数据
+const DEFAULT_POLICIES=[
+  {city:'深圳',dept:'文旅口',name:'数字创意产业高质量发展若干措施',match:'高度匹配',amount:'—',unit:'按项目评估',url:'https://www.sz.gov.cn/'},
+  {city:'深圳',dept:'文旅口',name:'数字创意产业集群扶持计划操作规程',match:'高度匹配',amount:'—',unit:'事后资助',url:'https://www.sz.gov.cn/'},
+  {city:'上海',dept:'科创科委口',name:'元宇宙技术研发专项补贴',match:'高度匹配',amount:'1840',unit:'万元上限',url:'https://stcsm.sh.gov.cn/'},
+  {city:'上海',dept:'文旅局口',name:'文旅元宇宙数字文娱新空间创新应用场景',match:'高度匹配',amount:'—',unit:'荣誉资源',url:'https://whlyj.sh.gov.cn/'},
+  {city:'上海',dept:'商委口',name:'促进服务消费提质扩容实施方案',match:'条件匹配',amount:'—',unit:'综合补贴',url:'https://www.sh.gov.cn/'},
+  {city:'南京',dept:'文旅局口',name:'玄武区数字文旅产业发展补贴',match:'高度匹配',amount:'100',unit:'万元上限',url:'https://www.nanjing.gov.cn/'},
+  {city:'哈尔滨',dept:'文旅局口',name:'支持新技术新业态创新应用（冰雪经济）',match:'高度匹配',amount:'—',unit:'营收奖补',url:'https://wlt.hlj.gov.cn/'},
+  {city:'哈尔滨',dept:'文旅局口',name:'支持冰雪旅游设备更新改造升级',match:'条件匹配',amount:'—',unit:'贷款贴息',url:'https://wlt.hlj.gov.cn/'},
+  {city:'国家级',dept:'工信部',name:'2025年元宇宙典型案例推荐',match:'高度匹配',amount:'—',unit:'荣誉资源',url:'https://www.miit.gov.cn/'},
+  {city:'广东省',dept:'科创科委口',name:'加快推动人工智能赋能实体经济',match:'条件匹配',amount:'—',unit:'综合措施',url:'https://gdii.gd.gov.cn/'},
+];
+
+function buildCityFilters(policies){
+  const cities=['全部',...new Set(policies.map(p=>p.city))];
+  const container=document.getElementById('filters');
+  container.innerHTML='<span class="filter-label">城市</span>';
+  cities.forEach(c=>{
+    const btn=document.createElement('button');
+    btn.className='filter-btn'+(c==='全部'?' active':'');
+    btn.dataset.city=c;btn.textContent=c;
+    btn.onclick=function(){filterCity(this)};
+    container.appendChild(btn);
+  });
+}
+
+function renderTable(){
+  const tbody=document.getElementById('policy-tbody');
+  const empty=document.getElementById('empty-state');
+  const countEl=document.getElementById('result-count');
+  const q=currentSearch.toLowerCase();
+  let visible=0;
+  tbody.innerHTML=allPolicies.map((p,i)=>{
+    const cityMatch=currentCity==='全部'||p.city===currentCity;
+    const textMatch=!q||p.name.toLowerCase().includes(q)||p.city.toLowerCase().includes(q)||p.dept.toLowerCase().includes(q);
+    const show=cityMatch&&textMatch;
+    if(show) visible++;
+    const bcls=MATCH_LABELS[p.match]||'bm';
+    const amtDisplay=p.amount&&p.amount!=='—'?`${p.amount} ${p.unit||''}`:p.unit||'—';
+    return `<tr class="${show?'':'filtered-out'}">
+      <td><span class="city-tag">${p.city}</span></td>
+      <td>${p.name}</td>
+      <td><span class="dept-tag">${p.dept}</span></td>
+      <td><span class="badge ${bcls}">${p.match}</span></td>
+      <td style="font-family:'DM Mono',monospace;font-size:11px;color:var(--t2)">${amtDisplay}</td>
+      <td>${p.url?`<a class="policy-link" href="${p.url}" target="_blank">原文 ↗</a>`:'—'}</td>
+    </tr>`;
+  }).join('');
+  if(countEl) countEl.textContent=`${visible} / ${allPolicies.length} 条`;
+  if(empty){ empty.classList.toggle('visible', visible===0); }
+}
+
+function filterCity(btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  currentCity=btn.dataset.city;
+  renderTable();
+}
+
+function filterSearch(){
+  currentSearch=document.getElementById('search-input').value;
+  renderTable();
+}
+
+function loadData(policies){
+  allPolicies=policies;
+  buildCityFilters(policies);
+  renderTable();
+}
+
+fetch('data.json')
+  .then(r=>{if(!r.ok)throw new Error();return r.json()})
+  .then(data=>{
+    if(data.updated_at) document.getElementById('updated-at').textContent=data.updated_at;
+    if(data.policy_count) document.getElementById('total-count').textContent=data.policy_count;
+    loadData(data.all_policies||DEFAULT_POLICIES);
+  })
+  .catch(()=>loadData(DEFAULT_POLICIES));
+</script>
+</body>
+</html>
