@@ -329,9 +329,12 @@ nav{display:flex;align-items:center;gap:34px}
 .dept-tag{font-family:'DM Mono',monospace;font-size:9px;padding:2px 7px;border-radius:2px;display:inline-block;margin:2px 2px 0 0;background:rgba(15,92,68,.04);border:1px solid rgba(15,92,68,.12);color:var(--t2)}
 
 /* ── CITY MAP ── */
-.city-layout{display:grid;grid-template-columns:1fr 340px;gap:40px;align-items:start}
-#china-map{width:100%;height:460px}
-.city-cards{display:flex;flex-direction:column;gap:10px}
+.city-layout{display:grid;grid-template-columns:1fr 320px;gap:40px;align-items:start}
+#china-map{width:100%;height:580px}
+.city-cards{display:flex;flex-direction:column;gap:10px;max-height:580px;overflow-y:auto}
+.city-cards::-webkit-scrollbar{width:3px}
+.city-cards::-webkit-scrollbar-track{background:transparent}
+.city-cards::-webkit-scrollbar-thumb{background:var(--line);border-radius:2px}
 .city-card{
   background:var(--bg2);border:1px solid var(--line);border-radius:6px;
   padding:14px 16px;cursor:pointer;
@@ -343,6 +346,25 @@ nav{display:flex;align-items:center;gap:34px}
 .cc-name{font-family:'Noto Serif SC',serif;font-size:14px;font-weight:600;color:var(--t1)}
 .cc-count{font-family:'DM Mono',monospace;font-size:10px;color:var(--teal)}
 .cc-desc{font-size:11px;color:var(--t3);line-height:1.5}
+
+/* ── POLICY TABLE show-more ── */
+.policy-table tr.hidden-row{display:none}
+.show-more-row{padding:20px 0 0;display:flex;align-items:center;justify-content:space-between}
+.show-more-btn{
+  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;
+  color:var(--teal);background:none;border:1px solid rgba(15,92,68,.28);
+  border-radius:3px;padding:8px 20px;cursor:pointer;
+  transition:background .2s,border-color .2s;
+}
+.show-more-btn:hover{background:rgba(15,92,68,.06);border-color:rgba(15,92,68,.5)}
+.full-list-link{
+  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;
+  color:var(--t3);text-decoration:none;
+  display:flex;align-items:center;gap:6px;
+  transition:color .2s,gap .2s;
+}
+.full-list-link:hover{color:var(--teal);gap:10px}
+.full-list-link::after{content:'→'}
 
 /* ── GUIDE ── */
 .guide-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
@@ -420,11 +442,11 @@ footer{
     <div class="dot-live"></div>
     <span>知识库在线</span>
     <div class="status-sep"></div>
-    <span>最近更新 · 2026-04-29</span>
+    <span>最近更新 · <span id="st-date">2026-04-29</span></span>
     <div class="status-sep"></div>
-    <span>覆盖城市 · 8+</span>
+    <span>覆盖城市 · <span id="st-city">8</span>+</span>
     <div class="status-sep"></div>
-    <span>政策条目 · 40+</span>
+    <span>政策条目 · <span id="st-count">40</span>+</span>
   </div>
 
   <!-- HERO -->
@@ -478,7 +500,8 @@ footer{
 
   <!-- CARDS -->
   <section class="cards-sec">
-    <div class="grid">
+    <div class="grid" id="policy-grid">
+      <!-- 默认静态卡片，data.json 加载后动态替换 -->
       <div class="pcard high mask-wrap"><div class="mask-inner d1">
         <div class="pc-top"><span class="pc-city">深圳 · 文旅口</span><span class="badge bh">高度匹配</span></div>
         <div class="pc-name">数字创意产业高质量发展若干措施</div>
@@ -525,12 +548,13 @@ footer{
   <!-- 政策库 -->
   <section class="page-sec mask-wrap" id="sec-policies">
     <div class="mask-inner">
-      <table class="policy-table">
+      <table class="policy-table" id="policy-table">
         <thead><tr>
           <th style="width:100px">城市</th><th>政策名称</th>
           <th>归口部门</th><th>补贴类型</th><th>匹配度</th>
         </tr></thead>
-        <tbody>
+        <tbody id="policy-tbody">
+          <!-- 默认静态行，data.json 加载后替换 -->
           <tr><td><span class="city-tag">深圳</span></td><td>数字创意产业高质量发展若干措施</td><td><span class="dept-tag">文旅口</span></td><td>资金资助</td><td><span class="badge bh">高度匹配</span></td></tr>
           <tr><td><span class="city-tag">深圳</span></td><td>数字创意产业集群扶持计划操作规程</td><td><span class="dept-tag">文旅口</span></td><td>事后资助</td><td><span class="badge bh">高度匹配</span></td></tr>
           <tr><td><span class="city-tag">上海</span></td><td>元宇宙技术研发专项补贴</td><td><span class="dept-tag">科创科委口</span></td><td>研发资助</td><td><span class="badge bh">高度匹配</span></td></tr>
@@ -543,6 +567,10 @@ footer{
           <tr><td><span class="city-tag">广东省</span></td><td>加快推动人工智能赋能实体经济</td><td><span class="dept-tag">科创科委口</span></td><td>综合措施</td><td><span class="badge bm">条件匹配</span></td></tr>
         </tbody>
       </table>
+      <div class="show-more-row" id="show-more-row">
+        <button class="show-more-btn" id="show-more-btn" onclick="showMorePolicies()">展开更多政策</button>
+        <a class="full-list-link" href="policies.html">查看完整政策库</a>
+      </div>
     </div>
   </section>
 
@@ -555,13 +583,14 @@ footer{
       </div>
       <div class="city-layout">
         <div id="china-map"></div>
-        <div class="city-cards">
-          <div class="city-card active"><div class="cc-top"><span class="cc-name">上海</span><span class="cc-count">8 条政策</span></div><div class="cc-desc">科创科委口 · 文旅局口 · 商委口</div></div>
-          <div class="city-card"><div class="cc-top"><span class="cc-name">深圳</span><span class="cc-count">6 条政策</span></div><div class="cc-desc">文旅口 · 科创科委口</div></div>
-          <div class="city-card"><div class="cc-top"><span class="cc-name">南京</span><span class="cc-count">3 条政策</span></div><div class="cc-desc">文旅局口 · 商委口 · 玄武区专项</div></div>
-          <div class="city-card"><div class="cc-top"><span class="cc-name">哈尔滨</span><span class="cc-count">3 条政策</span></div><div class="cc-desc">文旅局口 · 冰雪经济专项</div></div>
-          <div class="city-card"><div class="cc-top"><span class="cc-name">武汉</span><span class="cc-count">1 条政策</span></div><div class="cc-desc">文旅局口 · 元宇宙三年行动方案</div></div>
-          <div class="city-card"><div class="cc-top"><span class="cc-name">济南</span><span class="cc-count">1 条政策</span></div><div class="cc-desc">商委口 · 消费新业态新场景补贴</div></div>
+        <div class="city-cards" id="city-cards">
+          <div class="city-card active"><div class="cc-top"><span class="cc-name">上海</span><span class="cc-count" id="cc-上海">8 条政策</span></div><div class="cc-desc">科创科委口 · 文旅局口 · 商委口</div></div>
+          <div class="city-card"><div class="cc-top"><span class="cc-name">深圳</span><span class="cc-count" id="cc-深圳">6 条政策</span></div><div class="cc-desc">文旅口 · 科创科委口</div></div>
+          <div class="city-card"><div class="cc-top"><span class="cc-name">南京</span><span class="cc-count" id="cc-南京">3 条政策</span></div><div class="cc-desc">文旅局口 · 商委口 · 玄武区专项</div></div>
+          <div class="city-card"><div class="cc-top"><span class="cc-name">哈尔滨</span><span class="cc-count" id="cc-哈尔滨">3 条政策</span></div><div class="cc-desc">文旅局口 · 冰雪经济专项</div></div>
+          <div class="city-card"><div class="cc-top"><span class="cc-name">武汉</span><span class="cc-count" id="cc-武汉">1 条政策</span></div><div class="cc-desc">文旅局口 · 元宇宙三年行动方案</div></div>
+          <div class="city-card"><div class="cc-top"><span class="cc-name">济南</span><span class="cc-count" id="cc-济南">1 条政策</span></div><div class="cc-desc">商委口 · 消费新业态新场景补贴</div></div>
+          <div class="city-card"><div class="cc-top"><span class="cc-name">长春</span><span class="cc-count" id="cc-长春">待更新</span></div><div class="cc-desc">文旅局口 · 工信局 · 冰雪文旅 / 数字经济</div></div>
         </div>
       </div>
     </div>
@@ -716,6 +745,101 @@ document.addEventListener('mouseenter',()=>{cur.style.opacity='1';curO.style.opa
   })();
 })();
 
+/* ══════════════════════════════════════
+   DATA.JSON 动态加载
+══════════════════════════════════════ */
+const MATCH_LABELS = {'高度匹配':'bh','条件匹配':'bm','参考价值':'bm'};
+const PREVIEW_COUNT = 10;
+let allPoliciesData = [];
+
+function renderCards(policies){
+  const grid = document.getElementById('policy-grid');
+  if(!grid||!policies||!policies.length) return;
+  const delays = ['d1','d2','d3','d4','d5','d6'];
+  grid.innerHTML = policies.slice(0,6).map((p,i)=>{
+    const cls  = p.match==='高度匹配'?'high':'mid';
+    const bcls = MATCH_LABELS[p.match]||'bm';
+    const d    = delays[i]||'d1';
+    const inner = `
+      <div class="pc-top">
+        <span class="pc-city">${p.city} · ${p.dept}</span>
+        <span class="badge ${bcls}">${p.match}</span>
+      </div>
+      <div class="pc-name">${p.name}</div>
+      <div class="pc-amt-wrap">
+        <span class="pc-amt-num">${p.amount||'—'}</span>
+        <span class="pc-amt-unit">${p.unit||''}</span>
+      </div>`;
+    if(p.url){
+      return `<a class="pcard ${cls} mask-wrap" href="${p.url}" target="_blank" style="text-decoration:none;display:block">
+        <div class="mask-inner ${d}">${inner}</div></a>`;
+    }
+    return `<div class="pcard ${cls} mask-wrap"><div class="mask-inner ${d}">${inner}</div></div>`;
+  }).join('');
+  grid.querySelectorAll('.mask-wrap').forEach(el=>maskIO.observe(el));
+  grid.querySelectorAll('.pcard').forEach(c=>{
+    c.addEventListener('mousemove',e=>{
+      const r=c.getBoundingClientRect();
+      const x=((e.clientX-r.left)/r.width*100).toFixed(1);
+      const y=((e.clientY-r.top)/r.height*100).toFixed(1);
+      c.style.background=`radial-gradient(circle at ${x}% ${y}%,rgba(15,92,68,.08) 0%,var(--bg2) 65%)`;
+    });
+    c.addEventListener('mouseleave',()=>c.style.background='');
+  });
+}
+
+function renderTable(policies){
+  const tbody = document.getElementById('policy-tbody');
+  const btn   = document.getElementById('show-more-btn');
+  if(!tbody||!policies||!policies.length) return;
+  allPoliciesData = policies;
+  tbody.innerHTML = policies.map((p,i)=>{
+    const bcls  = MATCH_LABELS[p.match]||'bm';
+    const hidden = i >= PREVIEW_COUNT ? 'class="hidden-row"' : '';
+    return `<tr ${hidden}>
+      <td><span class="city-tag">${p.city}</span></td>
+      <td>${p.name}</td>
+      <td><span class="dept-tag">${p.dept}</span></td>
+      <td>${p.unit||'—'}</td>
+      <td><span class="badge ${bcls}">${p.match}</span></td>
+    </tr>`;
+  }).join('');
+  if(btn){
+    const extra = policies.length - PREVIEW_COUNT;
+    if(extra > 0){ btn.textContent = `展开更多 ${extra} 条`; }
+    else { btn.style.display='none'; }
+  }
+  const link = document.querySelector('.full-list-link');
+  if(link) link.textContent = `查看完整政策库（${policies.length} 条）→`;
+}
+
+function showMorePolicies(){
+  document.querySelectorAll('#policy-tbody tr.hidden-row').forEach(r=>r.classList.remove('hidden-row'));
+  const btn = document.getElementById('show-more-btn');
+  if(btn) btn.style.display='none';
+}
+
+function updateCityCards(cityStats){
+  if(!cityStats) return;
+  Object.entries(cityStats).forEach(([city,count])=>{
+    const el = document.getElementById(`cc-${city}`);
+    if(el && count > 0) el.textContent = `${count} 条政策`;
+  });
+}
+
+fetch('data.json')
+  .then(r=>{ if(!r.ok) throw new Error('no data.json'); return r.json(); })
+  .then(data=>{
+    if(data.updated_at)   document.getElementById('st-date').textContent  = data.updated_at;
+    if(data.city_count)   document.getElementById('st-city').textContent  = data.city_count;
+    if(data.policy_count) document.getElementById('st-count').textContent = data.policy_count;
+    if(data.top_policies?.length)  renderCards(data.top_policies);
+    if(data.all_policies?.length)  renderTable(data.all_policies);
+    if(data.city_stats)   updateCityCards(data.city_stats);
+    if(data.provinces?.length) window._coveredProvinces = data.provinces;
+  })
+  .catch(()=>{});
+
 /* ── MASK REVEAL ── */
 const maskIO=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('revealed');maskIO.unobserve(e.target)}});
@@ -756,7 +880,7 @@ function initMap(){
   const el=document.getElementById('china-map');
   if(!el||typeof echarts==='undefined')return;
   const chart=echarts.init(el,null,{renderer:'canvas'});
-  const covered=['上海','广东','江苏','黑龙江','湖北','山东'];
+  const covered = window._coveredProvinces || ['上海','广东','江苏','黑龙江','湖北','山东','吉林'];
   chart.setOption({
     backgroundColor:'transparent',
     tooltip:{trigger:'item',backgroundColor:'rgba(245,243,239,.97)',borderColor:'rgba(15,92,68,.2)',borderWidth:1,
