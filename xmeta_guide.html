@@ -50,7 +50,19 @@ body:has(a:hover) #cur-o,body:has(button:hover) #cur-o{width:46px;height:46px;bo
 #wrap{position:relative;z-index:10;max-width:860px;margin:0 auto;padding:0 40px 100px}
 
 /* ── TOP BAR ── */
-.top-bar{display:flex;align-items:center;justify-content:space-between;padding:24px 0 22px;border-bottom:1px solid var(--line);margin-bottom:72px;background:var(--bg)}
+.top-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:24px 56px;
+  border-bottom:1px solid var(--line);
+  margin-bottom:72px;
+  background:rgba(245,243,239,.92);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  position:sticky;top:0;z-index:100;
+  /* 突破 #wrap 的 max-width 限制，横跨全宽 */
+  margin-left:calc(-50vw + 50%);
+  margin-right:calc(-50vw + 50%);
+  width:100vw;
+}
 .logo-area{display:flex;align-items:center;gap:12px}
 .logo-area img{height:26px;width:auto;mix-blend-mode:multiply;filter:invert(1) sepia(.15) saturate(.8) hue-rotate(100deg);opacity:.9;transition:opacity .2s}
 .logo-sub{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2.5px;color:var(--t3);align-self:flex-end;padding-bottom:1px}
