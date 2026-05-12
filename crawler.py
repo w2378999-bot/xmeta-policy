@@ -119,19 +119,19 @@ TARGET_SITES = [
     # ===== 长春市（新增）=====
     {
         "city": "长春", "department": "文旅局口",
-        "name": "长春市文化和旅游局",
-        "url": "https://whlv.changchun.gov.cn/xxgk/zcwj/",
+        "name": "吉林省文化和旅游厅（政策法规）",
+        "url": "https://whhlyt.jl.gov.cn/zwgk/zcfg/",
         "keywords": ["VR", "AR", "元宇宙", "沉浸式", "冰雪", "数字文旅", "文旅融合", "补贴", "奖励", "扶持", "数字创意"],
-        "list_selector": ".list li a, .article-list li a, ul li a, .news-list li a",
+        "list_selector": ".list li a, .article-list li a, ul li a, .news-list li a, .zcfg-list li a",
         "title_selector": "h1, .article-title",
         "content_selector": ".article-content, .TRS_Editor, #content, .content",
         "encoding": "utf-8",
     },
     {
-        "city": "长春", "department": "科创科委口",
-        "name": "长春市工业和信息化局",
-        "url": "https://gxj.changchun.gov.cn/xxgk/zcwj/",
-        "keywords": ["VR", "XR", "元宇宙", "沉浸式", "数字", "人工智能", "文创", "补贴", "奖励", "扶持"],
+        "city": "长春", "department": "商委口",
+        "name": "长春市商务局（数字商务）",
+        "url": "http://swj.changchun.gov.cn/sy/fzjs/sswj/",
+        "keywords": ["VR", "XR", "元宇宙", "沉浸式", "数字", "消费新业态", "文创", "补贴", "奖励", "扶持", "新场景"],
         "list_selector": ".list li a, .article-list li a, ul li a, .news-list li a",
         "title_selector": "h1, .article-title",
         "content_selector": ".article-content, .TRS_Editor, #content, .content",
@@ -1140,24 +1140,69 @@ def upload_reviewed_file(filepath):
 # 首页写死的历史政策（知识库中已有，爬虫无法重新拉取结构化数据）
 # 每次爬虫跑完后，这批数据会和新爬取的合并，一起写入 data.json
 EXISTING_POLICIES = [
-    {"city":"深圳","province":"广东","dept":"文旅口","name":"数字创意产业高质量发展若干措施","match":"高度匹配","amount":"—","unit":"按项目评估","url":"https://www.sz.gov.cn/"},
-    {"city":"深圳","province":"广东","dept":"文旅口","name":"数字创意产业集群扶持计划操作规程","match":"高度匹配","amount":"—","unit":"事后资助","url":"https://www.sz.gov.cn/"},
-    {"city":"上海","province":"上海","dept":"科创科委口","name":"元宇宙技术研发专项补贴","match":"高度匹配","amount":"1840","unit":"万元上限","url":"https://stcsm.sh.gov.cn/"},
-    {"city":"上海","province":"上海","dept":"文旅局口","name":"文旅元宇宙数字文娱新空间创新应用场景","match":"高度匹配","amount":"—","unit":"荣誉资源","url":"https://whlyj.sh.gov.cn/"},
-    {"city":"上海","province":"上海","dept":"商委口","name":"促进服务消费提质扩容实施方案","match":"条件匹配","amount":"—","unit":"综合补贴","url":"https://www.sh.gov.cn/"},
-    {"city":"南京","province":"江苏","dept":"文旅局口","name":"玄武区数字文旅产业发展补贴","match":"高度匹配","amount":"100","unit":"万元上限","url":"https://www.nanjing.gov.cn/"},
-    {"city":"哈尔滨","province":"黑龙江","dept":"文旅局口","name":"支持新技术新业态创新应用（冰雪经济）","match":"高度匹配","amount":"—","unit":"营收奖补","url":"https://wlt.hlj.gov.cn/"},
-    {"city":"哈尔滨","province":"黑龙江","dept":"文旅局口","name":"支持冰雪旅游设备更新改造升级","match":"条件匹配","amount":"—","unit":"贷款贴息","url":"https://wlt.hlj.gov.cn/"},
+    # ===== 深圳市级 =====
+    {"city":"深圳","province":"广东","dept":"科创科委口","name":"2025年打造人工智能先锋城市项目扶持计划（第二批）","match":"条件匹配","amount":"—","unit":"按项目评估","url":"https://gxj.sz.gov.cn/xxgk/xxgkml/zjxx/czzxzj/content/post_12686352.html"},
+    {"city":"深圳","province":"广东","dept":"工信口","name":"2026年应用推广体系扶持计划首版次软件推广应用项目","match":"条件匹配","amount":"—","unit":"按项目评估","url":"https://gxj.sz.gov.cn/gkmlpt/content/12/12255/post_12255320.html"},
+    {"city":"深圳","province":"广东","dept":"文旅口","name":"深圳市数字创意产业高质量发展项目扶持计划","match":"条件匹配","amount":"—","unit":"按项目评估","url":"https://fgw.sz.gov.cn/ztzl/qtztzl/szscjmyjjfzzhfwpt/xwdt/content/post_12717384.html"},
+    {"city":"深圳","province":"广东","dept":"文旅口","name":"深圳市数字创意产业集群扶持计划操作规程","match":"高度匹配","amount":"—","unit":"事后资助","url":"https://wtl.sz.gov.cn/xxgk/zcfgjzcjd/whscsp/content/post_11748803.html"},
+    {"city":"深圳","province":"广东","dept":"文旅口","name":"深圳市推动数字创意产业高质量发展的若干措施","match":"高度匹配","amount":"—","unit":"按项目评估","url":"https://wtl.sz.gov.cn/xxgk/zcfgjzcjd/whscsp/content/post_12356503.html"},
+    {"city":"深圳","province":"广东","dept":"文旅口","name":"深圳市文化广电旅游体育局推动数字创意产业高质量发展项目扶持计划操作规程","match":"高度匹配","amount":"—","unit":"事后资助","url":"https://wtl.sz.gov.cn/xxgk/zcfgjzcjd/whscsp/content/post_12729921.html"},
+    {"city":"深圳","province":"广东","dept":"文旅口","name":"深圳市文化广电旅游体育局文化产业发展专项资金扶持计划操作规程（修订版）","match":"高度匹配","amount":"—","unit":"按项目评估","url":"https://wtl.sz.gov.cn/xxgk/zcfgjzcjd/whscsp/content/post_11202166.html"},
+    {"city":"深圳","province":"广东","dept":"商委口","name":"会展业扶持补贴","match":"条件匹配","amount":"—","unit":"展位费差旅补贴","url":"http://swj.sz.gov.cn"},
+    {"city":"深圳","province":"广东","dept":"商委口","name":"数字文娱基地入驻补贴（宝安区）","match":"高度匹配","amount":"—","unit":"租金减免","url":"http://www.baoan.gov.cn"},
+    {"city":"深圳","province":"广东","dept":"科创科委口","name":"光明区推动AI和软件信息产业高质量发展若干措施","match":"条件匹配","amount":"600","unit":"万元上限（算力券）","url":"https://sf.sz.gov.cn/gfxwjcx/qjgfxwj/gmq/qzfgfxwj/qzf/content/post_12072781.html"},
+    {"city":"深圳","province":"广东","dept":"科创科委口","name":"2025年元宇宙典型案例推荐（国家级）","match":"高度匹配","amount":"—","unit":"荣誉+资源对接","url":"https://gxj.sz.gov.cn"},
+    {"city":"深圳","province":"广东","dept":"科创科委口","name":"福田区加快科技创新推动新质生产力发展若干措施","match":"条件匹配","amount":"3000","unit":"万元上限","url":"https://www.szft.gov.cn/ftqkjj/gkmlpt/content/12/12467/post_12467865.html"},
+    {"city":"深圳","province":"广东","dept":"科创科委口","name":"南山区加快科技创新若干措施（六个券）","match":"条件匹配","amount":"100","unit":"万元/季（模型券）","url":"https://www.nfnews.com/content/VoQVlgbJy5.html"},
+    {"city":"深圳","province":"广东","dept":"文旅口","name":"福田区支持文化与数字创意产业发展若干措施","match":"高度匹配","amount":"500","unit":"万元上限","url":"https://www.szft.gov.cn/bmxx/qwtj/zcfg/content/post_12371630.html"},
+    {"city":"深圳","province":"广东","dept":"文旅口","name":"宝安区互联网优质内容创作扶持政策（宝安十条）","match":"条件匹配","amount":"1000","unit":"万元上限","url":""},
+    {"city":"深圳","province":"广东","dept":"文旅口","name":"前海促进文化产业高质量发展若干措施","match":"高度匹配","amount":"300","unit":"万元上限","url":"https://www.sz.gov.cn/cn/xxgk/zfxxgj/zcfg/content/post_12412409.html"},
+    # ===== 上海 =====
+    {"city":"上海","province":"上海","dept":"商委口","name":"服务消费场景创建补贴","match":"高度匹配","amount":"—","unit":"视项目评估","url":"https://zwdt.sh.gov.cn"},
+    {"city":"上海","province":"上海","dept":"商委口","name":"文化贸易促进补贴","match":"条件匹配","amount":"—","unit":"覆盖物流展位等","url":""},
+    {"city":"上海","province":"上海","dept":"科创科委口","name":"元宇宙技术研发专项补贴","match":"高度匹配","amount":"1840","unit":"万元上限","url":"https://stcsm.sh.gov.cn"},
+    {"city":"上海","province":"上海","dept":"科创科委口","name":"上海市元宇宙新赛道优秀创新产品申报","match":"高度匹配","amount":"—","unit":"荣誉+资源对接","url":"https://sheitc.sh.gov.cn"},
+    {"city":"上海","province":"上海","dept":"文旅局口","name":"数字文旅产业发展补贴（文旅元宇宙/数字文娱新空间）","match":"高度匹配","amount":"—","unit":"场景落地资源","url":"https://whlyj.sh.gov.cn"},
+    {"city":"上海","province":"上海","dept":"文旅局口","name":"黄浦区促进文化创意产业发展引导资金","match":"条件匹配","amount":"300","unit":"万元上限","url":""},
+    {"city":"上海","province":"上海","dept":"文旅局口","name":"上海市促进文化创意产业发展专项资金","match":"条件匹配","amount":"—","unit":"按项目类型","url":""},
+    {"city":"上海","province":"上海","dept":"文旅局口","name":"杨浦区打造互联网优质内容创作集聚区支持政策","match":"条件匹配","amount":"—","unit":"免租+奖励+补贴","url":"https://www.shyp.gov.cn/zhengwu/zwgk-qzfwj/2025/342/870.html"},
+    # ===== 南京 =====
+    {"city":"南京","province":"江苏","dept":"文旅局口","name":"关于南京市2026年第一批文旅消费政府补贴演出剧目的公示","match":"参考价值","amount":"—","unit":"按项目评估","url":"https://wlj.nanjing.gov.cn/njswhgdxwcbj/202602/t20260204_5787398.html"},
+    {"city":"南京","province":"江苏","dept":"商委口","name":"首发活动补贴","match":"条件匹配","amount":"48","unit":"万元上限","url":"http://swj.nanjing.gov.cn"},
+    {"city":"南京","province":"江苏","dept":"文旅局口","name":"南京玄武区数字文旅产业发展补贴","match":"高度匹配","amount":"100","unit":"万元上限","url":"http://www.xwzf.gov.cn/xwqrmzf/202504/t20250416_5129227.html"},
+    # ===== 哈尔滨 =====
+    {"city":"哈尔滨","province":"黑龙江","dept":"文旅局口","name":"黑龙江省冰雪经济高质量发展若干政策措施——第15条：支持新技术新业态创新应用","match":"高度匹配","amount":"50","unit":"万元上限","url":"https://wlt.hlj.gov.cn/"},
+    {"city":"哈尔滨","province":"黑龙江","dept":"文旅局口","name":"黑龙江省冰雪经济高质量发展若干政策措施——第12条：支持冰雪旅游设备更新改造升级","match":"条件匹配","amount":"800","unit":"万元上限（贷款贴息）","url":"https://wlt.hlj.gov.cn/"},
+    {"city":"哈尔滨","province":"黑龙江","dept":"文旅局口","name":"黑龙江省冰雪经济高质量发展若干政策措施——第14条：鼓励冰雪企业做大做强","match":"条件匹配","amount":"60","unit":"万元上限","url":""},
+    {"city":"哈尔滨","province":"黑龙江","dept":"文旅局口","name":"哈尔滨市支持冰雪经济发展若干政策措施","match":"高度匹配","amount":"50","unit":"万元上限","url":"https://www.harbin.gov.cn/haerbin/c104531/202205/c01_64695.shtml"},
+    # ===== 武汉 =====
+    {"city":"武汉","province":"湖北","dept":"文旅局口","name":"关于支持文化产业高质量发展的若干措施","match":"高度匹配","amount":"300","unit":"万元上限","url":"https://www.wuchang.gov.cn/zwgk_37/fdzdgknr/qtzdgknr/jytabl_1/qjytan/taq/202510/t20251030_2669636.html"},
+    {"city":"武汉","province":"湖北","dept":"文旅局口","name":"武汉市文旅元宇宙创新发展三年行动方案（2025—2027年）","match":"条件匹配","amount":"—","unit":"按项目评估","url":"https://www.wuhan.gov.cn/gwfbpt/sbm/swhhlyj_79506/202412/t20241218_2501366.shtml"},
+    {"city":"武汉","province":"湖北","dept":"文旅局口","name":"支持文化和旅游产业高质量发展若干奖补政策","match":"高度匹配","amount":"300","unit":"万元上限","url":"https://www.wuhan.gov.cn/gwfbpt/sbm/swhhlyj_79506/202512/t20251231_2705417.shtml"},
+    # ===== 济南 =====
+    {"city":"济南","province":"山东","dept":"商委口","name":"济南市消费新业态新模式新场景试点项目及资金管理办法","match":"高度匹配","amount":"—","unit":"按项目评估","url":"http://jnbusiness.jinan.gov.cn/col/col122001/art/2026/art_a27cc6c0b54d403c859c972e534dc803.html?type=FUaRhQW7Lo9974tywtQmQ"},
+    # ===== 苏州 =====
+    {"city":"苏州","province":"江苏","dept":"文旅局口","name":"苏州工业园区旅游产业发展扶持政策","match":"条件匹配","amount":"100","unit":"万元上限","url":"http://www.sipac.gov.cn/szgyyq/whjy/202604/e6fa2afa1714413a841e1b038036e227.shtml"},
+    {"city":"苏州","province":"江苏","dept":"科创科委口","name":"苏州市进一步加快建设人工智能+城市的若干措施（2026年版）","match":"条件匹配","amount":"—","unit":"按项目评估","url":"https://www.suzhou.gov.cn/szsrmzf/wzjd/202601/bab90715aaf3456981b802b6c59ec94d.shtml"},
+    # ===== 广州 =====
+    {"city":"广州","province":"广东","dept":"文旅局口","name":"广州市黄埔区广州开发区促进元宇宙创新发展办法","match":"高度匹配","amount":"—","unit":"综合补贴","url":"http://www.hp.gov.cn/gzjg/qzfgwhgzbm/qgyhxxhj/xxgk/content/post_8171935.html"},
+    # ===== 南昌 =====
+    {"city":"南昌","province":"江西","dept":"商委口","name":"关于开展南昌市消费新业态新模式新场景试点项目申报的通知","match":"高度匹配","amount":"—","unit":"按项目评估","url":"http://swj.nc.gov.cn/ncsswj/tzgg/202603/07e70fe68afa4a9ab3bb943883650438.shtml"},
+    # ===== 湖南省 =====
+    {"city":"湖南省","province":"湖南","dept":"文旅局口","name":"关于做好2026年省文化旅游和文物保护专项资金(文旅类)项目申报工作的通知","match":"条件匹配","amount":"200","unit":"万元上限","url":"https://www.hunan.gov.cn/zqt/xmsb/202512/t20251231_33884225.html"},
+    # ===== 福州 =====
+    {"city":"福州","province":"福建","dept":"科创科委口","name":"福州市促进人工智能产业创新发展行动方案（2024—2026年）","match":"条件匹配","amount":"—","unit":"按项目评估","url":"https://fzxq.fuzhou.gov.cn/xxgk/fgwj/202404/t20240402_4802873.htm"},
+    # ===== 国家级 =====
     {"city":"国家级","province":"—","dept":"工信部","name":"2025年元宇宙典型案例推荐","match":"高度匹配","amount":"—","unit":"荣誉资源","url":"https://www.miit.gov.cn/"},
-    {"city":"广东省","province":"广东","dept":"科创科委口","name":"加快推动人工智能赋能实体经济","match":"条件匹配","amount":"—","unit":"综合措施","url":"https://gdii.gd.gov.cn/"},
 ]
 
 # 城市 → 省份映射（用于 ECharts 地图高亮）
 CITY_PROVINCE_MAP = {
     "上海": "上海", "深圳": "广东", "南京": "江苏", "苏州": "江苏",
     "哈尔滨": "黑龙江", "武汉": "湖北", "济南": "山东",
-    "长春": "吉林", "广东省": "广东", "黑龙江省": "黑龙江",
-    "江苏省": "江苏", "国家级": "—",
+    "长春": "吉林", "广州": "广东", "南昌": "江西", "福州": "福建",
+    "广东省": "广东", "黑龙江省": "黑龙江", "江苏省": "江苏",
+    "湖南省": "湖南", "国家级": "—",
 }
 
 def parse_chunk_to_policy(chunk_text, source_city=None):
@@ -1170,6 +1215,12 @@ def parse_chunk_to_policy(chunk_text, source_city=None):
 
     city_raw = extract("城市/区域") or source_city or ""
     city = city_raw.split("·")[0].strip() if "·" in city_raw else city_raw.strip()
+    # 规范化：去掉末尾的"市"/"省"，统一和 EXISTING_POLICIES 对齐
+    _normalize = {"深圳市":"深圳","上海市":"上海","南京市":"南京","哈尔滨市":"哈尔滨",
+                  "武汉市":"武汉","济南市":"济南","苏州市":"苏州","广州市":"广州",
+                  "长春市":"长春","南昌市":"南昌","福州市":"福州","黑龙江省":"黑龙江省",
+                  "广东省":"广东省","江苏省":"江苏省","湖南省":"湖南省"}
+    city = _normalize.get(city, city)
 
     name    = extract("政策名称")
     dept    = extract("归口部门")
