@@ -771,6 +771,7 @@ function renderCards(policies){
       </div>
       <div class="pc-name">${p.name}</div>
       <div class="pc-amt-wrap">${amtHtml}</div>`;
+    if(p.url){
       return `<a class="pcard ${cls} mask-wrap" href="${p.url}" target="_blank" style="text-decoration:none;display:block">
         <div class="mask-inner ${d}">${inner}</div></a>`;
     }
@@ -883,16 +884,77 @@ function initMap(){
   const covered = window._coveredProvinces || ['上海','广东','江苏','黑龙江','湖北','山东','吉林'];
   chart.setOption({
     backgroundColor:'transparent',
-    tooltip:{trigger:'item',backgroundColor:'rgba(245,243,239,.97)',borderColor:'rgba(15,92,68,.2)',borderWidth:1,
+    tooltip:{
+      trigger:'item',
+      backgroundColor:'rgba(245,243,239,.97)',
+      borderColor:'rgba(15,92,68,.2)',borderWidth:1,
       textStyle:{color:'#1c2018',fontFamily:'Noto Sans SC',fontSize:12},
-      formatter:p=>covered.includes(p.name)?`<b>${p.name}</b><br/>✅ 已覆盖政策`:`<b>${p.name}</b><br/>暂未收录`},
-    series:[{type:'map',map:'china',roam:false,aspectScale:.85,label:{show:false},
-      emphasis:{label:{show:true,color:'#111510',fontSize:11},itemStyle:{areaColor:'rgba(15,92,68,.36)',borderColor:'#0f5c44'}},
-      select:{disabled:true},
-      itemStyle:{areaColor:'#e8e4db',borderColor:'rgba(0,0,0,.1)',borderWidth:.8},
-      data:covered.map(name=>({name,
-        itemStyle:{areaColor:'rgba(15,92,68,.15)',borderColor:'rgba(15,92,68,.38)',borderWidth:1,shadowColor:'rgba(15,92,68,.07)',shadowBlur:4},
-        emphasis:{itemStyle:{areaColor:'rgba(15,92,68,.32)',borderColor:'#0f5c44',shadowBlur:10}}
+      formatter:p=>covered.includes(p.name)?`<b>${p.name}</b><br/>✅ 已覆盖政策`:`<b>${p.name}</b><br/>暂未收录`
+    },
+    series:[{
+      type:'map',map:'china',roam:false,aspectScale:.85,
+      zoom: 1,
+      label:{show:false},
+      emphasis:{
+        disabled: false,
+        label:{show:true,color:'#111510',fontSize:11,fontWeight:'bold'},
+        itemStyle:{
+          areaColor:'rgba(15,92,68,.50)',
+          borderColor:'#0f5c44',
+          borderWidth:2,
+          shadowColor:'rgba(15,92,68,.35)',
+          shadowBlur:20,
+          shadowOffsetY:-4,
+        }
+      },
+      select:{
+        disabled: false,
+        label:{show:true,color:'#111510',fontSize:11,fontWeight:'bold'},
+        itemStyle:{
+          areaColor:'rgba(15,92,68,.55)',
+          borderColor:'#0f5c44',
+          borderWidth:2.5,
+          shadowColor:'rgba(15,92,68,.4)',
+          shadowBlur:28,
+          shadowOffsetY:-6,
+        }
+      },
+      itemStyle:{
+        areaColor:'#e8e4db',
+        borderColor:'rgba(0,0,0,.1)',
+        borderWidth:.8,
+        shadowColor:'transparent',
+        shadowBlur:0,
+      },
+      data:covered.map(name=>({
+        name,
+        itemStyle:{
+          areaColor:'rgba(15,92,68,.16)',
+          borderColor:'rgba(15,92,68,.4)',
+          borderWidth:1,
+          shadowColor:'rgba(15,92,68,.08)',
+          shadowBlur:4,
+        },
+        emphasis:{
+          itemStyle:{
+            areaColor:'rgba(15,92,68,.50)',
+            borderColor:'#0f5c44',
+            borderWidth:2,
+            shadowColor:'rgba(15,92,68,.35)',
+            shadowBlur:20,
+            shadowOffsetY:-4,
+          }
+        },
+        select:{
+          itemStyle:{
+            areaColor:'rgba(15,92,68,.58)',
+            borderColor:'#0a3d2d',
+            borderWidth:2.5,
+            shadowColor:'rgba(15,92,68,.45)',
+            shadowBlur:28,
+            shadowOffsetY:-6,
+          }
+        }
       }))
     }]
   });
