@@ -139,6 +139,10 @@ TARGET_SITES = [
     },
 
 
+    # ===== 国家级 =====
+    {
+        "city": "国家级", "department": "科创科委口",
+        "name": "工业和信息化部",
         "url": "https://www.miit.gov.cn/xwfb/zxzc/index.html",
         "keywords": ["元宇宙", "VR", "XR", "数字文娱", "沉浸式", "虚拟现实", "人工智能"],
         "list_selector": ".uni-main .xw-item a, .list-content li a, ul.zxzc-list li a",
