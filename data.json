@@ -1,0 +1,269 @@
+{
+  "updated_at": "2026-05-12",
+  "policy_count": 17,
+  "city_count": 9,
+  "cities": [
+    "深圳",
+    "上海",
+    "南京",
+    "哈尔滨",
+    "济南市",
+    "广州市",
+    "武汉市",
+    "苏州市",
+    "南京市"
+  ],
+  "provinces": [
+    "江苏",
+    "上海",
+    "黑龙江",
+    "广东"
+  ],
+  "city_stats": {
+    "深圳": 2,
+    "上海": 3,
+    "南京": 1,
+    "哈尔滨": 2,
+    "国家级": 1,
+    "济南市": 1,
+    "广州市": 1,
+    "武汉市": 3,
+    "广东省": 1,
+    "苏州市": 1,
+    "南京市": 1
+  },
+  "top_policies": [
+    {
+      "city": "深圳",
+      "province": "广东",
+      "dept": "文旅口",
+      "name": "数字创意产业高质量发展若干措施",
+      "match": "高度匹配",
+      "amount": "—",
+      "unit": "按项目评估",
+      "url": "https://www.sz.gov.cn/"
+    },
+    {
+      "city": "深圳",
+      "province": "广东",
+      "dept": "文旅口",
+      "name": "数字创意产业集群扶持计划操作规程",
+      "match": "高度匹配",
+      "amount": "—",
+      "unit": "事后资助",
+      "url": "https://www.sz.gov.cn/"
+    },
+    {
+      "city": "上海",
+      "province": "上海",
+      "dept": "科创科委口",
+      "name": "元宇宙技术研发专项补贴",
+      "match": "高度匹配",
+      "amount": "1840",
+      "unit": "万元上限",
+      "url": "https://stcsm.sh.gov.cn/"
+    },
+    {
+      "city": "上海",
+      "province": "上海",
+      "dept": "文旅局口",
+      "name": "文旅元宇宙数字文娱新空间创新应用场景",
+      "match": "高度匹配",
+      "amount": "—",
+      "unit": "荣誉资源",
+      "url": "https://whlyj.sh.gov.cn/"
+    },
+    {
+      "city": "南京",
+      "province": "江苏",
+      "dept": "文旅局口",
+      "name": "玄武区数字文旅产业发展补贴",
+      "match": "高度匹配",
+      "amount": "100",
+      "unit": "万元上限",
+      "url": "https://www.nanjing.gov.cn/"
+    },
+    {
+      "city": "哈尔滨",
+      "province": "黑龙江",
+      "dept": "文旅局口",
+      "name": "支持新技术新业态创新应用（冰雪经济）",
+      "match": "高度匹配",
+      "amount": "—",
+      "unit": "营收奖补",
+      "url": "https://wlt.hlj.gov.cn/"
+    }
+  ],
+  "all_policies": [
+    {
+      "city": "深圳",
+      "province": "广东",
+      "dept": "文旅口",
+      "name": "数字创意产业高质量发展若干措施",
+      "match": "高度匹配",
+      "amount": "—",
+      "unit": "按项目评估",
+      "url": "https://www.sz.gov.cn/"
+    },
+    {
+      "city": "深圳",
+      "province": "广东",
+      "dept": "文旅口",
+      "name": "数字创意产业集群扶持计划操作规程",
+      "match": "高度匹配",
+      "amount": "—",
+      "unit": "事后资助",
+      "url": "https://www.sz.gov.cn/"
+    },
+    {
+      "city": "上海",
+      "province": "上海",
+      "dept": "科创科委口",
+      "name": "元宇宙技术研发专项补贴",
+      "match": "高度匹配",
+      "amount": "1840",
+      "unit": "万元上限",
+      "url": "https://stcsm.sh.gov.cn/"
+    },
+    {
+      "city": "上海",
+      "province": "上海",
+      "dept": "文旅局口",
+      "name": "文旅元宇宙数字文娱新空间创新应用场景",
+      "match": "高度匹配",
+      "amount": "—",
+      "unit": "荣誉资源",
+      "url": "https://whlyj.sh.gov.cn/"
+    },
+    {
+      "city": "南京",
+      "province": "江苏",
+      "dept": "文旅局口",
+      "name": "玄武区数字文旅产业发展补贴",
+      "match": "高度匹配",
+      "amount": "100",
+      "unit": "万元上限",
+      "url": "https://www.nanjing.gov.cn/"
+    },
+    {
+      "city": "哈尔滨",
+      "province": "黑龙江",
+      "dept": "文旅局口",
+      "name": "支持新技术新业态创新应用（冰雪经济）",
+      "match": "高度匹配",
+      "amount": "—",
+      "unit": "营收奖补",
+      "url": "https://wlt.hlj.gov.cn/"
+    },
+    {
+      "city": "国家级",
+      "province": "—",
+      "dept": "工信部",
+      "name": "2025年元宇宙典型案例推荐",
+      "match": "高度匹配",
+      "amount": "—",
+      "unit": "荣誉资源",
+      "url": "https://www.miit.gov.cn/"
+    },
+    {
+      "city": "济南市",
+      "province": "",
+      "dept": "商委口",
+      "name": "济南市消费新业态新模式新场景试点项目及资金管理办法",
+      "match": "高度匹配",
+      "amount": "—",
+      "unit": "按项目评估",
+      "url": "https://jnbusiness.jinan.gov.cn/col/col25064/art/2026/art_a1cc3e9cbb9f41d9ab566629e745709e.html"
+    },
+    {
+      "city": "广州市",
+      "province": "",
+      "dept": "区级综合口",
+      "name": "广州市黄埔区 广州开发区促进元宇宙创新发展办法",
+      "match": "高度匹配",
+      "amount": "—",
+      "unit": "按项目评估",
+      "url": "http://www.hp.gov.cn/gzjg/qzfgwhgzbm/qgyhxxhj/xxgk/content/post_8171935.html"
+    },
+    {
+      "city": "武汉市",
+      "province": "",
+      "dept": "文旅局口",
+      "name": "关于支持文化产业高质量发展的若干措施",
+      "match": "高度匹配",
+      "amount": "20",
+      "unit": "万元上限",
+      "url": "https://www.wuchang.gov.cn/zwgk_37/fdzdgknr/qtzdgknr/jytabl_1/qjytan/taq/202510/t20251030_2669636.html"
+    },
+    {
+      "city": "武汉市",
+      "province": "",
+      "dept": "文旅局口",
+      "name": "支持文化和旅游产业高质量发展若干奖补政策",
+      "match": "高度匹配",
+      "amount": "20",
+      "unit": "万元上限",
+      "url": "https://www.wuhan.gov.cn/gwfbpt/sbm/swhhlyj_79506/202512/t20251231_2705417.shtml"
+    },
+    {
+      "city": "上海",
+      "province": "上海",
+      "dept": "商委口",
+      "name": "促进服务消费提质扩容实施方案",
+      "match": "条件匹配",
+      "amount": "—",
+      "unit": "综合补贴",
+      "url": "https://www.sh.gov.cn/"
+    },
+    {
+      "city": "哈尔滨",
+      "province": "黑龙江",
+      "dept": "文旅局口",
+      "name": "支持冰雪旅游设备更新改造升级",
+      "match": "条件匹配",
+      "amount": "—",
+      "unit": "贷款贴息",
+      "url": "https://wlt.hlj.gov.cn/"
+    },
+    {
+      "city": "广东省",
+      "province": "广东",
+      "dept": "科创科委口",
+      "name": "加快推动人工智能赋能实体经济",
+      "match": "条件匹配",
+      "amount": "—",
+      "unit": "综合措施",
+      "url": "https://gdii.gd.gov.cn/"
+    },
+    {
+      "city": "苏州市",
+      "province": "",
+      "dept": "科创科委口",
+      "name": "苏州市进一步加快建设“人工智能+”城市的若干措施（2026年版）",
+      "match": "条件匹配",
+      "amount": "—",
+      "unit": "按项目评估",
+      "url": "https://www.suzhou.gov.cn/szsrmzf/szfgfxwjk/202512/859f7ff48e8d45fdb9f38ad5977294ac.shtml"
+    },
+    {
+      "city": "武汉市",
+      "province": "",
+      "dept": "文旅局口",
+      "name": "武汉市文旅元宇宙创新发展三年行动方案（2025—2027年）",
+      "match": "条件匹配",
+      "amount": "—",
+      "unit": "按项目评估",
+      "url": "https://www.wuhan.gov.cn/gwfbpt/sbm/swhhlyj_79506/202412/t20241218_2501366.shtml"
+    },
+    {
+      "city": "南京市",
+      "province": "",
+      "dept": "文旅局口",
+      "name": "关于南京市2026年第一批文旅消费政府补贴演出剧目的公示",
+      "match": "参考价值",
+      "amount": "—",
+      "unit": "按项目评估",
+      "url": "https://wlj.nanjing.gov.cn/njswhgdxwcbj/202602/t20260204_5787398.html"
+    }
+  ]
+}
