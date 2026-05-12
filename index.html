@@ -312,7 +312,8 @@ nav{display:flex;align-items:center;gap:34px}
 .pc-name{font-family:'Noto Serif SC',serif;font-size:13.5px;font-weight:400;line-height:1.65;color:var(--t1);margin-bottom:18px}
 .pc-amt-wrap{border-top:1px solid var(--line);padding-top:13px;display:flex;align-items:baseline;gap:6px}
 .pc-amt-num{font-family:'DM Mono',monospace;font-size:22px;font-weight:500;color:var(--teal);line-height:1}
-.pc-amt-unit{font-family:'DM Mono',monospace;font-size:10px;color:var(--t3)}
+.pc-amt-num:empty,.pc-amt-num.hidden{display:none}
+.pc-amt-unit{font-family:'DM Mono',monospace;font-size:11px;color:var(--t3)}
 
 /* ── SECTION ── */
 .page-sec{padding:72px 56px;border-bottom:1px solid var(--line);background:var(--bg)}
@@ -505,7 +506,7 @@ footer{
       <div class="pcard high mask-wrap"><div class="mask-inner d1">
         <div class="pc-top"><span class="pc-city">深圳 · 文旅口</span><span class="badge bh">高度匹配</span></div>
         <div class="pc-name">数字创意产业高质量发展若干措施</div>
-        <div class="pc-amt-wrap"><span class="pc-amt-num">—</span><span class="pc-amt-unit">按项目评估</span></div>
+        <div class="pc-amt-wrap"><span class="pc-amt-unit">按项目评估</span></div>
       </div></div>
       <div class="pcard high mask-wrap"><div class="mask-inner d2">
         <div class="pc-top"><span class="pc-city">上海 · 科创科委口</span><span class="badge bh">高度匹配</span></div>
@@ -515,7 +516,7 @@ footer{
       <div class="pcard high mask-wrap"><div class="mask-inner d3">
         <div class="pc-top"><span class="pc-city">上海 · 文旅局口</span><span class="badge bh">高度匹配</span></div>
         <div class="pc-name">文旅元宇宙数字文娱新空间创新场景</div>
-        <div class="pc-amt-wrap"><span class="pc-amt-num">—</span><span class="pc-amt-unit">资源对接</span></div>
+        <div class="pc-amt-wrap"><span class="pc-amt-unit">资源对接</span></div>
       </div></div>
       <div class="pcard high mask-wrap"><div class="mask-inner d4">
         <div class="pc-top"><span class="pc-city">南京 · 文旅局口</span><span class="badge bh">高度匹配</span></div>
@@ -530,7 +531,7 @@ footer{
       <div class="pcard high mask-wrap"><div class="mask-inner d6">
         <div class="pc-top"><span class="pc-city">国家级 · 工信部</span><span class="badge bh">高度匹配</span></div>
         <div class="pc-name">2025 年元宇宙典型案例推荐</div>
-        <div class="pc-amt-wrap"><span class="pc-amt-num">—</span><span class="pc-amt-unit">资源 + 背书</span></div>
+        <div class="pc-amt-wrap"><span class="pc-amt-unit">资源 + 背书</span></div>
       </div></div>
     </div>
   </section>
@@ -760,17 +761,16 @@ function renderCards(policies){
     const cls  = p.match==='高度匹配'?'high':'mid';
     const bcls = MATCH_LABELS[p.match]||'bm';
     const d    = delays[i]||'d1';
+    const amtHtml = (p.amount && p.amount !== '—')
+      ? `<span class="pc-amt-num">${p.amount}</span><span class="pc-amt-unit">${p.unit||''}</span>`
+      : `<span class="pc-amt-unit">${p.unit||'—'}</span>`;
     const inner = `
       <div class="pc-top">
         <span class="pc-city">${p.city} · ${p.dept}</span>
         <span class="badge ${bcls}">${p.match}</span>
       </div>
       <div class="pc-name">${p.name}</div>
-      <div class="pc-amt-wrap">
-        <span class="pc-amt-num">${p.amount||'—'}</span>
-        <span class="pc-amt-unit">${p.unit||''}</span>
-      </div>`;
-    if(p.url){
+      <div class="pc-amt-wrap">${amtHtml}</div>`;
       return `<a class="pcard ${cls} mask-wrap" href="${p.url}" target="_blank" style="text-decoration:none;display:block">
         <div class="mask-inner ${d}">${inner}</div></a>`;
     }
