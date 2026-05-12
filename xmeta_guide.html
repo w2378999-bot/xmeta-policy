@@ -4,255 +4,148 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>使用指南 · X-META 补贴政策助手</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600&family=Noto+Sans+SC:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:   #0b1120;
-  --bg2:  #0f1628;
-  --bg3:  #131d30;
-  --teal: #1a9e7a;
-  --teal2:#0f6350;
-  --gold: #b88c0a;
-  --t1:   #b8ccc8;
-  --t2:   #7a9490;
-  --t3:   #4a6460;
-  --line: rgba(26,158,122,0.16);
+  --bg:    #f5f3ef;
+  --bg2:   #eceae4;
+  --teal:  #0f5c44;
+  --teal-l:#1a9e7a;
+  --teal-d:#0a3d2d;
+  --gold:  #b88c0a;
+  --ink:   #111510;
+  --t1:    #1c2018;
+  --t2:    #4a5245;
+  --t3:    #7a8575;
+  --line:  rgba(0,0,0,.08);
+  --line2: rgba(0,0,0,.04);
 }
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
 body{
-  background:var(--bg);
-  color:var(--t1);
-  font-family:'Noto Sans SC',sans-serif;
-  font-weight:300;
-  -webkit-font-smoothing:antialiased;
-  line-height:1.7;
+  background:var(--bg);color:var(--t1);
+  font-family:'Noto Sans SC',sans-serif;font-weight:300;
+  -webkit-font-smoothing:antialiased;line-height:1.7;cursor:none;
 }
 
-/* grid bg */
-body::before{
-  content:'';
-  position:fixed;inset:0;z-index:0;pointer-events:none;
-  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-  background-size:72px 72px;
-  mask-image:radial-gradient(ellipse 80% 80% at 50% 20%,black 20%,transparent 75%);
-  -webkit-mask-image:radial-gradient(ellipse 80% 80% at 50% 20%,black 20%,transparent 75%);
-}
+/* ── CURSOR ── */
+#cur{position:fixed;pointer-events:none;z-index:9999;width:5px;height:5px;border-radius:50%;background:var(--teal);transform:translate(-50%,-50%);transition:width .15s,height .15s,background .2s,opacity .2s}
+#cur-o{position:fixed;pointer-events:none;z-index:9998;width:30px;height:30px;border-radius:50%;border:1px solid rgba(15,92,68,.22);transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s}
+body:has(a:hover) #cur,body:has(button:hover) #cur{width:8px;height:8px;background:var(--gold)}
+body:has(a:hover) #cur-o,body:has(button:hover) #cur-o{width:46px;height:46px;border-color:rgba(184,140,10,.3)}
 
-#wrap{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:0 40px 80px;}
+/* ── BG ── */
+#bg-stage{
+  position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;opacity:.5;
+  -webkit-mask-image:linear-gradient(to bottom,black 0%,black 28%,transparent 60%);
+  mask-image:linear-gradient(to bottom,black 0%,black 28%,transparent 60%);
+}
+.bg-skew{position:absolute;top:-30%;left:-10%;right:-10%;bottom:-30%;transform:skewY(-7deg);display:flex;flex-direction:column;gap:10px;padding:10px 0}
+.bg-row{display:flex;gap:10px;flex-shrink:0;will-change:transform}
+.bg-cell{flex-shrink:0;width:180px;height:88px;border-radius:12px;background:rgba(220,218,212,.5);border:1px solid rgba(255,255,255,.65);background-image:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(255,255,255,.45) 0%,transparent 70%)}
 
-/* header */
-.top-bar{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:28px 0 24px;
-  border-bottom:1px solid var(--line);
-  margin-bottom:64px;
-}
-.logo-area{display:flex;align-items:center;gap:12px;}
-.logo-area img{height:26px;width:auto;mix-blend-mode:screen;opacity:.88;}
-.logo-sub{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2.5px;color:var(--t3);}
-.back-btn{
-  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;
-  color:var(--t3);text-decoration:none;
-  display:flex;align-items:center;gap:6px;
-  transition:color .2s;
-}
-.back-btn:hover{color:var(--teal);}
+#grain{position:fixed;inset:0;z-index:2;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)' opacity='.025'/%3E%3C/svg%3E");background-size:280px;opacity:.4;mix-blend-mode:multiply}
 
-/* hero */
-.hero{margin-bottom:72px;}
-.hero-label{
-  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;
-  color:var(--gold);text-transform:uppercase;
-  margin-bottom:20px;
-  display:flex;align-items:center;gap:10px;
-}
-.hero-label::before{content:'';width:20px;height:1px;background:var(--gold);}
-.hero h1{
-  font-family:'Noto Serif SC',serif;
-  font-size:clamp(32px,4vw,48px);
-  font-weight:300;line-height:1.2;
-  margin-bottom:16px;color:var(--t1);
-}
-.hero h1 strong{font-weight:600;color:var(--teal);}
-.hero-desc{font-size:14px;color:var(--t2);max-width:520px;line-height:1.9;}
+/* ── LAYOUT ── */
+#wrap{position:relative;z-index:10;max-width:860px;margin:0 auto;padding:0 40px 100px}
 
-/* section */
-.sec{margin-bottom:64px;}
-.sec-hd{
-  display:flex;align-items:center;gap:14px;
-  margin-bottom:32px;
-}
-.sec-hd-label{
-  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;
-  color:var(--t3);text-transform:uppercase;white-space:nowrap;
-}
-.sec-hd-line{flex:1;height:1px;background:var(--line);}
+/* ── TOP BAR ── */
+.top-bar{display:flex;align-items:center;justify-content:space-between;padding:24px 0 22px;border-bottom:1px solid var(--line);margin-bottom:72px}
+.logo-area{display:flex;align-items:center;gap:12px}
+.logo-area img{height:26px;width:auto;opacity:.88;transition:opacity .2s}
+.logo-sub{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2.5px;color:var(--t3);align-self:flex-end;padding-bottom:1px}
+.back-btn{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;color:var(--t2);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .2s}
+.back-btn:hover{color:var(--teal)}
 
-/* feature blocks */
-.feat{
-  border:1px solid var(--line);
-  border-radius:10px;
-  overflow:hidden;
-  margin-bottom:16px;
-  transition:border-color .25s;
-}
-.feat:hover{border-color:rgba(26,158,122,.35);}
-.feat-header{
-  display:flex;align-items:flex-start;gap:20px;
-  padding:28px 28px 24px;
-  cursor:pointer;
-  user-select:none;
-}
-.feat-num{
-  font-family:'DM Mono',monospace;
-  font-size:22px;font-weight:500;
-  color:rgba(26,158,122,.25);
-  line-height:1;flex-shrink:0;
-  padding-top:3px;
-  transition:color .25s;
-}
-.feat:hover .feat-num{color:rgba(26,158,122,.5);}
-.feat-meta{flex:1;}
-.feat-title{
-  font-family:'Noto Serif SC',serif;
-  font-size:18px;font-weight:600;
-  color:var(--t1);margin-bottom:6px;
-}
-.feat-tagline{font-size:13px;color:var(--t2);}
-.feat-arrow{
-  font-size:11px;color:var(--t3);
-  transition:transform .25s;
-  padding-top:4px;
-  flex-shrink:0;
-}
-.feat.open .feat-arrow{transform:rotate(90deg);}
+/* ── HERO ── */
+.hero{margin-bottom:80px;opacity:0;filter:blur(6px);animation:blurIn .9s .1s ease forwards}
+.hero-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3.5px;color:var(--gold);text-transform:uppercase;margin-bottom:22px;display:inline-flex;align-items:center;gap:10px}
+.hero-label::before{content:'';width:22px;height:1px;background:var(--gold)}
+.hero h1{font-family:'Noto Serif SC',serif;font-size:clamp(34px,4.5vw,52px);font-weight:300;line-height:1.15;letter-spacing:-1px;color:var(--ink);margin-bottom:18px}
+.hero h1 strong{font-weight:600;color:var(--teal);position:relative}
+.hero h1 strong::after{content:'';position:absolute;left:0;bottom:-3px;right:0;height:1.5px;background:linear-gradient(90deg,var(--teal),transparent)}
+.hero-desc{font-size:14.5px;color:var(--t2);max-width:500px;line-height:1.9;font-weight:300}
+@keyframes blurIn{to{opacity:1;filter:blur(0)}}
 
-.feat-body{
-  display:none;
-  padding:0 28px 28px 68px;
-  border-top:1px solid var(--line);
-  padding-top:24px;
-}
-.feat.open .feat-body{display:block;}
+/* ── SECTION ── */
+.sec{margin-bottom:72px}
+.sec-hd{display:flex;align-items:center;gap:14px;margin-bottom:32px}
+.sec-hd-label{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:5px;color:var(--t2);text-transform:uppercase;white-space:nowrap}
+.sec-hd-line{flex:1;height:1px;background:var(--line)}
 
-/* steps */
-.steps{display:flex;flex-direction:column;gap:0;margin-bottom:20px;}
-.step{display:flex;gap:16px;position:relative;padding-bottom:20px;}
-.step::before{
-  content:'';position:absolute;left:15px;top:32px;
-  width:1px;height:calc(100% - 8px);
-  background:var(--line);
-}
-.step:last-child::before{display:none;}
-.step:last-child{padding-bottom:0;}
-.step-dot{
-  width:30px;height:30px;border-radius:50%;
-  border:1px solid rgba(26,158,122,.4);
-  background:var(--bg2);
-  display:flex;align-items:center;justify-content:center;
-  font-family:'DM Mono',monospace;font-size:11px;
-  color:var(--teal);flex-shrink:0;
-  position:relative;z-index:1;
-}
-.step-content{padding-top:4px;}
-.step-title{font-size:13px;font-weight:500;color:var(--t1);margin-bottom:4px;}
-.step-desc{font-size:12.5px;color:var(--t2);line-height:1.65;}
+/* ── MASK REVEAL ── */
+.mask-wrap{overflow:hidden}
+.mask-inner{transform:translateY(40px);opacity:0;transition:transform .9s cubic-bezier(.16,1,.3,1),opacity .85s ease}
+.mask-wrap.revealed .mask-inner{transform:translateY(0);opacity:1}
+.mask-wrap.revealed .mask-inner.d1{transition-delay:.05s}
+.mask-wrap.revealed .mask-inner.d2{transition-delay:.13s}
+.mask-wrap.revealed .mask-inner.d3{transition-delay:.21s}
+.mask-wrap.revealed .mask-inner.d4{transition-delay:.29s}
 
-/* tips box */
-.tips-box{
-  background:var(--bg3);
-  border:1px solid var(--line);
-  border-left:3px solid var(--teal);
-  border-radius:0 6px 6px 0;
-  padding:14px 16px;
-  margin-top:16px;
-}
-.tips-box-title{
-  font-family:'DM Mono',monospace;
-  font-size:9px;letter-spacing:2px;
-  color:var(--teal);text-transform:uppercase;
-  margin-bottom:8px;
-}
-.tips-box li{
-  font-size:12px;color:var(--t2);
-  list-style:none;padding-left:14px;
-  position:relative;margin-bottom:4px;line-height:1.6;
-}
-.tips-box li::before{content:'◦';position:absolute;left:0;color:var(--teal);}
+/* ── FEAT ── */
+.feat{border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:12px;background:rgba(236,234,228,.7);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:border-color .25s,box-shadow .25s}
+.feat:hover{border-color:rgba(15,92,68,.22);box-shadow:0 2px 20px rgba(0,0,0,.05)}
+.feat-header{display:flex;align-items:flex-start;gap:20px;padding:26px 26px 22px;cursor:pointer;user-select:none}
+.feat-num{font-family:'DM Mono',monospace;font-size:22px;font-weight:500;color:rgba(15,92,68,.18);line-height:1;flex-shrink:0;padding-top:3px;transition:color .25s}
+.feat:hover .feat-num{color:rgba(15,92,68,.42)}
+.feat-meta{flex:1}
+.feat-title{font-family:'Noto Serif SC',serif;font-size:17px;font-weight:600;color:var(--t1);margin-bottom:5px}
+.feat-tagline{font-size:13px;color:var(--t2)}
+.feat-arrow{font-size:10px;color:var(--t3);transition:transform .25s;padding-top:5px;flex-shrink:0}
+.feat.open .feat-arrow{transform:rotate(90deg)}
+.feat-body{display:none;padding:22px 26px 26px 68px;border-top:1px solid var(--line);background:rgba(245,243,239,.5)}
+.feat.open .feat-body{display:block}
 
-/* warn box */
-.warn-box{
-  background:rgba(184,140,10,.06);
-  border:1px solid rgba(184,140,10,.2);
-  border-left:3px solid var(--gold);
-  border-radius:0 6px 6px 0;
-  padding:14px 16px;
-  margin-top:16px;
-  font-size:12px;color:var(--t2);line-height:1.65;
-}
-.warn-box strong{color:var(--t1);}
+/* ── STEPS ── */
+.steps{display:flex;flex-direction:column;margin-bottom:20px}
+.step{display:flex;gap:16px;position:relative;padding-bottom:20px}
+.step::before{content:'';position:absolute;left:15px;top:32px;width:1px;height:calc(100% - 8px);background:var(--line)}
+.step:last-child::before{display:none}
+.step:last-child{padding-bottom:0}
+.step-dot{width:30px;height:30px;border-radius:50%;border:1px solid rgba(15,92,68,.3);background:var(--bg2);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:11px;color:var(--teal);flex-shrink:0;position:relative;z-index:1}
+.step-content{padding-top:4px}
+.step-title{font-size:13.5px;font-weight:500;color:var(--t1);margin-bottom:5px}
+.step-desc{font-size:13px;color:var(--t2);line-height:1.68}
 
+/* ── TIPS / WARN ── */
+.tips-box{background:rgba(15,92,68,.04);border:1px solid rgba(15,92,68,.14);border-left:3px solid var(--teal);border-radius:0 6px 6px 0;padding:14px 16px;margin-top:18px}
+.tips-box-title{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--teal);text-transform:uppercase;margin-bottom:8px}
+.tips-box li{font-size:12.5px;color:var(--t2);list-style:none;padding-left:14px;position:relative;margin-bottom:4px;line-height:1.65}
+.tips-box li::before{content:'◦';position:absolute;left:0;color:var(--teal)}
+.warn-box{background:rgba(184,140,10,.05);border:1px solid rgba(184,140,10,.18);border-left:3px solid var(--gold);border-radius:0 6px 6px 0;padding:14px 16px;margin-top:18px;font-size:13px;color:var(--t2);line-height:1.68}
+.warn-box strong{color:var(--t1)}
 
-.screenshot::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(26,158,122,.03) 0%,transparent 70%);
-}
+/* ── FAQ ── */
+.faq-item{border-bottom:1px solid var(--line);padding:20px 0}
+.faq-item:last-child{border-bottom:none}
+.faq-q{font-family:'Noto Serif SC',serif;font-size:14.5px;font-weight:600;color:var(--t1);margin-bottom:10px;display:flex;align-items:flex-start;gap:10px}
+.faq-q::before{content:'Q';font-family:'DM Mono',monospace;font-size:9px;color:var(--teal);border:1px solid rgba(15,92,68,.3);padding:2px 6px;border-radius:2px;flex-shrink:0;margin-top:2px;background:rgba(15,92,68,.04)}
+.faq-a{font-size:13.5px;color:var(--t2);line-height:1.85;padding-left:28px}
 
-/* faq */
-.faq-item{
-  border-bottom:1px solid var(--line);
-  padding:20px 0;
-}
-.faq-item:last-child{border-bottom:none;}
-.faq-q{
-  font-family:'Noto Serif SC',serif;
-  font-size:14px;font-weight:600;
-  color:var(--t1);margin-bottom:10px;
-  display:flex;align-items:flex-start;gap:10px;
-}
-.faq-q::before{
-  content:'Q';
-  font-family:'DM Mono',monospace;
-  font-size:9px;color:var(--teal);
-  border:1px solid rgba(26,158,122,.4);
-  padding:2px 6px;border-radius:2px;
-  flex-shrink:0;margin-top:2px;
-}
-.faq-a{font-size:13px;color:var(--t2);line-height:1.8;padding-left:28px;}
+/* ── CONTACT ── */
+.contact-card{background:rgba(236,234,228,.7);border:1px solid var(--line);border-radius:10px;padding:40px;text-align:center;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.contact-card h3{font-family:'Noto Serif SC',serif;font-size:20px;font-weight:600;color:var(--t1);margin-bottom:10px}
+.contact-card p{font-size:13.5px;color:var(--t2);margin-bottom:28px;line-height:1.8}
+.contact-btn{display:inline-flex;align-items:center;gap:8px;padding:13px 32px;background:var(--teal);color:#f5f3ef;border-radius:4px;text-decoration:none;font-family:'Noto Sans SC',sans-serif;font-size:13px;font-weight:500;letter-spacing:1px;transition:background .2s,transform .15s,box-shadow .2s}
+.contact-btn:hover{background:var(--teal-d);transform:translateY(-2px);box-shadow:0 8px 24px rgba(15,92,68,.18)}
 
-/* contact */
-.contact-card{
-  background:var(--bg2);
-  border:1px solid var(--line);
-  border-radius:10px;
-  padding:32px;
-  text-align:center;
-}
-.contact-card h3{
-  font-family:'Noto Serif SC',serif;
-  font-size:18px;font-weight:600;
-  color:var(--t1);margin-bottom:8px;
-}
-.contact-card p{font-size:13px;color:var(--t2);margin-bottom:24px;}
-.contact-btn{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:12px 28px;
-  background:var(--teal);color:#060a10;
-  border-radius:3px;text-decoration:none;
-  font-size:13px;font-weight:500;letter-spacing:1px;
-  transition:background .2s,transform .15s;
-}
-.contact-btn:hover{background:#1db891;transform:translateY(-2px);}
+/* ── FOOTER ── */
+.guide-footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;color:var(--t3)}
 
 @media(max-width:640px){
-  #wrap{padding:0 20px 60px;}
-  .feat-body{padding-left:20px;}
-  .top-bar{flex-direction:column;align-items:flex-start;gap:16px;}
+  #wrap{padding:0 20px 60px}
+  .feat-body{padding-left:20px}
+  .top-bar{flex-direction:column;align-items:flex-start;gap:16px}
 }
 </style>
 </head>
 <body>
+
+<div id="cur"></div>
+<div id="cur-o"></div>
+<div id="bg-stage"><div class="bg-skew" id="bg-skew"></div></div>
+<div id="grain"></div>
+
 <div id="wrap">
 
   <div class="top-bar">
@@ -271,13 +164,12 @@ body::before{
 
   <!-- 功能详解 -->
   <div class="sec">
-    <div class="sec-hd">
+    <div class="sec-hd mask-wrap"><div class="mask-inner">
       <span class="sec-hd-label">功能详解</span>
       <div class="sec-hd-line"></div>
-    </div>
+    </div></div>
 
-    <!-- 功能1 -->
-    <div class="feat open" id="f1">
+    <div class="feat open mask-wrap" id="f1"><div class="mask-inner d1">
       <div class="feat-header" onclick="toggle('f1')">
         <div class="feat-num">01</div>
         <div class="feat-meta">
@@ -288,42 +180,22 @@ body::before{
       </div>
       <div class="feat-body">
         <div class="steps">
-          <div class="step">
-            <div class="step-dot">1</div>
-            <div class="step-content">
-              <div class="step-title">打开对话框，输入你的加盟城市</div>
-              <div class="step-desc">例如：「帮我查一下上海有哪些适合全感VR项目的补贴政策」或直接输入「深圳的政策」</div>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-dot">2</div>
-            <div class="step-content">
-              <div class="step-title">AI 自动检索知识库并分析匹配度</div>
-              <div class="step-desc">助手会列出该城市已收录的政策，每条标注「高度匹配 / 条件匹配 / 参考价值」以及匹配原因</div>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-dot">3</div>
-            <div class="step-content">
-              <div class="step-title">追问某条政策的详细信息</div>
-              <div class="step-desc">例如「第一条的申报条件具体是什么？」「我们公司注册在深圳南山区，符合条件吗？」</div>
-            </div>
-          </div>
+          <div class="step"><div class="step-dot">1</div><div class="step-content"><div class="step-title">打开对话框，输入你的加盟城市</div><div class="step-desc">例如：「帮我查一下上海有哪些适合全感VR项目的补贴政策」或直接输入「深圳的政策」</div></div></div>
+          <div class="step"><div class="step-dot">2</div><div class="step-content"><div class="step-title">AI 自动检索知识库并分析匹配度</div><div class="step-desc">助手会列出该城市已收录的政策，每条标注「高度匹配 / 条件匹配 / 参考价值」以及匹配原因</div></div></div>
+          <div class="step"><div class="step-dot">3</div><div class="step-content"><div class="step-title">追问某条政策的详细信息</div><div class="step-desc">例如「第一条的申报条件具体是什么？」「我们公司注册在深圳南山区，符合条件吗？」</div></div></div>
         </div>
         <div class="tips-box">
           <div class="tips-box-title">💡 提问技巧</div>
           <ul>
-            <li>可以直接用快捷按钮提问，无需手动输入</li>
             <li>指定城市区域效果更好，如「深圳南山区」比「深圳」更精准</li>
             <li>可以问「现在还有哪些政策在受理期内」筛选时效性政策</li>
             <li>知识库每月自动更新，建议每月初查询一次</li>
           </ul>
         </div>
       </div>
-    </div>
+    </div></div>
 
-    <!-- 功能2 -->
-    <div class="feat" id="f2">
+    <div class="feat mask-wrap" id="f2"><div class="mask-inner d2">
       <div class="feat-header" onclick="toggle('f2')">
         <div class="feat-num">02</div>
         <div class="feat-meta">
@@ -334,27 +206,9 @@ body::before{
       </div>
       <div class="feat-body">
         <div class="steps">
-          <div class="step">
-            <div class="step-dot">1</div>
-            <div class="step-content">
-              <div class="step-title">点击对话框右侧的📎图标上传文件</div>
-              <div class="step-desc">支持 PDF、Word（.docx）、TXT 格式，单个文件不超过 15MB</div>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-dot">2</div>
-            <div class="step-content">
-              <div class="step-title">发送「帮我分析适合申请的方向」</div>
-              <div class="step-desc">AI 会通读全文，从中识别所有可供企业申报的补贴/资助/奖励条款</div>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-dot">3</div>
-            <div class="step-content">
-              <div class="step-title">查看结构化分析报告</div>
-              <div class="step-desc">AI 输出「高度匹配 / 条件匹配」两档，每条列明补贴金额、申报条件、匹配理由和注意事项</div>
-            </div>
-          </div>
+          <div class="step"><div class="step-dot">1</div><div class="step-content"><div class="step-title">点击对话框右侧的 📎 图标上传文件</div><div class="step-desc">支持 PDF、Word（.docx）、TXT 格式，单个文件不超过 15MB</div></div></div>
+          <div class="step"><div class="step-dot">2</div><div class="step-content"><div class="step-title">发送「帮我分析适合申请的方向」</div><div class="step-desc">AI 会通读全文，从中识别所有可供企业申报的补贴 / 资助 / 奖励条款</div></div></div>
+          <div class="step"><div class="step-dot">3</div><div class="step-content"><div class="step-title">查看结构化分析报告</div><div class="step-desc">AI 输出「高度匹配 / 条件匹配」两档，每条列明补贴金额、申报条件、匹配理由和注意事项</div></div></div>
         </div>
         <div class="tips-box">
           <div class="tips-box-title">📎 适合上传的文件类型</div>
@@ -364,14 +218,11 @@ body::before{
             <li>年度申报指南、操作规程</li>
           </ul>
         </div>
-        <div class="warn-box">
-          <strong>⚠️ 注意：</strong>AI 分析结果仅供参考，建议申报前人工核实原文件的具体条款和最新截止时间。
-        </div>
+        <div class="warn-box"><strong>⚠️ 注意：</strong>AI 分析结果仅供参考，建议申报前人工核实原文件的具体条款和最新截止时间。</div>
       </div>
-    </div>
+    </div></div>
 
-    <!-- 功能3 -->
-    <div class="feat" id="f3">
+    <div class="feat mask-wrap" id="f3"><div class="mask-inner d3">
       <div class="feat-header" onclick="toggle('f3')">
         <div class="feat-num">03</div>
         <div class="feat-meta">
@@ -382,33 +233,14 @@ body::before{
       </div>
       <div class="feat-body">
         <div class="steps">
-          <div class="step">
-            <div class="step-dot">1</div>
-            <div class="step-content">
-              <div class="step-title">确认想申报的政策后，发起材料核对</div>
-              <div class="step-desc">输入「我想申报这个政策，帮我核对需要准备的材料」或「帮我列一下申报材料清单」</div>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-dot">2</div>
-            <div class="step-content">
-              <div class="step-title">AI 输出带复选框的材料清单</div>
-              <div class="step-desc">每项材料说明用途、在哪里开具，以及常见的办理周期</div>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-dot">3</div>
-            <div class="step-content">
-              <div class="step-title">逐项告知已备情况，AI 生成缺口清单</div>
-              <div class="step-desc">对「待准备」的材料，AI 给出办理建议（如「软著可联系知识产权代理，约1-2个月）</div>
-            </div>
-          </div>
+          <div class="step"><div class="step-dot">1</div><div class="step-content"><div class="step-title">确认想申报的政策后，发起材料核对</div><div class="step-desc">输入「我想申报这个政策，帮我核对需要准备的材料」或「帮我列一下申报材料清单」</div></div></div>
+          <div class="step"><div class="step-dot">2</div><div class="step-content"><div class="step-title">AI 输出带复选框的材料清单</div><div class="step-desc">每项材料说明用途、在哪里开具，以及常见的办理周期</div></div></div>
+          <div class="step"><div class="step-dot">3</div><div class="step-content"><div class="step-title">逐项告知已备情况，AI 生成缺口清单</div><div class="step-desc">对「待准备」的材料，AI 给出办理建议（如「软著可联系知识产权代理，约 1-2 个月」）</div></div></div>
         </div>
       </div>
-    </div>
+    </div></div>
 
-    <!-- 功能4 -->
-    <div class="feat" id="f4">
+    <div class="feat mask-wrap" id="f4"><div class="mask-inner d4">
       <div class="feat-header" onclick="toggle('f4')">
         <div class="feat-num">04</div>
         <div class="feat-meta">
@@ -419,71 +251,86 @@ body::before{
       </div>
       <div class="feat-body">
         <div class="steps">
-          <div class="step">
-            <div class="step-dot">1</div>
-            <div class="step-content">
-              <div class="step-title">材料备齐后，请求起草建议</div>
-              <div class="step-desc">输入「帮我起草这个政策的申请书」或「申请书应该包含哪些内容」</div>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-dot">2</div>
-            <div class="step-content">
-              <div class="step-title">AI 提供申请书结构框架</div>
-              <div class="step-desc">包含各部分的撰写要点、政策要求的关键词、注意事项等</div>
-            </div>
-          </div>
+          <div class="step"><div class="step-dot">1</div><div class="step-content"><div class="step-title">材料备齐后，请求起草建议</div><div class="step-desc">输入「帮我起草这个政策的申请书」或「申请书应该包含哪些内容」</div></div></div>
+          <div class="step"><div class="step-dot">2</div><div class="step-content"><div class="step-title">AI 提供申请书结构框架</div><div class="step-desc">包含各部分的撰写要点、政策要求的关键词、注意事项等</div></div></div>
         </div>
-        <div class="warn-box">
-          <strong>🚧 功能说明：</strong>申请书自动生成功能正在完善中，目前提供框架建议和要点指引。如需完整起草服务，请联系总部获取支持。
-        </div>
+        <div class="warn-box"><strong>🚧 功能说明：</strong>申请书自动生成功能正在完善中，目前提供框架建议和要点指引。如需完整起草服务，请联系总部获取支持。</div>
       </div>
-    </div>
+    </div></div>
   </div>
 
   <!-- FAQ -->
   <div class="sec">
-    <div class="sec-hd">
+    <div class="sec-hd mask-wrap"><div class="mask-inner">
       <span class="sec-hd-label">常见问题</span>
       <div class="sec-hd-line"></div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-q">知识库里的政策是最新的吗？</div>
-      <div class="faq-a">知识库每月1日自动更新一次，覆盖上海、深圳、南京、哈尔滨、武汉、济南等城市及国家级政策。页面顶部状态栏会显示最近更新时间，建议每月初查询一次获取最新信息。</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">我的城市没有收录怎么办？</div>
-      <div class="faq-a">可以将当地政府发布的政策文件（PDF 或 Word）直接上传给助手，使用「文件分析」功能进行筛选。同时可以联系总部，我们会将该城市纳入下次知识库更新范围。</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">AI 的分析结果准确吗？可以直接用于申报吗？</div>
-      <div class="faq-a">AI 分析基于政策原文，准确度较高，但政策条款可能随时更新，建议申报前务必核对官方原文和最新通知。AI 的结果作为参考和辅助，最终决策请结合人工判断。</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">上传的文件内容会被保存吗？</div>
-      <div class="faq-a">上传的文件仅在本次对话中使用，不会永久保存到知识库。每次新对话需要重新上传。</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">遇到问题或发现政策信息有误怎么反馈？</div>
-      <div class="faq-a">请联系 X-META 总部运营团队，我们会及时核实并更新知识库。你的反馈对提升系统质量非常重要。</div>
-    </div>
+    </div></div>
+    <div class="mask-wrap"><div class="mask-inner">
+      <div class="faq-item"><div class="faq-q">知识库里的政策是最新的吗？</div><div class="faq-a">知识库每月 1 日自动更新一次，覆盖上海、深圳、南京、哈尔滨、武汉、济南等城市及国家级政策。建议每月初查询一次获取最新信息。</div></div>
+      <div class="faq-item"><div class="faq-q">我的城市没有收录怎么办？</div><div class="faq-a">可以将当地政府发布的政策文件（PDF 或 Word）直接上传给助手，使用「文件分析」功能进行筛选。同时可以联系总部，我们会将该城市纳入下次知识库更新范围。</div></div>
+      <div class="faq-item"><div class="faq-q">AI 的分析结果准确吗？可以直接用于申报吗？</div><div class="faq-a">AI 分析基于政策原文，准确度较高，但政策条款可能随时更新，建议申报前务必核对官方原文和最新通知。AI 的结果作为参考和辅助，最终决策请结合人工判断。</div></div>
+      <div class="faq-item"><div class="faq-q">上传的文件内容会被保存吗？</div><div class="faq-a">上传的文件仅在本次对话中使用，不会永久保存到知识库。每次新对话需要重新上传。</div></div>
+      <div class="faq-item"><div class="faq-q">遇到问题或发现政策信息有误怎么反馈？</div><div class="faq-a">请联系 X-META 总部运营团队，我们会及时核实并更新知识库。</div></div>
+    </div></div>
   </div>
 
   <!-- 联系 -->
-  <div class="contact-card">
+  <div class="contact-card mask-wrap"><div class="mask-inner">
     <h3>还有疑问？</h3>
     <p>如需人工协助或申报支持，请联系 X-META 总部运营团队</p>
     <a class="contact-btn" href="https://udify.app/chatbot/gu49G2wdPn2pbr3u" target="_blank">立即开始咨询 ↗</a>
+  </div></div>
+
+  <div class="guide-footer">
+    <span>X-META · 使用指南</span>
+    <span>如有疑问请联系总部</span>
   </div>
 
 </div>
 
 <script>
-function toggle(id) {
-  const el = document.getElementById(id);
-  el.classList.toggle('open');
-}
+/* ── CURSOR ── */
+const cur=document.getElementById('cur'),curO=document.getElementById('cur-o');
+let mx=0,my=0,ox=0,oy=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function f(){ox+=(mx-ox)*.1;oy+=(my-oy)*.1;curO.style.left=ox+'px';curO.style.top=oy+'px';requestAnimationFrame(f)})();
+document.addEventListener('mouseleave',()=>{cur.style.opacity='0';curO.style.opacity='0'});
+document.addEventListener('mouseenter',()=>{cur.style.opacity='1';curO.style.opacity='1'});
+
+/* ── BG (same logic as homepage) ── */
+(function(){
+  const skew=document.getElementById('bg-skew');
+  const CW=180,GAP=10,NROWS=7;
+  const SPEEDS=[0.22,-0.18,0.26,-0.20,0.18,-0.24,0.20];
+  const cols=Math.ceil((window.innerWidth*1.6)/(CW+GAP))+4;
+  const rows=[];
+  for(let r=0;r<NROWS;r++){
+    const row=document.createElement('div');
+    row.className='bg-row';
+    for(let c=0;c<cols*2;c++){const cell=document.createElement('div');cell.className='bg-cell';row.appendChild(cell)}
+    skew.appendChild(row);
+    rows.push({el:row,x:-(cols*(CW+GAP)*0.5),speed:SPEEDS[r]});
+  }
+  const loopW=cols*(CW+GAP);
+  (function tick(){
+    rows.forEach(row=>{
+      row.x+=row.speed;
+      if(row.x>0)row.x-=loopW;
+      if(row.x<-loopW)row.x+=loopW;
+      row.el.style.transform=`translateX(${row.x}px)`;
+    });
+    requestAnimationFrame(tick);
+  })();
+})();
+
+/* ── MASK REVEAL ── */
+const maskIO=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('revealed');maskIO.unobserve(e.target)}});
+},{threshold:.07});
+document.querySelectorAll('.mask-wrap').forEach(el=>maskIO.observe(el));
+
+/* ── ACCORDION ── */
+function toggle(id){document.getElementById(id).classList.toggle('open')}
 </script>
 </body>
 </html>
