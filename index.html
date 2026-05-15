@@ -787,6 +787,12 @@ document.addEventListener('mouseenter',()=>{cur.style.opacity='1';curO.style.opa
   })();
 })();
 
+/* ── MASK REVEAL ── */
+const maskIO=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('revealed');maskIO.unobserve(e.target)}});
+},{threshold:.07});
+document.querySelectorAll('.mask-wrap').forEach(el=>maskIO.observe(el));
+
 /* ══════════════════════════════════════
    DATA.JSON 动态加载
 ══════════════════════════════════════ */
@@ -944,12 +950,6 @@ function loadHomeAwards(){
     if(data.provinces?.length) window._coveredProvinces = data.provinces;
   })
   .catch(()=>{});
-
-/* ── MASK REVEAL ── */
-const maskIO=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('revealed');maskIO.unobserve(e.target)}});
-},{threshold:.07});
-document.querySelectorAll('.mask-wrap').forEach(el=>maskIO.observe(el));
 
 /* ── CARD GLOW ── */
 document.querySelectorAll('.pcard').forEach(c=>{
