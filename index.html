@@ -790,8 +790,12 @@ document.addEventListener('mouseenter',()=>{cur.style.opacity='1';curO.style.opa
 /* ── MASK REVEAL ── */
 const maskIO=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('revealed');maskIO.unobserve(e.target)}});
-},{threshold:.07});
-document.querySelectorAll('.mask-wrap').forEach(el=>maskIO.observe(el));
+},{threshold:0.01});
+
+function observeAll(){
+  document.querySelectorAll('.mask-wrap:not(.revealed)').forEach(el=>maskIO.observe(el));
+}
+observeAll();
 
 /* ══════════════════════════════════════
    DATA.JSON 动态加载
@@ -824,7 +828,11 @@ function renderCards(policies){
     }
     return `<div class="pcard ${cls} mask-wrap"><div class="mask-inner ${d}">${inner}</div></div>`;
   }).join('');
-  grid.querySelectorAll('.mask-wrap').forEach(el=>maskIO.observe(el));
+  grid.querySelectorAll('.mask-wrap').forEach(el=>{
+    maskIO.observe(el);
+    const r=el.getBoundingClientRect();
+    if(r.top < window.innerHeight+100) el.classList.add('revealed');
+  });
   grid.querySelectorAll('.pcard').forEach(c=>{
     c.addEventListener('mousemove',e=>{
       const r=c.getBoundingClientRect();
@@ -939,6 +947,7 @@ function loadHomeAwards(){
 }
 
 
+fetch('data.json')
   .then(r=>{ if(!r.ok) throw new Error('no data.json'); return r.json(); })
   .then(data=>{
     if(data.updated_at)   document.getElementById('st-date').textContent  = data.updated_at;
