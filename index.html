@@ -214,8 +214,8 @@ nav{display:flex;align-items:center;gap:34px}
   opacity:0;animation:blurIn .8s .62s ease forwards;
 }
 .hero-city{
-  font-family:'DM Mono',monospace;font-size:8.5px;letter-spacing:1.5px;
-  color:var(--teal);padding:4px 11px;border-radius:2px;
+  font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;
+  color:var(--teal);padding:6px 14px;border-radius:2px;
   border:1px solid rgba(15,92,68,.22);background:rgba(15,92,68,.05);
   transition:background .2s,border-color .2s,transform .15s;
 }
@@ -309,7 +309,7 @@ nav{display:flex;align-items:center;gap:34px}
 .badge{font-family:'DM Mono',monospace;font-size:8px;padding:2px 7px;border-radius:2px;letter-spacing:.5px}
 .bh{color:var(--teal);border:1px solid rgba(15,92,68,.25);background:rgba(15,92,68,.06)}
 .bm{color:var(--gold);border:1px solid rgba(184,140,10,.25);background:rgba(184,140,10,.06)}
-.pc-name{font-family:'Noto Serif SC',serif;font-size:13.5px;font-weight:400;line-height:1.65;color:var(--t1);margin-bottom:18px}
+.pc-name{font-family:'Noto Serif SC',serif;font-size:15.5px;font-weight:400;line-height:1.65;color:var(--t1);margin-bottom:18px}
 .pc-amt-wrap{border-top:1px solid var(--line);padding-top:13px;display:flex;align-items:baseline;gap:6px}
 .pc-amt-num{font-family:'DM Mono',monospace;font-size:22px;font-weight:500;color:var(--teal);line-height:1}
 .pc-amt-num:empty,.pc-amt-num.hidden{display:none}
@@ -384,7 +384,42 @@ nav{display:flex;align-items:center;gap:34px}
 .gs-tip{font-family:'DM Mono',monospace;font-size:10px;color:var(--t3);display:flex;align-items:center;gap:6px;margin-bottom:5px}
 .gs-tip::before{content:'◦';color:var(--teal)}
 
-/* ── FOOTER ── */
+/* ── TAB SWITCHER ── */
+.tab-bar{
+  display:flex;align-items:center;gap:2px;
+  padding:4px;background:var(--bg2);border-radius:6px;
+  width:fit-content;margin-bottom:28px;
+}
+.tab-btn{
+  font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:1.5px;
+  color:var(--t3);background:none;border:none;cursor:pointer;
+  padding:7px 18px;border-radius:4px;
+  transition:background .2s,color .2s;
+  white-space:nowrap;
+}
+.tab-btn.active{background:var(--bg);color:var(--t1);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.tab-btn:hover:not(.active){color:var(--t2)}
+
+/* award card mini (for homepage grid) */
+.acard-mini{
+  background:var(--bg2);border:1px solid var(--line);border-radius:10px;
+  padding:24px 22px 20px;position:relative;overflow:hidden;
+  transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+  cursor:pointer;text-decoration:none;display:block;
+}
+.acard-mini::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;border-radius:10px 0 0 10px;background:var(--gold);opacity:0;transition:opacity .25s}
+.acard-mini:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(0,0,0,.08);border-color:rgba(0,0,0,.12)}
+.acard-mini:hover::before{opacity:1}
+.am-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.am-region{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase}
+.am-name{font-family:'Noto Serif SC',serif;font-size:13.5px;font-weight:600;line-height:1.55;color:var(--t1);margin-bottom:8px}
+.am-organizer{font-size:11px;color:var(--t3);margin-bottom:14px}
+.am-footer{border-top:1px solid var(--line);padding-top:13px;display:flex;align-items:center;justify-content:space-between}
+.am-deadline{font-family:'DM Mono',monospace;font-size:10px;color:var(--t2)}
+.am-deadline.urgent{color:var(--red,#c0392b)}
+.am-link{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--teal);opacity:.7}
+
+
 footer{
   margin-top:auto;padding:20px 56px;
   border-top:1px solid var(--line);
@@ -433,6 +468,7 @@ footer{
     <nav>
       <a class="nav-link" href="#sec-policies">政策库</a>
       <a class="nav-link" href="#sec-cities">城市覆盖</a>
+      <a class="nav-link" href="awards.html">奖项库</a>
       <a class="nav-link" href="xmeta_guide.html" target="_blank">使用指南</a>
       <a class="nav-btn" href="https://udify.app/chatbot/gu49G2wdPn2pbr3u" target="_blank">进入对话 →</a>
     </nav>
@@ -489,18 +525,22 @@ footer{
     </div>
   </section>
 
-  <!-- CHAPTER -->
+  <!-- CHAPTER with TAB -->
   <div class="chapter mask-wrap">
     <div class="mask-inner">
       <span class="ch-label">本月推荐</span>
       <span class="ch-slash">//</span>
-      <span class="ch-count">高匹配政策 · TOP 6</span>
+      <span class="ch-count" id="ch-count">高匹配政策 · TOP 6</span>
     </div>
     <div class="ch-line"></div>
   </div>
 
   <!-- CARDS -->
   <section class="cards-sec">
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="switchTab('policy',this)">本月政策</button>
+      <button class="tab-btn" onclick="switchTab('award',this)">近期奖项</button>
+    </div>
     <div class="grid" id="policy-grid">
       <!-- 默认静态卡片，data.json 加载后动态替换 -->
       <div class="pcard high mask-wrap"><div class="mask-inner d1">
@@ -534,6 +574,7 @@ footer{
         <div class="pc-amt-wrap"><span class="pc-amt-unit">资源 + 背书</span></div>
       </div></div>
     </div>
+    <div class="grid" id="award-grid-home" style="display:none"></div>
   </section>
 
   <!-- CHAPTER 2 -->
@@ -828,7 +869,70 @@ function updateCityCards(cityStats){
   });
 }
 
-fetch('data.json')
+/* ── TAB SWITCH ── */
+let awardsLoaded = false;
+let homeAwards = [];
+
+function switchTab(tab, btn){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const pg = document.getElementById('policy-grid');
+  const ag = document.getElementById('award-grid-home');
+  const ch = document.getElementById('ch-count');
+  if(tab==='policy'){
+    pg.style.display=''; ag.style.display='none';
+    ch.textContent='高匹配政策 · TOP 6';
+  } else {
+    pg.style.display='none'; ag.style.display='';
+    ch.textContent='近期可申报奖项';
+    if(!awardsLoaded) loadHomeAwards();
+  }
+}
+
+function loadHomeAwards(){
+  awardsLoaded = true;
+  const TODAY = new Date();
+  function daysUntil(d){ if(!d) return Infinity; return Math.ceil((new Date(d)-TODAY)/86400000); }
+
+  fetch('awards.json')
+    .then(r=>r.json())
+    .then(data=>{
+      // 选近期未截止、按deadline排序的前6个
+      const upcoming = (data.awards||[])
+        .filter(a=>daysUntil(a.deadline)>=0)
+        .sort((a,b)=>daysUntil(a.deadline)-daysUntil(b.deadline))
+        .slice(0,6);
+      homeAwards = upcoming;
+      const grid = document.getElementById('award-grid-home');
+      const delays=['d1','d2','d3','d4','d5','d6'];
+      grid.innerHTML = upcoming.map((a,i)=>{
+        const days=daysUntil(a.deadline);
+        const isUrgent=days<=45;
+        const dateStr=new Date(a.deadline).toLocaleDateString('zh-CN',{month:'2-digit',day:'2-digit'});
+        return `<a class="acard-mini mask-wrap" href="awards.html" style="text-decoration:none">
+          <div class="mask-inner ${delays[i]}">
+            <div class="am-top">
+              <span class="am-region">${a.region} · ${a.category}</span>
+              ${isUrgent?`<span class="badge" style="font-family:'DM Mono',monospace;font-size:8px;padding:2px 7px;border-radius:2px;color:#c0392b;border:1px solid rgba(192,57,43,.25);background:rgba(192,57,43,.06)">⚡ 还剩${days}天</span>`:''}
+            </div>
+            <div class="am-name">${a.name}</div>
+            <div class="am-organizer">${a.organizer}</div>
+            <div class="am-footer">
+              <span class="am-deadline ${isUrgent?'urgent':''}">截止 ${dateStr}</span>
+              <span class="am-link">查看详情 →</span>
+            </div>
+          </div>
+        </a>`;
+      }).join('');
+      grid.querySelectorAll('.mask-wrap').forEach(el=>maskIO.observe(el));
+    })
+    .catch(()=>{
+      document.getElementById('award-grid-home').innerHTML=
+        '<div style="grid-column:1/-1;text-align:center;padding:40px;font-family:DM Mono,monospace;font-size:10px;letter-spacing:2px;color:var(--t3)">奖项数据加载中，请稍后重试</div>';
+    });
+}
+
+
   .then(r=>{ if(!r.ok) throw new Error('no data.json'); return r.json(); })
   .then(data=>{
     if(data.updated_at)   document.getElementById('st-date').textContent  = data.updated_at;
