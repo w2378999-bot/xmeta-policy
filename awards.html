@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>奖项库 · X-META 补贴政策助手</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600&family=Noto+Sans+SC:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f3ef;--bg2:#eceae4;--bg3:#e4e1da;
+  --teal:#0f5c44;--teal-l:#1a9e7a;--teal-d:#0a3d2d;
+  --gold:#b88c0a;--gold-bg:rgba(184,140,10,.06);
+  --red:#c0392b;--red-bg:rgba(192,57,43,.06);
+  --ink:#111510;--t1:#1c2018;--t2:#4a5245;--t3:#7a8575;
+  --line:rgba(0,0,0,.08);--line2:rgba(0,0,0,.04);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--t1);font-family:'Noto Sans SC',sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;cursor:none;overflow-x:hidden}
+
+/* CURSOR */
+#cur{position:fixed;pointer-events:none;z-index:9999;width:5px;height:5px;border-radius:50%;background:var(--teal);transform:translate(-50%,-50%);transition:width .15s,height .15s,background .2s,opacity .2s}
+#cur-o{position:fixed;pointer-events:none;z-index:9998;width:30px;height:30px;border-radius:50%;border:1px solid rgba(15,92,68,.22);transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s}
+body:has(a:hover) #cur,body:has(button:hover) #cur{width:8px;height:8px;background:var(--gold)}
+body:has(a:hover) #cur-o,body:has(button:hover) #cur-o{width:46px;height:46px;border-color:rgba(184,140,10,.3)}
+
+/* BG */
+#bg-stage{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;opacity:.4;
+  -webkit-mask-image:linear-gradient(to bottom,black 0%,black 20%,transparent 50%);
+  mask-image:linear-gradient(to bottom,black 0%,black 20%,transparent 50%)}
+.bg-skew{position:absolute;top:-30%;left:-10%;right:-10%;bottom:-30%;transform:skewY(-7deg);display:flex;flex-direction:column;gap:10px;padding:10px 0}
+.bg-row{display:flex;gap:10px;flex-shrink:0;will-change:transform}
+.bg-cell{flex-shrink:0;width:180px;height:88px;border-radius:12px;background:rgba(220,218,212,.5);border:1px solid rgba(255,255,255,.65)}
+#grain{position:fixed;inset:0;z-index:2;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)' opacity='.025'/%3E%3C/svg%3E");background-size:280px;opacity:.4;mix-blend-mode:multiply}
+
+/* HEADER */
+header{
+  padding:22px 56px;display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--line);
+  background:rgba(245,243,239,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  position:sticky;top:0;z-index:200;
+  margin-left:calc(-50vw + 50%);margin-right:calc(-50vw + 50%);width:100vw;
+}
+.logo{display:flex;align-items:center;gap:13px;text-decoration:none}
+.logo img{height:27px;width:auto;mix-blend-mode:multiply;filter:invert(1) sepia(.15) saturate(.8) hue-rotate(100deg);opacity:.9;transition:opacity .2s}
+.logo:hover img{opacity:1}
+.logo-sub{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2.5px;color:var(--t3);align-self:flex-end;padding-bottom:1px}
+nav{display:flex;align-items:center;gap:34px}
+.nav-link{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--t2);text-decoration:none;position:relative;padding-bottom:2px;transition:color .2s}
+.nav-link::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--teal);transition:width .3s}
+.nav-link:hover{color:var(--t1)}.nav-link:hover::after{width:100%}
+.nav-link.active{color:var(--teal)}.nav-link.active::after{width:100%}
+.nav-btn{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--teal);text-decoration:none;padding:8px 20px;border:1px solid rgba(15,92,68,.3);border-radius:3px;transition:background .2s,border-color .2s}
+.nav-btn:hover{background:rgba(15,92,68,.07);border-color:rgba(15,92,68,.5)}
+
+/* LAYOUT */
+#wrap{position:relative;z-index:10;max-width:1100px;margin:0 auto;padding:0 56px 100px}
+
+/* PAGE HERO */
+.page-hero{margin:52px 0 40px;opacity:0;filter:blur(6px);animation:blurIn .8s .1s ease forwards}
+.page-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3.5px;color:var(--gold);text-transform:uppercase;margin-bottom:16px;display:inline-flex;align-items:center;gap:10px}
+.page-tag::before{content:'';width:20px;height:1px;background:var(--gold)}
+.page-h1{font-family:'Noto Serif SC',serif;font-size:clamp(28px,4vw,44px);font-weight:300;line-height:1.15;letter-spacing:-1px;color:var(--ink);margin-bottom:8px}
+.page-h1 strong{font-weight:600;color:var(--teal)}
+.page-desc{font-size:13.5px;color:var(--t2);line-height:1.8}
+@keyframes blurIn{to{opacity:1;filter:blur(0)}}
+
+/* FILTERS */
+.filter-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid var(--line);opacity:0;animation:blurIn .8s .2s ease forwards}
+.filter-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--t3);text-transform:uppercase;margin-right:4px;white-space:nowrap}
+.filter-sep{width:1px;height:18px;background:var(--line);margin:0 6px}
+.fbtn{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--t2);padding:5px 13px;border:1px solid var(--line);border-radius:2px;background:transparent;cursor:pointer;transition:all .18s;white-space:nowrap}
+.fbtn:hover{border-color:rgba(15,92,68,.3);color:var(--teal)}
+.fbtn.active{background:var(--teal);color:#f5f3ef;border-color:var(--teal)}
+
+/* SEARCH */
+.search-row{display:flex;gap:12px;align-items:center;margin-bottom:28px;opacity:0;animation:blurIn .8s .3s ease forwards}
+.search-input{flex:1;font-family:'Noto Sans SC',sans-serif;font-size:13px;font-weight:300;padding:10px 16px;border:1px solid var(--line);border-radius:4px;background:var(--bg2);color:var(--t1);outline:none;transition:border-color .2s,box-shadow .2s}
+.search-input::placeholder{color:var(--t3)}
+.search-input:focus{border-color:rgba(15,92,68,.4);box-shadow:0 0 0 3px rgba(15,92,68,.06)}
+.result-count{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--t3);white-space:nowrap}
+
+/* AWARD GRID */
+.award-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;opacity:0;animation:blurIn .8s .4s ease forwards}
+.acard{
+  background:var(--bg2);border:1px solid var(--line);border-radius:10px;
+  padding:24px 22px;cursor:pointer;position:relative;overflow:hidden;
+  transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+}
+.acard::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;border-radius:10px 0 0 10px;background:var(--teal);opacity:0;transition:opacity .25s}
+.acard.intl::before{background:var(--gold)}
+.acard:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.08);border-color:rgba(0,0,0,.13)}
+.acard:hover::before{opacity:1}
+.acard.filtered-out{display:none}
+
+.ac-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
+.ac-badges{display:flex;align-items:center;gap:6px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end}
+.badge{font-family:'DM Mono',monospace;font-size:8px;padding:2px 7px;border-radius:2px;letter-spacing:.5px;white-space:nowrap}
+.badge-region{color:var(--teal);border:1px solid rgba(15,92,68,.25);background:rgba(15,92,68,.06)}
+.badge-region.intl{color:var(--gold);border:1px solid rgba(184,140,10,.25);background:rgba(184,140,10,.06)}
+.badge-prestige-h{color:var(--teal);border:1px solid rgba(15,92,68,.25);background:rgba(15,92,68,.06)}
+.badge-prestige-m{color:var(--t3);border:1px solid var(--line);background:transparent}
+.badge-urgent{color:var(--red);border:1px solid rgba(192,57,43,.25);background:var(--red-bg);animation:urgentPulse 2s ease-in-out infinite}
+@keyframes urgentPulse{0%,100%{opacity:1}50%{opacity:.6}}
+
+.ac-name{font-family:'Noto Serif SC',serif;font-size:14.5px;font-weight:600;line-height:1.45;color:var(--t1);flex:1}
+.ac-organizer{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--t3);margin-bottom:10px}
+.ac-desc{font-size:12.5px;color:var(--t2);line-height:1.7;margin-bottom:14px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.ac-footer{display:flex;align-items:center;justify-content:space-between;padding-top:13px;border-top:1px solid var(--line)}
+.ac-deadline{display:flex;align-items:center;gap:6px}
+.ac-deadline-label{font-family:'DM Mono',monospace;font-size:8.5px;letter-spacing:1px;color:var(--t3)}
+.ac-deadline-date{font-family:'DM Mono',monospace;font-size:10px;color:var(--t2)}
+.ac-deadline-date.urgent{color:var(--red);font-weight:500}
+.ac-arrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--teal);opacity:.6;transition:opacity .2s,gap .2s;display:flex;align-items:center;gap:4px}
+.acard:hover .ac-arrow{opacity:1}
+
+/* HIGHLIGHT TAG */
+.ac-highlight{display:inline-flex;align-items:center;gap:5px;font-family:'DM Mono',monospace;font-size:8.5px;letter-spacing:.5px;color:var(--gold);margin-bottom:10px}
+.ac-highlight::before{content:'✦';font-size:8px}
+
+/* ═══════════════════════════
+   DRAWER (右侧滑出)
+═══════════════════════════ */
+#drawer-overlay{
+  position:fixed;inset:0;z-index:300;
+  background:rgba(17,21,16,.35);
+  backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+  opacity:0;pointer-events:none;
+  transition:opacity .35s ease;
+}
+#drawer-overlay.open{opacity:1;pointer-events:auto}
+
+#drawer{
+  position:fixed;top:0;right:0;bottom:0;z-index:301;
+  width:min(520px,90vw);
+  background:var(--bg);
+  border-left:1px solid var(--line);
+  transform:translateX(100%);
+  transition:transform .4s cubic-bezier(.16,1,.3,1);
+  overflow-y:auto;
+  display:flex;flex-direction:column;
+}
+#drawer.open{transform:translateX(0)}
+
+.drawer-header{
+  padding:28px 32px 22px;
+  border-bottom:1px solid var(--line);
+  background:var(--bg2);
+  position:sticky;top:0;z-index:1;
+  display:flex;align-items:flex-start;justify-content:space-between;gap:16px;
+}
+.drawer-close{
+  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;
+  color:var(--t3);background:none;border:1px solid var(--line);
+  border-radius:2px;padding:6px 12px;cursor:pointer;flex-shrink:0;
+  transition:color .2s,border-color .2s;
+}
+.drawer-close:hover{color:var(--t1);border-color:rgba(0,0,0,.2)}
+.drawer-title{font-family:'Noto Serif SC',serif;font-size:18px;font-weight:600;color:var(--t1);line-height:1.4}
+.drawer-organizer{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--t3);margin-top:6px}
+
+.drawer-body{padding:28px 32px;flex:1}
+
+.d-section{margin-bottom:24px}
+.d-label{font-family:'DM Mono',monospace;font-size:8.5px;letter-spacing:2.5px;color:var(--t3);text-transform:uppercase;margin-bottom:8px}
+.d-value{font-size:13.5px;color:var(--t2);line-height:1.75}
+.d-value a{color:var(--teal);text-decoration:none;border-bottom:1px solid rgba(15,92,68,.25);transition:border-color .2s}
+.d-value a:hover{border-color:var(--teal)}
+
+.d-deadline-box{
+  background:var(--bg2);border:1px solid var(--line);border-radius:6px;
+  padding:14px 16px;display:flex;align-items:center;justify-content:space-between;
+}
+.d-deadline-box.urgent{border-color:rgba(192,57,43,.3);background:var(--red-bg)}
+.d-dl-left{}
+.d-dl-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--t3);text-transform:uppercase;margin-bottom:4px}
+.d-dl-date{font-family:'DM Mono',monospace;font-size:18px;font-weight:500;color:var(--t1)}
+.d-dl-date.urgent{color:var(--red)}
+.d-dl-days{font-family:'DM Mono',monospace;font-size:11px;color:var(--t3)}
+.d-dl-days.urgent{color:var(--red)}
+
+.d-badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:4px}
+
+.drawer-cta{
+  margin:28px 32px;padding:18px;
+  background:var(--teal);border-radius:6px;
+  display:flex;align-items:center;justify-content:space-between;
+  text-decoration:none;
+  transition:background .2s,transform .15s;
+}
+.drawer-cta:hover{background:var(--teal-d);transform:translateY(-1px)}
+.drawer-cta-text{}
+.drawer-cta-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:rgba(245,243,239,.6);text-transform:uppercase;margin-bottom:3px}
+.drawer-cta-title{font-family:'Noto Sans SC',sans-serif;font-size:13px;font-weight:500;color:#f5f3ef;letter-spacing:.5px}
+.drawer-cta-arrow{font-size:18px;color:rgba(245,243,239,.7)}
+
+.drawer-ai{
+  margin:0 32px 28px;padding:14px 16px;
+  background:var(--bg2);border:1px solid var(--line);border-radius:6px;
+  text-decoration:none;display:flex;align-items:center;gap:12px;
+  transition:border-color .2s,background .2s;
+}
+.drawer-ai:hover{border-color:rgba(15,92,68,.3);background:rgba(15,92,68,.03)}
+.drawer-ai-icon{font-size:18px;flex-shrink:0}
+.drawer-ai-text{font-size:12.5px;color:var(--t2);line-height:1.6}
+.drawer-ai-text strong{color:var(--t1);font-weight:500}
+
+/* EMPTY */
+.empty-state{padding:60px 0;text-align:center;display:none}
+.empty-state.visible{display:block}
+.empty-state p{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--t3)}
+
+/* FOOTER */
+.page-footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;color:var(--t3)}
+
+@media(max-width:900px){
+  #wrap{padding:0 24px 80px}
+  .award-grid{grid-template-columns:1fr}
+  header{padding:18px 24px}
+  nav{display:none}
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-o"></div>
+<div id="bg-stage"><div class="bg-skew" id="bg-skew"></div></div>
+<div id="grain"></div>
+
+<!-- DRAWER OVERLAY -->
+<div id="drawer-overlay" onclick="closeDrawer()"></div>
+
+<!-- DRAWER -->
+<div id="drawer">
+  <div class="drawer-header">
+    <div>
+      <div class="drawer-title" id="d-title">—</div>
+      <div class="drawer-organizer" id="d-organizer">—</div>
+    </div>
+    <button class="drawer-close" onclick="closeDrawer()">关闭 ✕</button>
+  </div>
+  <div class="drawer-body">
+    <div class="d-section">
+      <div class="d-badges" id="d-badges"></div>
+    </div>
+    <div class="d-section">
+      <div class="d-label">报名截止</div>
+      <div class="d-deadline-box" id="d-deadline-box">
+        <div class="d-dl-left">
+          <div class="d-dl-label">Deadline</div>
+          <div class="d-dl-date" id="d-dl-date">—</div>
+        </div>
+        <div class="d-dl-days" id="d-dl-days">—</div>
+      </div>
+    </div>
+    <div class="d-section">
+      <div class="d-label">颁奖时间</div>
+      <div class="d-value" id="d-event-date">—</div>
+    </div>
+    <div class="d-section">
+      <div class="d-label">奖项介绍</div>
+      <div class="d-value" id="d-desc">—</div>
+    </div>
+    <div class="d-section">
+      <div class="d-label">奖金 / 权益</div>
+      <div class="d-value" id="d-prize">—</div>
+    </div>
+    <div class="d-section">
+      <div class="d-label">报名方式</div>
+      <div class="d-value" id="d-apply">—</div>
+    </div>
+    <div class="d-section" id="d-highlight-sec" style="display:none">
+      <div class="d-label">X-META 匹配亮点</div>
+      <div class="d-value" id="d-highlight">—</div>
+    </div>
+  </div>
+  <a class="drawer-cta" id="d-url" href="#" target="_blank">
+    <div class="drawer-cta-text">
+      <div class="drawer-cta-label">官方网站</div>
+      <div class="drawer-cta-title">前往报名页面 →</div>
+    </div>
+    <div class="drawer-cta-arrow">↗</div>
+  </a>
+  <a class="drawer-ai" href="https://udify.app/chatbot/gu49G2wdPn2pbr3u" target="_blank">
+    <div class="drawer-ai-icon">🤖</div>
+    <div class="drawer-ai-text"><strong>向 AI 助手咨询</strong><br>了解此奖项的申报条件、准备材料及匹配建议</div>
+  </a>
+</div>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="index.html">
+    <img src="x-meta_logo.png" alt="X-META">
+    <span class="logo-sub">补贴政策助手</span>
+  </a>
+  <nav>
+    <a class="nav-link" href="index.html#sec-policies">政策库</a>
+    <a class="nav-link" href="index.html#sec-cities">城市覆盖</a>
+    <a class="nav-link active" href="awards.html">奖项库</a>
+    <a class="nav-link" href="xmeta_guide.html">使用指南</a>
+    <a class="nav-btn" href="https://udify.app/chatbot/gu49G2wdPn2pbr3u" target="_blank">进入对话 →</a>
+  </nav>
+</header>
+
+<div id="wrap">
+
+  <div class="page-hero">
+    <div class="page-tag">奖项库 · Awards Database</div>
+    <h1 class="page-h1">国内外 VR/XR<br><strong>赛事奖项全览</strong></h1>
+    <p class="page-desc">收录 <span id="total-count">—</span> 个国内外主要赛事奖项，涵盖内容创作、商业应用、学术技术等类别<br>
+    最近更新：<span id="updated-at">—</span> &nbsp;·&nbsp; 点击任意奖项查看详情与报名方式</p>
+  </div>
+
+  <!-- FILTERS -->
+  <div class="filter-bar" id="filter-bar">
+    <span class="filter-label">地区</span>
+    <button class="fbtn active" data-filter="region" data-val="全部" onclick="setFilter('region','全部',this)">全部</button>
+    <button class="fbtn" data-filter="region" data-val="国内" onclick="setFilter('region','国内',this)">国内</button>
+    <button class="fbtn" data-filter="region" data-val="国际" onclick="setFilter('region','国际',this)">国际</button>
+    <div class="filter-sep"></div>
+    <span class="filter-label">类别</span>
+    <button class="fbtn active" data-filter="category" data-val="全部" onclick="setFilter('category','全部',this)">全部</button>
+    <button class="fbtn" data-filter="category" data-val="内容创作" onclick="setFilter('category','内容创作',this)">内容创作</button>
+    <button class="fbtn" data-filter="category" data-val="商业内容" onclick="setFilter('category','商业内容',this)">商业内容</button>
+    <button class="fbtn" data-filter="category" data-val="游戏内容" onclick="setFilter('category','游戏内容',this)">游戏内容</button>
+    <button class="fbtn" data-filter="category" data-val="学术技术" onclick="setFilter('category','学术技术',this)">学术技术</button>
+    <button class="fbtn" data-filter="category" data-val="企业榜单" onclick="setFilter('category','企业榜单',this)">企业榜单</button>
+    <button class="fbtn" data-filter="category" data-val="综合" onclick="setFilter('category','综合',this)">综合</button>
+    <div class="filter-sep"></div>
+    <button class="fbtn" id="urgent-btn" onclick="toggleUrgent(this)">⚡ 即将截止</button>
+  </div>
+
+  <div class="search-row">
+    <input class="search-input" id="search-input" type="text" placeholder="搜索奖项名称、主办方…" oninput="applyFilters()">
+    <span class="result-count" id="result-count"></span>
+  </div>
+
+  <div class="award-grid" id="award-grid"></div>
+  <div class="empty-state" id="empty-state"><p>NO RESULTS · 暂无匹配奖项</p></div>
+
+  <div class="page-footer">
+    <span>X-META · 奖项库</span>
+    <span>数据每年人工更新 · 如有疑问请联系总部</span>
+  </div>
+</div>
+
+<script>
+/* CURSOR */
+const cur=document.getElementById('cur'),curO=document.getElementById('cur-o');
+let mx=0,my=0,ox=0,oy=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function f(){ox+=(mx-ox)*.1;oy+=(my-oy)*.1;curO.style.left=ox+'px';curO.style.top=oy+'px';requestAnimationFrame(f)})();
+document.addEventListener('mouseleave',()=>{cur.style.opacity='0';curO.style.opacity='0'});
+document.addEventListener('mouseenter',()=>{cur.style.opacity='1';curO.style.opacity='1'});
+
+/* BG */
+(function(){
+  const skew=document.getElementById('bg-skew');
+  const CW=180,GAP=10,NROWS=6,SPEEDS=[0.22,-0.18,0.26,-0.20,0.18,-0.24];
+  const cols=Math.ceil((window.innerWidth*1.6)/(CW+GAP))+4;
+  const rows=[];
+  for(let r=0;r<NROWS;r++){
+    const row=document.createElement('div');row.className='bg-row';
+    for(let c=0;c<cols*2;c++){const cell=document.createElement('div');cell.className='bg-cell';row.appendChild(cell)}
+    skew.appendChild(row);
+    rows.push({el:row,x:-(cols*(CW+GAP)*0.5),speed:SPEEDS[r]});
+  }
+  const loopW=cols*(CW+GAP);
+  (function tick(){rows.forEach(row=>{row.x+=row.speed;if(row.x>0)row.x-=loopW;if(row.x<-loopW)row.x+=loopW;row.el.style.transform=`translateX(${row.x}px)`});requestAnimationFrame(tick)})();
+})();
+
+/* ── DATA & RENDER ── */
+let allAwards = [];
+let activeFilters = { region:'全部', category:'全部' };
+let urgentOnly = false;
+const TODAY = new Date();
+const URGENT_DAYS = 45;
+
+function daysUntil(dateStr){
+  if(!dateStr) return Infinity;
+  const d = new Date(dateStr);
+  return Math.ceil((d - TODAY) / 86400000);
+}
+function formatDate(dateStr){
+  if(!dateStr) return '—';
+  const d = new Date(dateStr);
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function prestigeLabel(p){ return p==='高'?'含金量高':p==='中'?'含金量中':'参考'; }
+function prestigeClass(p){ return p==='高'?'badge-prestige-h':'badge-prestige-m'; }
+
+function buildCard(a){
+  const days = daysUntil(a.deadline);
+  const isUrgent = days >= 0 && days <= URGENT_DAYS;
+  const isPast = days < 0;
+  const isIntl = a.region === '国际';
+
+  const urgentBadge = isUrgent
+    ? `<span class="badge badge-urgent">⚡ 还剩 ${days} 天</span>`
+    : isPast ? `<span class="badge badge-prestige-m">已截止</span>` : '';
+
+  const deadlineText = isPast
+    ? `<span class="ac-deadline-date" style="color:var(--t3)">已截止</span>`
+    : `<span class="ac-deadline-date ${isUrgent?'urgent':''}">${formatDate(a.deadline)}</span>`;
+
+  return `
+  <div class="acard ${isIntl?'intl':''}" data-id="${a.id}" data-region="${a.region}" data-category="${a.category}" data-deadline="${a.deadline||''}" onclick="openDrawer('${a.id}')">
+    <div class="ac-top">
+      <div class="ac-name">${a.name}</div>
+      <div class="ac-badges">
+        <span class="badge badge-region ${isIntl?'intl':''}">${a.region}</span>
+        <span class="badge ${prestigeClass(a.prestige)}">${prestigeLabel(a.prestige)}</span>
+        ${urgentBadge}
+      </div>
+    </div>
+    <div class="ac-organizer">${a.organizer}</div>
+    ${a.highlight?`<div class="ac-highlight">${a.highlight}</div>`:''}
+    <div class="ac-desc">${a.desc}</div>
+    <div class="ac-footer">
+      <div class="ac-deadline">
+        <span class="ac-deadline-label">报名截止</span>
+        ${deadlineText}
+      </div>
+      <div class="ac-arrow">详情 →</div>
+    </div>
+  </div>`;
+}
+
+function applyFilters(){
+  const q = document.getElementById('search-input').value.toLowerCase();
+  const cards = document.querySelectorAll('.acard');
+  let visible = 0;
+  cards.forEach(card=>{
+    const id = card.dataset.id;
+    const a = allAwards.find(x=>x.id===id);
+    if(!a){ card.classList.add('filtered-out'); return; }
+    const regionOk = activeFilters.region==='全部' || a.region===activeFilters.region;
+    const catOk    = activeFilters.category==='全部' || a.category===activeFilters.category;
+    const days     = daysUntil(a.deadline);
+    const urgentOk = !urgentOnly || (days >= 0 && days <= URGENT_DAYS);
+    const textOk   = !q || a.name.toLowerCase().includes(q) || a.organizer.toLowerCase().includes(q) || (a.desc||'').toLowerCase().includes(q);
+    const show = regionOk && catOk && urgentOk && textOk;
+    card.classList.toggle('filtered-out', !show);
+    if(show) visible++;
+  });
+  document.getElementById('result-count').textContent = `${visible} / ${allAwards.length} 个`;
+  document.getElementById('empty-state').classList.toggle('visible', visible===0);
+}
+
+function setFilter(type, val, btn){
+  activeFilters[type] = val;
+  // update button active state within same group
+  document.querySelectorAll(`[data-filter="${type}"]`).forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+
+function toggleUrgent(btn){
+  urgentOnly = !urgentOnly;
+  btn.classList.toggle('active', urgentOnly);
+  applyFilters();
+}
+
+/* ── DRAWER ── */
+let currentAward = null;
+function openDrawer(id){
+  const a = allAwards.find(x=>x.id===id);
+  if(!a) return;
+  currentAward = a;
+  const days = daysUntil(a.deadline);
+  const isPast = days < 0;
+  const isUrgent = !isPast && days <= URGENT_DAYS;
+
+  document.getElementById('d-title').textContent = a.name;
+  document.getElementById('d-organizer').textContent = a.organizer;
+
+  // badges
+  const isIntl = a.region==='国际';
+  document.getElementById('d-badges').innerHTML = `
+    <span class="badge badge-region ${isIntl?'intl':''}">${a.region}</span>
+    <span class="badge ${prestigeClass(a.prestige)}">${prestigeLabel(a.prestige)}</span>
+    <span class="badge badge-region">${a.category}</span>
+    ${isUrgent?`<span class="badge badge-urgent">⚡ 还剩 ${days} 天</span>`:''}
+    ${isPast?`<span class="badge badge-prestige-m">已截止</span>`:''}
+  `;
+
+  // deadline box
+  const box = document.getElementById('d-deadline-box');
+  const dlDate = document.getElementById('d-dl-date');
+  const dlDays = document.getElementById('d-dl-days');
+  box.className = 'd-deadline-box' + (isUrgent?' urgent':'');
+  dlDate.className = 'd-dl-date' + (isUrgent||isPast?' urgent':'');
+  dlDate.textContent = a.deadline ? formatDate(a.deadline) : '—';
+  if(isPast) dlDays.textContent = '已截止';
+  else if(days===Infinity) dlDays.textContent = '时间待定';
+  else dlDays.textContent = `距截止 ${days} 天`;
+  dlDays.className = 'd-dl-days' + (isUrgent?' urgent':'');
+
+  document.getElementById('d-event-date').textContent = a.event_date || '—';
+  document.getElementById('d-desc').textContent = a.desc || '—';
+  document.getElementById('d-prize').textContent = a.prize || '—';
+  document.getElementById('d-apply').textContent = a.how_to_apply || '—';
+
+  const hlSec = document.getElementById('d-highlight-sec');
+  const hlVal = document.getElementById('d-highlight');
+  if(a.highlight){ hlSec.style.display='block'; hlVal.textContent=a.highlight; }
+  else { hlSec.style.display='none'; }
+
+  const ctaLink = document.getElementById('d-url');
+  ctaLink.href = a.url || '#';
+
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('drawer-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeDrawer(){
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('drawer-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeDrawer(); });
+
+/* ── LOAD DATA ── */
+const DEFAULT_AWARDS = [];
+
+function loadAwards(awards){
+  allAwards = awards;
+  // sort: urgent first, then by deadline asc, then past
+  allAwards.sort((a,b)=>{
+    const da = daysUntil(a.deadline), db = daysUntil(b.deadline);
+    if(da<0 && db>=0) return 1;
+    if(db<0 && da>=0) return -1;
+    return da - db;
+  });
+  document.getElementById('award-grid').innerHTML = allAwards.map(buildCard).join('');
+  document.getElementById('total-count').textContent = allAwards.length;
+  applyFilters();
+}
+
+fetch('awards.json')
+  .then(r=>{if(!r.ok)throw new Error();return r.json()})
+  .then(data=>{
+    if(data.updated_at) document.getElementById('updated-at').textContent = data.updated_at;
+    loadAwards(data.awards||[]);
+  })
+  .catch(()=>loadAwards(DEFAULT_AWARDS));
+</script>
+</body>
+</html>
