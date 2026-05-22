@@ -1,0 +1,57 @@
+name: 奖项季度自动更新
+
+on:
+  schedule:
+    # 每季度1日 00:30 UTC（北京时间 08:30）触发
+    - cron: '30 0 1 1,4,7,10 *'
+  workflow_dispatch:  # 支持手动触发，方便测试
+
+jobs:
+  update-awards:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout 仓库
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 设置 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 安装依赖
+        run: |
+          pip install requests beautifulsoup4
+
+      - name: 运行奖项更新脚本
+        env:
+          SERPER_API_KEY: ${{ secrets.SERPER_API_KEY }}
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+        run: python update_awards.py
+
+      - name: 提交 awards.json 更新
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add awards.json
+          # 只有awards.json有变化时才commit
+          git diff --cached --quiet || git commit -m "🏆 奖项季度自动更新 $(date +'%Y-%m-%d')"
+
+      - name: 上传待审核新奖项报告（如有）
+        uses: actions/upload-artifact@v4
+        with:
+          name: 新奖项候选报告
+          path: 待审核_新奖项_*.txt
+          if-no-files-found: ignore
+          retention-days: 30
+
+      - name: Push 更新
+        uses: ad-hoc/push@v1
+        continue-on-error: true
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push（备用方式）
+        run: git push origin main || echo "无变更，无需push"
