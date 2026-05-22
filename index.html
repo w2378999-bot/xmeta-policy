@@ -812,16 +812,25 @@ function renderCards(policies){
     const cls  = p.match==='高度匹配'?'high':'mid';
     const bcls = MATCH_LABELS[p.match]||'bm';
     const d    = delays[i]||'d1';
+    const cert = p.certainty || 'confirmed';
     const amtHtml = (p.amount && p.amount !== '—')
       ? `<span class="pc-amt-num">${p.amount}</span><span class="pc-amt-unit">${p.unit||''}</span>`
       : `<span class="pc-amt-unit">${p.unit||'—'}</span>`;
+    const certBadge = cert==='confirmed'
+      ? `<span style="font-family:'DM Mono',monospace;font-size:8px;padding:2px 7px;border-radius:2px;color:#1a6fb5;background:#e6f1fb;border:1px solid rgba(26,111,181,.22);letter-spacing:.5px">已生效</span>`
+      : cert==='draft'
+      ? `<span style="font-family:'DM Mono',monospace;font-size:8px;padding:2px 7px;border-radius:2px;color:#b86b0a;background:#faeeda;border:1px solid rgba(184,107,10,.22);letter-spacing:.5px">征求意见稿</span>`
+      : `<span style="font-family:'DM Mono',monospace;font-size:8px;padding:2px 7px;border-radius:2px;color:#7a8575;background:#eceae4;border:1px solid rgba(122,133,117,.22);letter-spacing:.5px">延续预测</span>`;
+    const predictedNote = cert==='predicted'
+      ? `<div style="margin-top:10px;padding-top:8px;border-top:1px solid rgba(0,0,0,.06);font-size:11px;color:var(--t3);line-height:1.5">2026 年官方文件待发布，当前信息基于历史政策推测</div>`
+      : '';
     const inner = `
       <div class="pc-top">
         <span class="pc-city">${p.city} · ${p.dept}</span>
-        <span class="badge ${bcls}">${p.match}</span>
+        <div style="display:flex;align-items:center;gap:6px">${certBadge}<span class="badge ${bcls}">${p.match}</span></div>
       </div>
       <div class="pc-name">${p.name}</div>
-      <div class="pc-amt-wrap">${amtHtml}</div>`;
+      <div class="pc-amt-wrap">${amtHtml}</div>${predictedNote}`;
     if(p.url){
       return `<a class="pcard ${cls} mask-wrap" href="${p.url}" target="_blank" style="text-decoration:none;display:block">
         <div class="mask-inner ${d}">${inner}</div></a>`;
