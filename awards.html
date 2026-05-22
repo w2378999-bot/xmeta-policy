@@ -101,6 +101,15 @@ nav{display:flex;align-items:center;gap:34px}
 .badge-prestige-h{color:var(--teal);border:1px solid rgba(15,92,68,.25);background:rgba(15,92,68,.06)}
 .badge-prestige-m{color:var(--t3);border:1px solid var(--line);background:transparent}
 .badge-urgent{color:var(--red);border:1px solid rgba(192,57,43,.25);background:var(--red-bg);animation:urgentPulse 2s ease-in-out infinite}
+/* certainty */
+.cert-confirmed{color:#1a6fb5;background:#e6f1fb;border:1px solid rgba(26,111,181,.22);font-family:'DM Mono',monospace;font-size:8px;padding:2px 7px;border-radius:2px;letter-spacing:.5px;white-space:nowrap}
+.cert-draft{color:#b86b0a;background:#faeeda;border:1px solid rgba(184,107,10,.22);font-family:'DM Mono',monospace;font-size:8px;padding:2px 7px;border-radius:2px;letter-spacing:.5px;white-space:nowrap}
+.cert-predicted{color:#7a8575;background:#eceae4;border:1px solid rgba(122,133,117,.22);font-family:'DM Mono',monospace;font-size:8px;padding:2px 7px;border-radius:2px;letter-spacing:.5px;white-space:nowrap}
+.acard.predicted{opacity:.7}
+/* 抽屉风险提示栏 */
+.drawer-risk{display:flex;align-items:flex-start;gap:10px;background:#faeeda;border:1px solid rgba(184,107,10,.25);border-radius:6px;padding:12px 14px;margin-bottom:16px}
+.drawer-risk-icon{font-size:15px;flex-shrink:0;margin-top:1px}
+.drawer-risk-text{font-size:12px;color:#854f0b;line-height:1.6}
 @keyframes urgentPulse{0%,100%{opacity:1}50%{opacity:.6}}
 
 .ac-name{font-family:'Noto Serif SC',serif;font-size:14.5px;font-weight:600;line-height:1.45;color:var(--t1);flex:1}
@@ -241,6 +250,11 @@ nav{display:flex;align-items:center;gap:34px}
     <button class="drawer-close" onclick="closeDrawer()">关闭 ✕</button>
   </div>
   <div class="drawer-body">
+    <!-- 风险提示框，predicted/draft时显示 -->
+    <div class="drawer-risk" id="d-risk" style="display:none">
+      <span class="drawer-risk-icon">⚠️</span>
+      <span class="drawer-risk-text"></span>
+    </div>
     <div class="d-section">
       <div class="d-badges" id="d-badges"></div>
     </div>
@@ -404,13 +418,18 @@ function buildCard(a){
     ? `<span class="ac-deadline-date" style="color:var(--t3)">已截止</span>`
     : `<span class="ac-deadline-date ${isUrgent?'urgent':''}">${formatDate(a.deadline)}</span>`;
 
+  const cert = a.certainty || 'confirmed';
+  const certLabel = cert==='confirmed'?'已生效':cert==='draft'?'征求意见稿':'延续预测';
+  const certBadge = `<span class="cert-${cert}">${certLabel}</span>`;
+
   return `
-  <div class="acard ${isIntl?'intl':''}" data-id="${a.id}" data-region="${a.region}" data-category="${a.category}" data-deadline="${a.deadline||''}" onclick="openDrawer('${a.id}')">
+  <div class="acard ${isIntl?'intl':''} ${cert==='predicted'?'predicted':''}" data-id="${a.id}" data-region="${a.region}" data-category="${a.category}" data-deadline="${a.deadline||''}" onclick="openDrawer('${a.id}')">
     <div class="ac-top">
       <div class="ac-name">${a.name}</div>
       <div class="ac-badges">
         <span class="badge badge-region ${isIntl?'intl':''}">${a.region}</span>
         <span class="badge ${prestigeClass(a.prestige)}">${prestigeLabel(a.prestige)}</span>
+        ${certBadge}
         ${urgentBadge}
       </div>
     </div>
@@ -475,15 +494,32 @@ function openDrawer(id){
   document.getElementById('d-title').textContent = a.name;
   document.getElementById('d-organizer').textContent = a.organizer;
 
-  // badges
+  // certainty badge in drawer
+  const cert = a.certainty || 'confirmed';
+  const certLabel = cert==='confirmed'?'已生效':cert==='draft'?'征求意见稿':'延续预测';
   const isIntl = a.region==='国际';
   document.getElementById('d-badges').innerHTML = `
     <span class="badge badge-region ${isIntl?'intl':''}">${a.region}</span>
     <span class="badge ${prestigeClass(a.prestige)}">${prestigeLabel(a.prestige)}</span>
     <span class="badge badge-region">${a.category}</span>
+    <span class="cert-${cert}">${certLabel}</span>
     ${isUrgent?`<span class="badge badge-urgent">⚡ 还剩 ${days} 天</span>`:''}
     ${isPast?`<span class="badge badge-prestige-m">已截止</span>`:''}
   `;
+
+  // 风险提示框（predicted/draft时显示）
+  const riskEl = document.getElementById('d-risk');
+  if(cert === 'predicted'){
+    riskEl.style.display = 'flex';
+    riskEl.querySelector('.drawer-risk-text').innerHTML =
+      `该奖项内容基于 2024/2025 版历史文件推测，实际条款与要求请以 <a href="${a.url||'#'}" target="_blank" style="color:#854f0b;text-decoration:underline">${a.organizer}官网</a> 最终发布的官方文件为准。`;
+  } else if(cert === 'draft'){
+    riskEl.style.display = 'flex';
+    riskEl.querySelector('.drawer-risk-text').innerHTML =
+      `该奖项当前处于征求意见阶段，最终条款可能调整，请以官方正式发布文件为准。`;
+  } else {
+    riskEl.style.display = 'none';
+  }
 
   // deadline box
   const box = document.getElementById('d-deadline-box');
