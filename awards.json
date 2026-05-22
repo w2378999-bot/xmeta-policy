@@ -31,7 +31,9 @@
       "how_to_apply": "官网在线填写资料，打印报名表签字/盖章后提交",
       "url": "http://cybersousa.com.cn/index/web/index.html",
       "highlight": "国家级赛事，有现金奖励",
-      "certainty": "confirmed"
+      "certainty": "predicted",
+      "deadline_note": "以下截止日期为基于2025年历史信息推测，2026年官方通知暂未发布",
+      "deadline_estimated": true
     },
     {
       "id": "jintuoluo",
@@ -95,7 +97,9 @@
       "how_to_apply": "大会官网或江西省工信厅在线申报",
       "url": "https://www.wcvri.cn/home.html?name=shouye",
       "highlight": "国家级荣誉，直接关联政府扶持项目",
-      "certainty": "confirmed"
+      "certainty": "predicted",
+      "deadline_note": "以下截止日期为基于2025年历史信息推测，2026年官方通知暂未发布",
+      "deadline_estimated": true
     },
     {
       "id": "sandboxif",
@@ -111,7 +115,9 @@
       "how_to_apply": "在线提交作品+邮件补充材料（主竞赛/展映/创投单元分类申报）",
       "url": "https://sandboxif.com/",
       "highlight": "国际展映+创投对接双重价值",
-      "certainty": "confirmed"
+      "certainty": "predicted",
+      "deadline_note": "以下截止日期为基于2025年历史信息推测，2026年官方通知暂未发布",
+      "deadline_estimated": true
     },
     {
       "id": "jinji-xr",
@@ -143,7 +149,9 @@
       "how_to_apply": "通过世界VR产业大会官网提交年度经营数据、技术专利、市场应用案例等材料",
       "url": "https://www.wcvri.cn",
       "highlight": "工信部背书，含金量极高",
-      "certainty": "confirmed"
+      "certainty": "predicted",
+      "deadline_note": "以下截止日期为基于2025年历史信息推测，2026年官方通知暂未发布",
+      "deadline_estimated": true
     },
     {
       "id": "cvrvt",
