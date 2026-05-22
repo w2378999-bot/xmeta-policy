@@ -170,8 +170,8 @@ body:has(a:hover) #cur-o,body:has(button:hover) #cur-o{width:46px;height:46px;bo
 
   <div class="hero">
     <div class="hero-label">使用指南 · User Guide</div>
-    <h1>四步完成<br><strong>政策申报全流程</strong></h1>
-    <p class="hero-desc">本指南帮助你快速上手 X-META 补贴政策助手，从查询政策到核对材料，全程 AI 辅助，无需专业背景。</p>
+    <h1>三大功能<br><strong>政策 · 奖项 · 展览</strong></h1>
+    <p class="hero-desc">本指南帮助你快速上手 X-META 智能助手，查政策、找奖项、看展览，全程 AI 辅助，无需专业背景。</p>
   </div>
 
   <!-- 功能详解 -->
@@ -211,6 +211,50 @@ body:has(a:hover) #cur-o,body:has(button:hover) #cur-o{width:46px;height:46px;bo
       <div class="feat-header" onclick="toggle('f2')">
         <div class="feat-num">02</div>
         <div class="feat-meta">
+          <div class="feat-title">查询可申报奖项</div>
+          <div class="feat-tagline">检索国内外VR/XR赛事奖项，了解报名时间与含金量</div>
+        </div>
+        <div class="feat-arrow">▶</div>
+      </div>
+      <div class="feat-body">
+        <div class="steps">
+          <div class="step"><div class="step-dot">1</div><div class="step-content"><div class="step-title">直接询问可申报的奖项</div><div class="step-desc">例如：「现在有哪些VR奖项可以申报？」「有没有含金量高的国际奖项？」</div></div></div>
+          <div class="step"><div class="step-dot">2</div><div class="step-content"><div class="step-title">或直接询问某个奖项的详情</div><div class="step-desc">例如：「金陀螺奖怎么报名？」「威尼斯VR单元的截止时间是什么时候？」</div></div></div>
+          <div class="step"><div class="step-dot">3</div><div class="step-content"><div class="step-title">助手返回奖项详情与申报建议</div><div class="step-desc">包括报名截止时间、含金量、申报入口，以及与全感VR业务的匹配说明</div></div></div>
+        </div>
+        <div class="tips-box">
+          <div class="tips-box-title">💡 提问技巧</div>
+          <ul>
+            <li>问「还有多少天截止」可以快速筛选紧急奖项</li>
+            <li>可以追问「这个奖项和我们全感VR的匹配度怎么样」</li>
+            <li>奖项库每季度自动更新，部分延续预测条目会标注提示</li>
+          </ul>
+        </div>
+      </div>
+    </div></div>
+
+    <div class="feat mask-wrap" id="f3"><div class="mask-inner d3">
+      <div class="feat-header" onclick="toggle('f3')">
+        <div class="feat-num">03</div>
+        <div class="feat-meta">
+          <div class="feat-title">查询近期展览动态</div>
+          <div class="feat-tagline">实时搜索VR/XR/沉浸式展览活动，发现合作与曝光机会</div>
+        </div>
+        <div class="feat-arrow">▶</div>
+      </div>
+      <div class="feat-body">
+        <div class="steps">
+          <div class="step"><div class="step-dot">1</div><div class="step-content"><div class="step-title">询问近期展览信息</div><div class="step-desc">例如：「最近上海有哪些VR展览？」「近期有没有适合全感VR参展的活动？」</div></div></div>
+          <div class="step"><div class="step-dot">2</div><div class="step-content"><div class="step-title">助手实时搜索并整理结果</div><div class="step-desc">返回展览名称、城市、时间和官网链接，可直接点击查看详情</div></div></div>
+        </div>
+        <div class="warn-box"><strong>⚠️ 说明：</strong>展览信息来自实时搜索，每次查询均为最新结果，时效性强，建议以官方公告为准。与政策/奖项不同，展览不依赖知识库，无需等待更新。</div>
+      </div>
+    </div></div>
+
+    <div class="feat mask-wrap" id="f4"><div class="mask-inner d4">
+      <div class="feat-header" onclick="toggle('f4')">
+        <div class="feat-num">04</div>
+        <div class="feat-meta">
           <div class="feat-title">上传政策文件分析</div>
           <div class="feat-tagline">上传红头文件，AI 自动筛选最适合申报的条款</div>
         </div>
@@ -234,9 +278,9 @@ body:has(a:hover) #cur-o,body:has(button:hover) #cur-o{width:46px;height:46px;bo
       </div>
     </div></div>
 
-    <div class="feat mask-wrap" id="f3"><div class="mask-inner d3">
-      <div class="feat-header" onclick="toggle('f3')">
-        <div class="feat-num">03</div>
+    <div class="feat mask-wrap" id="f5"><div class="mask-inner d5">
+      <div class="feat-header" onclick="toggle('f5')">
+        <div class="feat-num">05</div>
         <div class="feat-meta">
           <div class="feat-title">核对申报材料清单</div>
           <div class="feat-tagline">逐项核查，找出缺失材料，避免申报失败</div>
@@ -252,9 +296,9 @@ body:has(a:hover) #cur-o,body:has(button:hover) #cur-o{width:46px;height:46px;bo
       </div>
     </div></div>
 
-    <div class="feat mask-wrap" id="f4"><div class="mask-inner d4">
-      <div class="feat-header" onclick="toggle('f4')">
-        <div class="feat-num">04</div>
+    <div class="feat mask-wrap" id="f6"><div class="mask-inner d6">
+      <div class="feat-header" onclick="toggle('f6')">
+        <div class="feat-num">06</div>
         <div class="feat-meta">
           <div class="feat-title">申报起草辅助</div>
           <div class="feat-tagline">获取申请书框架和要点建议（功能完善中）</div>
@@ -279,6 +323,7 @@ body:has(a:hover) #cur-o,body:has(button:hover) #cur-o{width:46px;height:46px;bo
     </div></div>
     <div class="mask-wrap"><div class="mask-inner">
       <div class="faq-item"><div class="faq-q">知识库里的政策是最新的吗？</div><div class="faq-a">知识库每月 1 日自动更新一次，覆盖上海、深圳、南京、哈尔滨、武汉、济南等城市及国家级政策。建议每月初查询一次获取最新信息。</div></div>
+      <div class="faq-item"><div class="faq-q">奖项和展览信息准确吗？</div><div class="faq-a">奖项库收录27个国内外主要VR/XR赛事，每季度核查更新。部分2026年尚未发布通知的条目会标注「延续预测」提示，以示区别。展览信息来自实时搜索，每次查询均为当下最新结果，建议以官方公告为准。</div></div>
       <div class="faq-item"><div class="faq-q">我的城市没有收录怎么办？</div><div class="faq-a">可以将当地政府发布的政策文件（PDF 或 Word）直接上传给助手，使用「文件分析」功能进行筛选。同时可以联系总部，我们会将该城市纳入下次知识库更新范围。</div></div>
       <div class="faq-item"><div class="faq-q">AI 的分析结果准确吗？可以直接用于申报吗？</div><div class="faq-a">AI 分析基于政策原文，准确度较高，但政策条款可能随时更新，建议申报前务必核对官方原文和最新通知。AI 的结果作为参考和辅助，最终决策请结合人工判断。</div></div>
       <div class="faq-item"><div class="faq-q">上传的文件内容会被保存吗？</div><div class="faq-a">上传的文件仅在本次对话中使用，不会永久保存到知识库。每次新对话需要重新上传。</div></div>
