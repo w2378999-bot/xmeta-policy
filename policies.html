@@ -155,7 +155,7 @@ tr.row-predicted td{opacity:.7}
     <div class="page-tag">政策库 · Policy Database</div>
     <h1 class="page-h1">完整政策库<br><strong>全量收录 · 持续更新</strong></h1>
     <p class="page-desc">知识库每月 1 日自动同步，覆盖上海、深圳、南京、哈尔滨、武汉、济南、长春等城市及国家级政策<br>
-    最近更新：<span id="updated-at">—</span> &nbsp;·&nbsp; 共收录 <span id="total-count">—</span> 条政策</p>
+    最近更新：<span id="updated-at">—</span> &nbsp;·&nbsp; 共收录 <span id="total-count">—</span> 条政策，其中 <span id="confirmed-count" style="color:var(--teal)">—</span> 条已生效</p>
   </div>
 
   <!-- 城市筛选 -->
@@ -178,7 +178,7 @@ tr.row-predicted td{opacity:.7}
       <th>政策名称</th>
       <th style="width:120px">归口部门</th>
       <th style="width:100px">匹配度</th>
-      <th style="width:88px">确定性</th>
+      <th style="width:88px;cursor:pointer;user-select:none" onclick="toggleCertSort(this)" id="th-cert">确定性 <span id="cert-sort-icon">↕</span></th>
       <th style="width:100px">补贴金额</th>
       <th style="width:60px">原文</th>
     </tr></thead>
@@ -238,9 +238,12 @@ document.addEventListener('mouseenter',()=>{cur.style.opacity='1';curO.style.opa
 
 /* DATA */
 const MATCH_LABELS={'高度匹配':'bh','条件匹配':'bm','参考价值':'bm'};
+const CERT_ORDER={'confirmed':0,'draft':1,'predicted':2};
+const MATCH_ORDER={'高度匹配':0,'条件匹配':1,'参考价值':2};
 let allPolicies=[];
 let currentCity='全部';
 let currentSearch='';
+let currentSort='default'; // default | cert-asc | cert-desc
 
 // 默认兜底数据
 const DEFAULT_POLICIES=[
@@ -275,7 +278,22 @@ function renderTable(){
   const countEl=document.getElementById('result-count');
   const q=currentSearch.toLowerCase();
   let visible=0;
-  tbody.innerHTML=allPolicies.map((p,i)=>{
+
+  // 排序：确定性优先+匹配度次之（default），或按确定性单独排
+  let sorted = [...allPolicies];
+  if(currentSort==='cert-asc'){
+    sorted.sort((a,b)=>{
+      const cd=CERT_ORDER[a.certainty||'confirmed']-(CERT_ORDER[b.certainty||'confirmed']);
+      return cd!==0?cd:(MATCH_ORDER[a.match||'']||2)-(MATCH_ORDER[b.match||'']||2);
+    });
+  } else if(currentSort==='cert-desc'){
+    sorted.sort((a,b)=>{
+      const cd=CERT_ORDER[b.certainty||'confirmed']-(CERT_ORDER[a.certainty||'confirmed']);
+      return cd!==0?cd:(MATCH_ORDER[a.match||'']||2)-(MATCH_ORDER[b.match||'']||2);
+    });
+  }
+
+  tbody.innerHTML=sorted.map((p,i)=>{
     const cityMatch=currentCity==='全部'||p.city===currentCity;
     const textMatch=!q||p.name.toLowerCase().includes(q)||p.city.toLowerCase().includes(q)||p.dept.toLowerCase().includes(q);
     const show=cityMatch&&textMatch;
@@ -301,6 +319,13 @@ function renderTable(){
   if(empty){ empty.classList.toggle('visible', visible===0); }
 }
 
+function toggleCertSort(th){
+  if(currentSort==='cert-asc'){ currentSort='cert-desc'; document.getElementById('cert-sort-icon').textContent='↓'; }
+  else if(currentSort==='cert-desc'){ currentSort='default'; document.getElementById('cert-sort-icon').textContent='↕'; }
+  else { currentSort='cert-asc'; document.getElementById('cert-sort-icon').textContent='↑'; }
+  renderTable();
+}
+
 function filterCity(btn){
   document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
@@ -316,6 +341,10 @@ function filterSearch(){
 function loadData(policies){
   allPolicies=policies;
   buildCityFilters(policies);
+  // 已生效统计
+  const confirmedCount = policies.filter(p=>(p.certainty||'confirmed')==='confirmed').length;
+  const el = document.getElementById('confirmed-count');
+  if(el) el.textContent = confirmedCount;
   renderTable();
 }
 
