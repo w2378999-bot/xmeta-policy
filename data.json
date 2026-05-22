@@ -53,7 +53,8 @@
       "match": "高度匹配",
       "amount": "—",
       "unit": "事后资助",
-      "url": "https://wtl.sz.gov.cn/xxgk/zcfgjzcjd/whscsp/content/post_11748803.html"
+      "url": "https://wtl.sz.gov.cn/xxgk/zcfgjzcjd/whscsp/content/post_11748803.html",
+      "certainty": "confirmed"
     },
     {
       "city": "深圳",
@@ -63,7 +64,8 @@
       "match": "高度匹配",
       "amount": "—",
       "unit": "按项目评估",
-      "url": "https://wtl.sz.gov.cn/xxgk/zcfgjzcjd/whscsp/content/post_12356503.html"
+      "url": "https://wtl.sz.gov.cn/xxgk/zcfgjzcjd/whscsp/content/post_12356503.html",
+      "certainty": "confirmed"
     },
     {
       "city": "深圳",
@@ -73,7 +75,8 @@
       "match": "高度匹配",
       "amount": "—",
       "unit": "事后资助",
-      "url": "https://wtl.sz.gov.cn/xxgk/zcfgjzcjd/whscsp/content/post_12729921.html"
+      "url": "https://wtl.sz.gov.cn/xxgk/zcfgjzcjd/whscsp/content/post_12729921.html",
+      "certainty": "confirmed"
     },
     {
       "city": "深圳",
@@ -83,7 +86,8 @@
       "match": "高度匹配",
       "amount": "—",
       "unit": "按项目评估",
-      "url": "https://wtl.sz.gov.cn/xxgk/zcfgjzcjd/whscsp/content/post_11202166.html"
+      "url": "https://wtl.sz.gov.cn/xxgk/zcfgjzcjd/whscsp/content/post_11202166.html",
+      "certainty": "confirmed"
     },
     {
       "city": "深圳",
@@ -93,7 +97,8 @@
       "match": "高度匹配",
       "amount": "—",
       "unit": "租金减免",
-      "url": "http://www.baoan.gov.cn"
+      "url": "http://www.baoan.gov.cn",
+      "certainty": "confirmed"
     },
     {
       "city": "深圳",
@@ -103,7 +108,8 @@
       "match": "高度匹配",
       "amount": "—",
       "unit": "荣誉+资源对接",
-      "url": "https://gxj.sz.gov.cn"
+      "url": "https://gxj.sz.gov.cn",
+      "certainty": "confirmed"
     }
   ],
   "all_policies": [
@@ -115,7 +121,8 @@
       "match": "高度匹配",
       "amount": "—",
       "unit": "事后资助",
-      "url": "https://wtl.sz.gov.cn/xxgk/zcfgjzcjd/whscsp/content/post_11748803.html"
+      "url": "https://wtl.sz.gov.cn/xxgk/zcfgjzcjd/whscsp/content/post_11748803.html",
+      "certainty": "confirmed"
     },
     {
       "city": "深圳",
@@ -125,7 +132,8 @@
       "match": "高度匹配",
       "amount": "—",
       "unit": "按项目评估",
-      "url": "https://wtl.sz.gov.cn/xxgk/zcfgjzcjd/whscsp/content/post_12356503.html"
+      "url": "https://wtl.sz.gov.cn/xxgk/zcfgjzcjd/whscsp/content/post_12356503.html",
+      "certainty": "confirmed"
     },
     {
       "city": "深圳",
@@ -135,7 +143,8 @@
       "match": "高度匹配",
       "amount": "—",
       "unit": "事后资助",
-      "url": "https://wtl.sz.gov.cn/xxgk/zcfgjzcjd/whscsp/content/post_12729921.html"
+      "url": "https://wtl.sz.gov.cn/xxgk/zcfgjzcjd/whscsp/content/post_12729921.html",
+      "certainty": "confirmed"
     },
     {
       "city": "深圳",
@@ -145,7 +154,8 @@
       "match": "高度匹配",
       "amount": "—",
       "unit": "按项目评估",
-      "url": "https://wtl.sz.gov.cn/xxgk/zcfgjzcjd/whscsp/content/post_11202166.html"
+      "url": "https://wtl.sz.gov.cn/xxgk/zcfgjzcjd/whscsp/content/post_11202166.html",
+      "certainty": "confirmed"
     },
     {
       "city": "深圳",
@@ -155,7 +165,8 @@
       "match": "高度匹配",
       "amount": "—",
       "unit": "租金减免",
-      "url": "http://www.baoan.gov.cn"
+      "url": "http://www.baoan.gov.cn",
+      "certainty": "confirmed"
     },
     {
       "city": "深圳",
@@ -165,7 +176,8 @@
       "match": "高度匹配",
       "amount": "—",
       "unit": "荣誉+资源对接",
-      "url": "https://gxj.sz.gov.cn"
+      "url": "https://gxj.sz.gov.cn",
+      "certainty": "confirmed"
     },
     {
       "city": "深圳",
@@ -175,7 +187,8 @@
       "match": "高度匹配",
       "amount": "500",
       "unit": "万元上限",
-      "url": "https://www.szft.gov.cn/bmxx/qwtj/zcfg/content/post_12371630.html"
+      "url": "https://www.szft.gov.cn/bmxx/qwtj/zcfg/content/post_12371630.html",
+      "certainty": "confirmed"
     },
     {
       "city": "深圳",
@@ -185,7 +198,8 @@
       "match": "高度匹配",
       "amount": "300",
       "unit": "万元上限",
-      "url": "https://www.sz.gov.cn/cn/xxgk/zfxxgj/zcfg/content/post_12412409.html"
+      "url": "https://www.sz.gov.cn/cn/xxgk/zfxxgj/zcfg/content/post_12412409.html",
+      "certainty": "confirmed"
     },
     {
       "city": "上海",
@@ -195,7 +209,8 @@
       "match": "高度匹配",
       "amount": "—",
       "unit": "视项目评估",
-      "url": "https://zwdt.sh.gov.cn"
+      "url": "https://zwdt.sh.gov.cn",
+      "certainty": "confirmed"
     },
     {
       "city": "上海",
@@ -205,7 +220,8 @@
       "match": "高度匹配",
       "amount": "1840",
       "unit": "万元上限",
-      "url": "https://stcsm.sh.gov.cn"
+      "url": "https://stcsm.sh.gov.cn",
+      "certainty": "confirmed"
     },
     {
       "city": "上海",
@@ -215,7 +231,8 @@
       "match": "高度匹配",
       "amount": "—",
       "unit": "荣誉+资源对接",
-      "url": "https://sheitc.sh.gov.cn"
+      "url": "https://sheitc.sh.gov.cn",
+      "certainty": "confirmed"
     },
     {
       "city": "上海",
@@ -225,7 +242,8 @@
       "match": "高度匹配",
       "amount": "—",
       "unit": "场景落地资源",
-      "url": "https://whlyj.sh.gov.cn"
+      "url": "https://whlyj.sh.gov.cn",
+      "certainty": "confirmed"
     },
     {
       "city": "南京",
@@ -235,7 +253,8 @@
       "match": "高度匹配",
       "amount": "100",
       "unit": "万元上限",
-      "url": "http://www.xwzf.gov.cn/xwqrmzf/202504/t20250416_5129227.html"
+      "url": "http://www.xwzf.gov.cn/xwqrmzf/202504/t20250416_5129227.html",
+      "certainty": "confirmed"
     },
     {
       "city": "哈尔滨",
@@ -245,7 +264,8 @@
       "match": "高度匹配",
       "amount": "50",
       "unit": "万元上限",
-      "url": "https://wlt.hlj.gov.cn/"
+      "url": "https://wlt.hlj.gov.cn/",
+      "certainty": "confirmed"
     },
     {
       "city": "哈尔滨",
@@ -255,7 +275,8 @@
       "match": "高度匹配",
       "amount": "50",
       "unit": "万元上限",
-      "url": "https://www.harbin.gov.cn/haerbin/c104531/202205/c01_64695.shtml"
+      "url": "https://www.harbin.gov.cn/haerbin/c104531/202205/c01_64695.shtml",
+      "certainty": "confirmed"
     },
     {
       "city": "武汉",
@@ -265,7 +286,8 @@
       "match": "高度匹配",
       "amount": "300",
       "unit": "万元上限",
-      "url": "https://www.wuchang.gov.cn/zwgk_37/fdzdgknr/qtzdgknr/jytabl_1/qjytan/taq/202510/t20251030_2669636.html"
+      "url": "https://www.wuchang.gov.cn/zwgk_37/fdzdgknr/qtzdgknr/jytabl_1/qjytan/taq/202510/t20251030_2669636.html",
+      "certainty": "confirmed"
     },
     {
       "city": "武汉",
@@ -275,7 +297,8 @@
       "match": "高度匹配",
       "amount": "300",
       "unit": "万元上限",
-      "url": "https://www.wuhan.gov.cn/gwfbpt/sbm/swhhlyj_79506/202512/t20251231_2705417.shtml"
+      "url": "https://www.wuhan.gov.cn/gwfbpt/sbm/swhhlyj_79506/202512/t20251231_2705417.shtml",
+      "certainty": "confirmed"
     },
     {
       "city": "济南",
@@ -285,7 +308,8 @@
       "match": "高度匹配",
       "amount": "—",
       "unit": "按项目评估",
-      "url": "http://jnbusiness.jinan.gov.cn/col/col122001/art/2026/art_a27cc6c0b54d403c859c972e534dc803.html?type=FUaRhQW7Lo9974tywtQmQ"
+      "url": "http://jnbusiness.jinan.gov.cn/col/col122001/art/2026/art_a27cc6c0b54d403c859c972e534dc803.html?type=FUaRhQW7Lo9974tywtQmQ",
+      "certainty": "confirmed"
     },
     {
       "city": "广州",
@@ -295,7 +319,8 @@
       "match": "高度匹配",
       "amount": "—",
       "unit": "综合补贴",
-      "url": "http://www.hp.gov.cn/gzjg/qzfgwhgzbm/qgyhxxhj/xxgk/content/post_8171935.html"
+      "url": "http://www.hp.gov.cn/gzjg/qzfgwhgzbm/qgyhxxhj/xxgk/content/post_8171935.html",
+      "certainty": "confirmed"
     },
     {
       "city": "南昌",
@@ -305,7 +330,8 @@
       "match": "高度匹配",
       "amount": "—",
       "unit": "按项目评估",
-      "url": "http://swj.nc.gov.cn/ncsswj/tzgg/202603/07e70fe68afa4a9ab3bb943883650438.shtml"
+      "url": "http://swj.nc.gov.cn/ncsswj/tzgg/202603/07e70fe68afa4a9ab3bb943883650438.shtml",
+      "certainty": "confirmed"
     },
     {
       "city": "国家级",
@@ -315,7 +341,8 @@
       "match": "高度匹配",
       "amount": "—",
       "unit": "荣誉资源",
-      "url": "https://www.miit.gov.cn/"
+      "url": "https://www.miit.gov.cn/",
+      "certainty": "confirmed"
     },
     {
       "city": "长春",
@@ -325,7 +352,8 @@
       "match": "高度匹配",
       "amount": "—",
       "unit": "按项目评估",
-      "url": "http://swj.changchun.gov.cn/sy/fzjs/sswj/202605/t20260506_3485167.html"
+      "url": "http://swj.changchun.gov.cn/sy/fzjs/sswj/202605/t20260506_3485167.html",
+      "certainty": "confirmed"
     },
     {
       "city": "深圳",
@@ -335,7 +363,8 @@
       "match": "条件匹配",
       "amount": "—",
       "unit": "按项目评估",
-      "url": "https://gxj.sz.gov.cn/xxgk/xxgkml/zjxx/czzxzj/content/post_12686352.html"
+      "url": "https://gxj.sz.gov.cn/xxgk/xxgkml/zjxx/czzxzj/content/post_12686352.html",
+      "certainty": "confirmed"
     },
     {
       "city": "深圳",
@@ -345,7 +374,8 @@
       "match": "条件匹配",
       "amount": "—",
       "unit": "按项目评估",
-      "url": "https://gxj.sz.gov.cn/gkmlpt/content/12/12255/post_12255320.html"
+      "url": "https://gxj.sz.gov.cn/gkmlpt/content/12/12255/post_12255320.html",
+      "certainty": "confirmed"
     },
     {
       "city": "深圳",
@@ -355,7 +385,8 @@
       "match": "条件匹配",
       "amount": "—",
       "unit": "按项目评估",
-      "url": "https://fgw.sz.gov.cn/ztzl/qtztzl/szscjmyjjfzzhfwpt/xwdt/content/post_12717384.html"
+      "url": "https://fgw.sz.gov.cn/ztzl/qtztzl/szscjmyjjfzzhfwpt/xwdt/content/post_12717384.html",
+      "certainty": "confirmed"
     },
     {
       "city": "深圳",
@@ -365,7 +396,8 @@
       "match": "条件匹配",
       "amount": "—",
       "unit": "展位费差旅补贴",
-      "url": "http://swj.sz.gov.cn"
+      "url": "http://swj.sz.gov.cn",
+      "certainty": "confirmed"
     },
     {
       "city": "深圳",
@@ -375,7 +407,8 @@
       "match": "条件匹配",
       "amount": "600",
       "unit": "万元上限（算力券）",
-      "url": "https://sf.sz.gov.cn/gfxwjcx/qjgfxwj/gmq/qzfgfxwj/qzf/content/post_12072781.html"
+      "url": "https://sf.sz.gov.cn/gfxwjcx/qjgfxwj/gmq/qzfgfxwj/qzf/content/post_12072781.html",
+      "certainty": "confirmed"
     },
     {
       "city": "深圳",
@@ -385,7 +418,8 @@
       "match": "条件匹配",
       "amount": "3000",
       "unit": "万元上限",
-      "url": "https://www.szft.gov.cn/ftqkjj/gkmlpt/content/12/12467/post_12467865.html"
+      "url": "https://www.szft.gov.cn/ftqkjj/gkmlpt/content/12/12467/post_12467865.html",
+      "certainty": "confirmed"
     },
     {
       "city": "深圳",
@@ -395,7 +429,8 @@
       "match": "条件匹配",
       "amount": "100",
       "unit": "万元/季（模型券）",
-      "url": "https://www.nfnews.com/content/VoQVlgbJy5.html"
+      "url": "https://www.nfnews.com/content/VoQVlgbJy5.html",
+      "certainty": "confirmed"
     },
     {
       "city": "深圳",
@@ -405,7 +440,8 @@
       "match": "条件匹配",
       "amount": "1000",
       "unit": "万元上限",
-      "url": ""
+      "url": "",
+      "certainty": "predicted"
     },
     {
       "city": "上海",
@@ -415,7 +451,8 @@
       "match": "条件匹配",
       "amount": "—",
       "unit": "覆盖物流展位等",
-      "url": ""
+      "url": "",
+      "certainty": "predicted"
     },
     {
       "city": "上海",
@@ -425,7 +462,8 @@
       "match": "条件匹配",
       "amount": "300",
       "unit": "万元上限",
-      "url": ""
+      "url": "",
+      "certainty": "predicted"
     },
     {
       "city": "上海",
@@ -435,7 +473,8 @@
       "match": "条件匹配",
       "amount": "—",
       "unit": "按项目类型",
-      "url": ""
+      "url": "",
+      "certainty": "predicted"
     },
     {
       "city": "上海",
@@ -445,7 +484,8 @@
       "match": "条件匹配",
       "amount": "—",
       "unit": "免租+奖励+补贴",
-      "url": "https://www.shyp.gov.cn/zhengwu/zwgk-qzfwj/2025/342/870.html"
+      "url": "https://www.shyp.gov.cn/zhengwu/zwgk-qzfwj/2025/342/870.html",
+      "certainty": "confirmed"
     },
     {
       "city": "南京",
@@ -455,7 +495,8 @@
       "match": "条件匹配",
       "amount": "48",
       "unit": "万元上限",
-      "url": "http://swj.nanjing.gov.cn"
+      "url": "http://swj.nanjing.gov.cn",
+      "certainty": "confirmed"
     },
     {
       "city": "哈尔滨",
@@ -465,7 +506,8 @@
       "match": "条件匹配",
       "amount": "800",
       "unit": "万元上限（贷款贴息）",
-      "url": "https://wlt.hlj.gov.cn/"
+      "url": "https://wlt.hlj.gov.cn/",
+      "certainty": "confirmed"
     },
     {
       "city": "哈尔滨",
@@ -475,7 +517,8 @@
       "match": "条件匹配",
       "amount": "60",
       "unit": "万元上限",
-      "url": ""
+      "url": "",
+      "certainty": "predicted"
     },
     {
       "city": "武汉",
@@ -485,7 +528,8 @@
       "match": "条件匹配",
       "amount": "—",
       "unit": "按项目评估",
-      "url": "https://www.wuhan.gov.cn/gwfbpt/sbm/swhhlyj_79506/202412/t20241218_2501366.shtml"
+      "url": "https://www.wuhan.gov.cn/gwfbpt/sbm/swhhlyj_79506/202412/t20241218_2501366.shtml",
+      "certainty": "confirmed"
     },
     {
       "city": "苏州",
@@ -495,7 +539,8 @@
       "match": "条件匹配",
       "amount": "100",
       "unit": "万元上限",
-      "url": "http://www.sipac.gov.cn/szgyyq/whjy/202604/e6fa2afa1714413a841e1b038036e227.shtml"
+      "url": "http://www.sipac.gov.cn/szgyyq/whjy/202604/e6fa2afa1714413a841e1b038036e227.shtml",
+      "certainty": "confirmed"
     },
     {
       "city": "苏州",
@@ -505,7 +550,8 @@
       "match": "条件匹配",
       "amount": "—",
       "unit": "按项目评估",
-      "url": "https://www.suzhou.gov.cn/szsrmzf/wzjd/202601/bab90715aaf3456981b802b6c59ec94d.shtml"
+      "url": "https://www.suzhou.gov.cn/szsrmzf/wzjd/202601/bab90715aaf3456981b802b6c59ec94d.shtml",
+      "certainty": "confirmed"
     },
     {
       "city": "湖南省",
@@ -515,7 +561,8 @@
       "match": "条件匹配",
       "amount": "200",
       "unit": "万元上限",
-      "url": "https://www.hunan.gov.cn/zqt/xmsb/202512/t20251231_33884225.html"
+      "url": "https://www.hunan.gov.cn/zqt/xmsb/202512/t20251231_33884225.html",
+      "certainty": "confirmed"
     },
     {
       "city": "福州",
@@ -525,7 +572,8 @@
       "match": "条件匹配",
       "amount": "—",
       "unit": "按项目评估",
-      "url": "https://fzxq.fuzhou.gov.cn/xxgk/fgwj/202404/t20240402_4802873.htm"
+      "url": "https://fzxq.fuzhou.gov.cn/xxgk/fgwj/202404/t20240402_4802873.htm",
+      "certainty": "confirmed"
     },
     {
       "city": "长春",
@@ -535,7 +583,8 @@
       "match": "条件匹配",
       "amount": "—",
       "unit": "按项目评估",
-      "url": "http://swj.changchun.gov.cn/sy/fzjs/sswj/202604/t20260410_3479784.html"
+      "url": "http://swj.changchun.gov.cn/sy/fzjs/sswj/202604/t20260410_3479784.html",
+      "certainty": "confirmed"
     },
     {
       "city": "广州",
@@ -545,7 +594,8 @@
       "match": "条件匹配",
       "amount": "—",
       "unit": "按项目评估",
-      "url": "http://www.hp.gov.cn/gzjg/qzfgwhgzbm/qgyhxxhj/xxgk/content/post_8171935.html"
+      "url": "http://www.hp.gov.cn/gzjg/qzfgwhgzbm/qgyhxxhj/xxgk/content/post_8171935.html",
+      "certainty": "confirmed"
     },
     {
       "city": "苏州",
@@ -555,7 +605,8 @@
       "match": "条件匹配",
       "amount": "—",
       "unit": "按项目评估",
-      "url": "https://www.suzhou.gov.cn/szsrmzf/wzjd/202601/bab90715aaf3456981b802b6c59ec94d.shtml"
+      "url": "https://www.suzhou.gov.cn/szsrmzf/wzjd/202601/bab90715aaf3456981b802b6c59ec94d.shtml",
+      "certainty": "confirmed"
     },
     {
       "city": "济南",
@@ -565,7 +616,8 @@
       "match": "条件匹配",
       "amount": "—",
       "unit": "按项目评估",
-      "url": "https://www.jinan.gov.cn/col113976/art/2022/art_113976_4936330.html"
+      "url": "https://www.jinan.gov.cn/col113976/art/2022/art_113976_4936330.html",
+      "certainty": "confirmed"
     },
     {
       "city": "南京",
@@ -575,7 +627,8 @@
       "match": "参考价值",
       "amount": "—",
       "unit": "按项目评估",
-      "url": "https://wlj.nanjing.gov.cn/njswhgdxwcbj/202602/t20260204_5787398.html"
+      "url": "https://wlj.nanjing.gov.cn/njswhgdxwcbj/202602/t20260204_5787398.html",
+      "certainty": "confirmed"
     },
     {
       "city": "广州",
@@ -585,7 +638,8 @@
       "match": "参考价值",
       "amount": "—",
       "unit": "按项目评估",
-      "url": "http://wglj.gz.gov.cn/gkmlpt/content/10/10679/post_10679329.html"
+      "url": "http://wglj.gz.gov.cn/gkmlpt/content/10/10679/post_10679329.html",
+      "certainty": "confirmed"
     },
     {
       "city": "广东省",
@@ -595,7 +649,8 @@
       "match": "参考价值",
       "amount": "—",
       "unit": "按项目评估",
-      "url": "http://www.jieyang.gov.cn/jywgdltj/gkmlpt/content/1/1010/post_1010492.html"
+      "url": "http://www.jieyang.gov.cn/jywgdltj/gkmlpt/content/1/1010/post_1010492.html",
+      "certainty": "confirmed"
     }
   ]
 }
