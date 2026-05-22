@@ -414,9 +414,10 @@ function buildCard(a){
     ? `<span class="badge badge-urgent">⚡ 还剩 ${days} 天</span>`
     : isPast ? `<span class="badge badge-prestige-m">已截止</span>` : '';
 
+  const estMark = a.deadline_estimated ? `<span style="font-family:'DM Mono',monospace;font-size:8px;color:var(--t3);margin-left:4px">推测</span>` : '';
   const deadlineText = isPast
     ? `<span class="ac-deadline-date" style="color:var(--t3)">已截止</span>`
-    : `<span class="ac-deadline-date ${isUrgent?'urgent':''}">${formatDate(a.deadline)}</span>`;
+    : `<span class="ac-deadline-date ${isUrgent?'urgent':''}">${formatDate(a.deadline)}</span>${estMark}`;
 
   const cert = a.certainty || 'confirmed';
   const certLabel = cert==='confirmed'?'已生效':cert==='draft'?'征求意见稿':'延续预测';
@@ -528,6 +529,10 @@ function openDrawer(id){
   box.className = 'd-deadline-box' + (isUrgent?' urgent':'');
   dlDate.className = 'd-dl-date' + (isUrgent||isPast?' urgent':'');
   dlDate.textContent = a.deadline ? formatDate(a.deadline) : '—';
+  if(a.deadline_estimated){
+    dlDate.textContent += ' (推测)';
+    dlDate.style.color = 'var(--t3)';
+  }
   if(isPast) dlDays.textContent = '已截止';
   else if(days===Infinity) dlDays.textContent = '时间待定';
   else dlDays.textContent = `距截止 ${days} 天`;
