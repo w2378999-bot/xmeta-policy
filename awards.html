@@ -105,11 +105,30 @@ nav{display:flex;align-items:center;gap:34px}
 .cert-confirmed{color:#1a6fb5;background:#e6f1fb;border:1px solid rgba(26,111,181,.22);font-family:'DM Mono',monospace;font-size:8px;padding:2px 7px;border-radius:2px;letter-spacing:.5px;white-space:nowrap}
 .cert-draft{color:#b86b0a;background:#faeeda;border:1px solid rgba(184,107,10,.22);font-family:'DM Mono',monospace;font-size:8px;padding:2px 7px;border-radius:2px;letter-spacing:.5px;white-space:nowrap}
 .cert-predicted{color:#7a8575;background:#eceae4;border:1px solid rgba(122,133,117,.22);font-family:'DM Mono',monospace;font-size:8px;padding:2px 7px;border-radius:2px;letter-spacing:.5px;white-space:nowrap}
-.acard.predicted{opacity:.7}
+/* predicted卡片：灰色固定左边框+背景微调 */
+.acard.predicted{background:rgba(236,234,228,.75);border-color:rgba(0,0,0,.07)}
+.acard.predicted::before{background:#b0a99a !important;opacity:1 !important}
+.acard.predicted .ac-name{color:var(--t2)}
+.cert-predicted::before{content:'⚠️ '}
 /* 抽屉风险提示栏 */
 .drawer-risk{display:flex;align-items:flex-start;gap:10px;background:#faeeda;border:1px solid rgba(184,107,10,.25);border-radius:6px;padding:12px 14px;margin-bottom:16px}
 .drawer-risk-icon{font-size:15px;flex-shrink:0;margin-top:1px}
 .drawer-risk-text{font-size:12px;color:#854f0b;line-height:1.6}
+/* 全生命周期时间轴 */
+.d-timeline{display:flex;flex-direction:column;gap:0;padding:4px 0}
+.d-tl-item{display:flex;gap:14px;position:relative;padding-bottom:18px}
+.d-tl-item:last-child{padding-bottom:0}
+.d-tl-left{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:14px}
+.d-tl-dot{width:10px;height:10px;border-radius:50%;border:2px solid var(--bg3);background:var(--bg);flex-shrink:0;transition:border-color .2s}
+.d-tl-dot.active{border-color:var(--teal);background:var(--teal)}
+.d-tl-dot.past{border-color:var(--t3);background:var(--t3)}
+.d-tl-dot.future{border-color:var(--bg3);background:var(--bg)}
+.d-tl-line{flex:1;width:1px;background:var(--line);margin:3px 0}
+.d-tl-content{padding-top:0;padding-bottom:2px}
+.d-tl-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--t3);text-transform:uppercase;margin-bottom:3px}
+.d-tl-label.active{color:var(--teal)}
+.d-tl-date{font-size:12.5px;color:var(--t2);line-height:1.5}
+.d-tl-date.active{color:var(--t1);font-weight:500}
 @keyframes urgentPulse{0%,100%{opacity:1}50%{opacity:.6}}
 
 .ac-name{font-family:'Noto Serif SC',serif;font-size:14.5px;font-weight:600;line-height:1.45;color:var(--t1);flex:1}
@@ -259,18 +278,8 @@ nav{display:flex;align-items:center;gap:34px}
       <div class="d-badges" id="d-badges"></div>
     </div>
     <div class="d-section">
-      <div class="d-label">报名截止</div>
-      <div class="d-deadline-box" id="d-deadline-box">
-        <div class="d-dl-left">
-          <div class="d-dl-label">Deadline</div>
-          <div class="d-dl-date" id="d-dl-date">—</div>
-        </div>
-        <div class="d-dl-days" id="d-dl-days">—</div>
-      </div>
-    </div>
-    <div class="d-section">
-      <div class="d-label">颁奖时间</div>
-      <div class="d-value" id="d-event-date">—</div>
+      <div class="d-label">关键时间节点</div>
+      <div class="d-timeline" id="d-timeline"></div>
     </div>
     <div class="d-section">
       <div class="d-label">奖项介绍</div>
@@ -322,7 +331,7 @@ nav{display:flex;align-items:center;gap:34px}
   <div class="page-hero">
     <div class="page-tag">奖项库 · Awards Database</div>
     <h1 class="page-h1">国内外 VR/XR<br><strong>赛事奖项全览</strong></h1>
-    <p class="page-desc">收录 <span id="total-count">—</span> 个国内外主要赛事奖项，涵盖内容创作、商业应用、学术技术等类别<br>
+    <p class="page-desc">收录 <span id="total-count">—</span> 个国内外主要赛事奖项，其中 <span id="confirmed-count" style="color:var(--teal)">—</span> 个已发布2026年通知<br>
     最近更新：<span id="updated-at">—</span> &nbsp;·&nbsp; 点击任意奖项查看详情与报名方式</p>
   </div>
 
@@ -522,23 +531,54 @@ function openDrawer(id){
     riskEl.style.display = 'none';
   }
 
-  // deadline box
-  const box = document.getElementById('d-deadline-box');
-  const dlDate = document.getElementById('d-dl-date');
-  const dlDays = document.getElementById('d-dl-days');
-  box.className = 'd-deadline-box' + (isUrgent?' urgent':'');
-  dlDate.className = 'd-dl-date' + (isUrgent||isPast?' urgent':'');
-  dlDate.textContent = a.deadline ? formatDate(a.deadline) : '—';
-  if(a.deadline_estimated){
-    dlDate.textContent += ' (推测)';
-    dlDate.style.color = 'var(--t3)';
-  }
-  if(isPast) dlDays.textContent = '已截止';
-  else if(days===Infinity) dlDays.textContent = '时间待定';
-  else dlDays.textContent = `距截止 ${days} 天`;
-  dlDays.className = 'd-dl-days' + (isUrgent?' urgent':'');
+  // 全生命周期时间轴
+  const tlEl = document.getElementById('d-timeline');
+  const isEstimated = !!a.deadline_estimated;
+  const estNote = isEstimated ? ' <span style="font-family:\'DM Mono\',monospace;font-size:9px;color:var(--t3)">(推测)</span>' : '';
 
-  document.getElementById('d-event-date').textContent = a.event_date || '—';
+  // 判断当前处于哪个阶段
+  const now = new Date();
+  const deadlineDate = a.deadline ? new Date(a.deadline) : null;
+  const eventStr = a.event_date || '';
+  // event_date格式可能是 "2026-10" 或 "2026-10-15"
+  const eventDate = eventStr ? new Date(eventStr.length===7 ? eventStr+'-01' : eventStr) : null;
+
+  function tlPhase(date){
+    if(!date) return 'future';
+    if(date < now) return 'past';
+    if(Math.ceil((date-now)/86400000) <= 45) return 'active';
+    return 'future';
+  }
+
+  const deadlinePhase = deadlineDate ? (isPast?'past':(isUrgent?'active':'future')) : 'future';
+  const eventPhase    = eventDate ? tlPhase(eventDate) : 'future';
+
+  const tlItems = [
+    {
+      label: '报名截止',
+      date: a.deadline ? formatDate(a.deadline) + (isPast?' · 已截止':isUrgent?` · 还剩 ${days} 天`:'') : '时间待定',
+      note: estNote,
+      phase: deadlinePhase,
+    },
+    {
+      label: '颁奖 / 活动',
+      date: eventStr || '时间待定',
+      note: '',
+      phase: eventPhase,
+    },
+  ];
+
+  tlEl.innerHTML = tlItems.map((item, i) => `
+    <div class="d-tl-item">
+      <div class="d-tl-left">
+        <div class="d-tl-dot ${item.phase}"></div>
+        ${i < tlItems.length-1 ? '<div class="d-tl-line"></div>' : ''}
+      </div>
+      <div class="d-tl-content">
+        <div class="d-tl-label ${item.phase==='active'?'active':''}">${item.label}</div>
+        <div class="d-tl-date ${item.phase==='active'?'active':''}">${item.date}${item.note}</div>
+      </div>
+    </div>`).join('');
   document.getElementById('d-desc').textContent = a.desc || '—';
   document.getElementById('d-prize').textContent = a.prize || '—';
   document.getElementById('d-apply').textContent = a.how_to_apply || '—';
@@ -576,6 +616,9 @@ function loadAwards(awards){
   });
   document.getElementById('award-grid').innerHTML = allAwards.map(buildCard).join('');
   document.getElementById('total-count').textContent = allAwards.length;
+  const confirmedCount = allAwards.filter(a=>(a.certainty||'confirmed')==='confirmed').length;
+  const ccEl = document.getElementById('confirmed-count');
+  if(ccEl) ccEl.textContent = confirmedCount;
   applyFilters();
 }
 
