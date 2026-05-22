@@ -14,7 +14,8 @@
       "prize": "无现金，获产业扶持政策、合作资源、投融资对接",
       "how_to_apply": "大赛官网在线提交作品及商业计划书",
       "url": "https://ymshxr.com",
-      "highlight": "文旅定制赛道与全感VR高度匹配"
+      "highlight": "文旅定制赛道与全感VR高度匹配",
+      "certainty": "confirmed"
     },
     {
       "id": "jinhaitun",
@@ -29,7 +30,8 @@
       "prize": "总奖金101万元，VR赛道按比例分配",
       "how_to_apply": "官网在线填写资料，打印报名表签字/盖章后提交",
       "url": "http://cybersousa.com.cn/index/web/index.html",
-      "highlight": "国家级赛事，有现金奖励"
+      "highlight": "国家级赛事，有现金奖励",
+      "certainty": "confirmed"
     },
     {
       "id": "jintuoluo",
@@ -44,7 +46,8 @@
       "prize": "无现金，行业顶级曝光、产业链资源对接",
       "how_to_apply": "陀螺科技官网或官方公众号在线提交申报材料",
       "url": "https://www.fbec.info/#/",
-      "highlight": "「年度优秀XR LBE大空间内容」与全感VR直接匹配"
+      "highlight": "「年度优秀XR LBE大空间内容」与全感VR直接匹配",
+      "certainty": "confirmed"
     },
     {
       "id": "jinv",
@@ -59,7 +62,8 @@
       "prize": "无现金，行业曝光、产业链资源对接、投融资机会",
       "how_to_apply": "93913官网或官方公众号在线提交申报材料",
       "url": "https://www.93913.com/98226.html",
-      "highlight": "《魔法冰堡》全感XR曾参评年度优秀XR LBE大空间内容"
+      "highlight": "《魔法冰堡》全感XR曾参评年度优秀XR LBE大空间内容",
+      "certainty": "confirmed"
     },
     {
       "id": "jinduo",
@@ -74,7 +78,8 @@
       "prize": "无现金，获全国巡展、资源对接、媒体报道机会",
       "how_to_apply": "通过中国VR/AR创作大赛官网或官方公众号在线提交作品",
       "url": "http://chinavrcontest.com",
-      "highlight": "北师大主办，学术+产业双重背书"
+      "highlight": "北师大主办，学术+产业双重背书",
+      "certainty": "confirmed"
     },
     {
       "id": "wcvri",
@@ -89,7 +94,8 @@
       "prize": "无现金，国家级荣誉，纳入工信部产业扶持项目申报参考",
       "how_to_apply": "大会官网或江西省工信厅在线申报",
       "url": "https://www.wcvri.cn/home.html?name=shouye",
-      "highlight": "国家级荣誉，直接关联政府扶持项目"
+      "highlight": "国家级荣誉，直接关联政府扶持项目",
+      "certainty": "confirmed"
     },
     {
       "id": "sandboxif",
@@ -104,7 +110,8 @@
       "prize": "无现金，获国际展映、创投对接、行业资源导入",
       "how_to_apply": "在线提交作品+邮件补充材料（主竞赛/展映/创投单元分类申报）",
       "url": "https://sandboxif.com/",
-      "highlight": "国际展映+创投对接双重价值"
+      "highlight": "国际展映+创投对接双重价值",
+      "certainty": "confirmed"
     },
     {
       "id": "jinji-xr",
@@ -119,7 +126,8 @@
       "prize": "无现金，国内VR内容最高规格荣誉认可",
       "how_to_apply": "金鸡百花电影节官网提交",
       "url": "https://ai.caa.edu.cn/info/1009/1571.htm",
-      "highlight": "中国电影最高荣誉官方VR单元"
+      "highlight": "中国电影最高荣誉官方VR单元",
+      "certainty": "confirmed"
     },
     {
       "id": "cvr50",
@@ -134,7 +142,8 @@
       "prize": "无现金，国家级产业认可，优先对接政府扶持项目与国际合作资源",
       "how_to_apply": "通过世界VR产业大会官网提交年度经营数据、技术专利、市场应用案例等材料",
       "url": "https://www.wcvri.cn",
-      "highlight": "工信部背书，含金量极高"
+      "highlight": "工信部背书，含金量极高",
+      "certainty": "confirmed"
     },
     {
       "id": "cvrvt",
@@ -149,7 +158,8 @@
       "prize": "无现金，国家级品牌背书、全行业曝光及投融资资源精准对接",
       "how_to_apply": "定向邀请+公开征集，通过官方渠道提交申报材料",
       "url": "http://www.nc-vr.cn",
-      "highlight": "与投融资资源直接对接"
+      "highlight": "与投融资资源直接对接",
+      "certainty": "confirmed"
     },
     {
       "id": "ieee-vr",
@@ -164,7 +174,8 @@
       "prize": "无现金，颁发荣誉奖章及IEEE VGTC官方认证",
       "how_to_apply": "提名制（自我/他人提名），提交学术成果/技术贡献证明",
       "url": "https://tc.computer.org/vgtc/awards/vr-award-nominations/",
-      "highlight": "全球VR学术最高荣誉"
+      "highlight": "全球VR学术最高荣誉",
+      "certainty": "confirmed"
     },
     {
       "id": "aixr",
@@ -179,7 +190,8 @@
       "prize": "无现金，颁发定制奖杯，获全球媒体曝光、高端资源对接",
       "how_to_apply": "官网在线提交作品/申报材料，缴纳报名费",
       "url": "https://xrawards.aixr.org/nominate/",
-      "highlight": "全球XR商业最高荣誉之一"
+      "highlight": "全球XR商业最高荣誉之一",
+      "certainty": "confirmed"
     },
     {
       "id": "tga",
@@ -194,7 +206,8 @@
       "prize": "无现金，荣誉表彰+全球千万级曝光",
       "how_to_apply": "游戏发行商/开发商通过官方渠道提交提名申请",
       "url": "https://thegameawards.com/",
-      "highlight": "全球最高曝光量的VR游戏奖项"
+      "highlight": "全球最高曝光量的VR游戏奖项",
+      "certainty": "confirmed"
     },
     {
       "id": "awe-auggie",
@@ -209,7 +222,8 @@
       "prize": "无现金，大会现场表彰+行业资源精准对接",
       "how_to_apply": "官网在线提交作品/解决方案，按类别申报",
       "url": "https://www.awexr.com/usa-2026/auggie",
-      "highlight": "全球最大XR产业大会官方奖项"
+      "highlight": "全球最大XR产业大会官方奖项",
+      "certainty": "confirmed"
     },
     {
       "id": "venice-immersive",
@@ -224,7 +238,8 @@
       "prize": "无现金，获全球艺术展映、发行合作等机会",
       "how_to_apply": "电影节官网在线提交Immersive项目，填写预选表格+支付注册费",
       "url": "https://www.labiennale.org/en",
-      "highlight": "全球VR艺术内容最高殿堂"
+      "highlight": "全球VR艺术内容最高殿堂",
+      "certainty": "confirmed"
     },
     {
       "id": "cannes-xr",
@@ -239,7 +254,8 @@
       "prize": "无现金，获国际发行、版权合作等商业机会",
       "how_to_apply": "电影节官网在线提交XR作品，提供演示视频及技术说明",
       "url": "https://www.cannes.com/en/cannes-cinema/the-festival-de-cannes.html",
-      "highlight": "全球顶级电影节官方XR单元"
+      "highlight": "全球顶级电影节官方XR单元",
+      "certainty": "confirmed"
     },
     {
       "id": "sxsw-xr",
@@ -254,7 +270,8 @@
       "prize": "无现金，核心价值为跨界资源对接",
       "how_to_apply": "通过Film & TV Submissions系统提交XR项目",
       "url": "https://sxsw.com/apply/film-submissions/",
-      "highlight": "商业合作转化率极高"
+      "highlight": "商业合作转化率极高",
+      "certainty": "confirmed"
     },
     {
       "id": "siggraph",
@@ -269,7 +286,8 @@
       "prize": "无现金，技术认证+行业合作机会，获奖技术易转化为商业产品",
       "how_to_apply": "官网在线提交技术项目说明、演示视频及技术文档",
       "url": "https://s2026.siggraph.org/",
-      "highlight": "前沿技术商业转化价值高"
+      "highlight": "前沿技术商业转化价值高",
+      "certainty": "confirmed"
     },
     {
       "id": "raindance",
@@ -284,7 +302,8 @@
       "prize": "无现金，获欧洲多国展映及版权合作",
       "how_to_apply": "通过FilmFreeway的Immersive类别提交XR/沉浸体验项目",
       "url": "https://filmfreeway.com/RaindanceFilmFestival",
-      "highlight": "欧洲独立VR内容重要展映平台"
+      "highlight": "欧洲独立VR内容重要展映平台",
+      "certainty": "confirmed"
     },
     {
       "id": "tribeca",
@@ -299,7 +318,8 @@
       "prize": "无公开奖金，获奖作品获北美发行机会",
       "how_to_apply": "通过FilmFreeway或Tribeca Extranet提交Immersive/XR项目",
       "url": "https://filmfreeway.com/TribecaFestival",
-      "highlight": "北美最强叙事VR奖项，获北美发行机会"
+      "highlight": "北美最强叙事VR奖项，获北美发行机会",
+      "certainty": "confirmed"
     },
     {
       "id": "laval-virtual",
@@ -314,7 +334,8 @@
       "prize": "无现金，获奖企业获欧洲市场推广、产业合作对接",
       "how_to_apply": "官网在线提交项目申报材料及演示视频",
       "url": "https://www.laval-virtual.com/en/submit-your-project",
-      "highlight": "欧洲历史最悠久VR产业奖"
+      "highlight": "欧洲历史最悠久VR产业奖",
+      "certainty": "confirmed"
     },
     {
       "id": "vr-forever",
@@ -329,7 +350,8 @@
       "prize": "无现金，获Steam平台首页推荐位（曝光量超千万）",
       "how_to_apply": "通过VR Forever Awards官网或Steam开发者中心在线提交",
       "url": "https://www.creature.page/vrforever",
-      "highlight": "Steam首页推荐位价值极高"
+      "highlight": "Steam首页推荐位价值极高",
+      "certainty": "confirmed"
     },
     {
       "id": "dice",
@@ -344,7 +366,8 @@
       "prize": "无现金，颁发D.I.C.E.官方奖杯，可显著提升全球市场销量与行业知名度",
       "how_to_apply": "通过AIAS官网提交申报材料",
       "url": "https://www.interactive.org",
-      "highlight": "游戏界奥斯卡分支"
+      "highlight": "游戏界奥斯卡分支",
+      "certainty": "confirmed"
     },
     {
       "id": "anidox-vr",
@@ -359,7 +382,8 @@
       "prize": "最佳VR动画纪录片奖金10000欧元",
       "how_to_apply": "通过ANIDOX Festival官网在线提交，需提供VR成片、创作阐述、字幕文件",
       "url": "https://www.anidox.com/anidoxvr/",
-      "highlight": "有现金奖励（10000欧元）"
+      "highlight": "有现金奖励（10000欧元）",
+      "certainty": "confirmed"
     },
     {
       "id": "annecy-vr",
@@ -374,7 +398,8 @@
       "prize": "无现金，获全球动画电影节巡展资格、国际发行合作机会",
       "how_to_apply": "通过Annecy Festival官网在线提交，需提供VR动画成片、技术参数说明、创作阐述",
       "url": "https://www.annecyfestival.com",
-      "highlight": "全球动画VR内容最高水晶奖"
+      "highlight": "全球动画VR内容最高水晶奖",
+      "certainty": "confirmed"
     },
     {
       "id": "emmy-emerging",
@@ -389,7 +414,8 @@
       "prize": "无现金，颁发艾美奖官方奖杯，可大幅提升北美市场商业转化",
       "how_to_apply": "通过官网提交申报材料，需提供VR作品成片",
       "url": "https://www.emmys.com",
-      "highlight": "美国电视最高荣誉VR单元"
+      "highlight": "美国电视最高荣誉VR单元",
+      "certainty": "confirmed"
     },
     {
       "id": "bafta-beyond",
@@ -404,7 +430,8 @@
       "prize": "无现金，颁发BAFTA定制奖杯，获国际投融资与行业资源对接机会",
       "how_to_apply": "通过BAFTA官网提交申报材料，需提供VR作品演示视频、创作理念说明",
       "url": "https://www.bafta.org",
-      "highlight": "欧洲VR内容最高荣誉"
+      "highlight": "欧洲VR内容最高荣誉",
+      "certainty": "confirmed"
     }
   ]
 }
