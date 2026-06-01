@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-05-12",
-  "policy_count": 49,
+  "updated_at": "2026-06-01",
+  "policy_count": 47,
   "city_count": 12,
   "cities": [
     "深圳",
@@ -17,32 +17,31 @@
     "福州"
   ],
   "provinces": [
-    "福建",
     "湖北",
+    "广东",
+    "江苏",
+    "山东",
+    "吉林",
     "黑龙江",
     "上海",
+    "福建",
     "江西",
-    "吉林",
-    "山东",
-    "湖南",
-    "广东",
-    "江苏"
+    "湖南"
   ],
   "city_stats": {
     "深圳": 16,
     "上海": 8,
-    "南京": 3,
+    "南京": 4,
     "哈尔滨": 4,
     "武汉": 3,
-    "济南": 2,
-    "广州": 3,
+    "济南": 1,
+    "广州": 2,
     "南昌": 1,
     "国家级": 1,
     "长春": 2,
     "苏州": 3,
     "湖南省": 1,
-    "福州": 1,
-    "广东省": 1
+    "福州": 1
   },
   "top_policies": [
     {
@@ -347,12 +346,23 @@
     {
       "city": "长春",
       "province": "吉林",
-      "dept": "商委口",
-      "name": "关于开展长春市消费新业态新模式新场景试点项目（第二批）申报工作的通知",
+      "dept": "商委口,文旅局口",
+      "name": "长春市消费新业态新模式新场景试点项目管理办法（试行）",
       "match": "高度匹配",
       "amount": "—",
       "unit": "按项目评估",
-      "url": "http://swj.changchun.gov.cn/sy/fzjs/sswj/202605/t20260506_3485167.html",
+      "url": "http://swj.changchun.gov.cn/sy/fzjs/sswj/202604/t20260410_3479784.html",
+      "certainty": "confirmed"
+    },
+    {
+      "city": "长春",
+      "province": "吉林",
+      "dept": "商委口",
+      "name": "长春市关于开展消费新业态新模式新场景试点项目申报工作的通知",
+      "match": "高度匹配",
+      "amount": "—",
+      "unit": "按项目评估",
+      "url": "http://swj.changchun.gov.cn/sy/fzjs/sswj/202512/t20251229_3456133.html",
       "certainty": "confirmed"
     },
     {
@@ -576,47 +586,14 @@
       "certainty": "confirmed"
     },
     {
-      "city": "长春",
-      "province": "吉林",
-      "dept": "商委口,文旅局口",
-      "name": "长春市消费新业态新模式新场景试点项目管理办法（试行）",
-      "match": "条件匹配",
-      "amount": "—",
-      "unit": "按项目评估",
-      "url": "http://swj.changchun.gov.cn/sy/fzjs/sswj/202604/t20260410_3479784.html",
-      "certainty": "confirmed"
-    },
-    {
-      "city": "广州",
-      "province": "广东",
-      "dept": "区级综合口",
-      "name": "广州市黄埔区 广州开发区促进元宇宙创新发展办法",
-      "match": "条件匹配",
-      "amount": "—",
-      "unit": "按项目评估",
-      "url": "http://www.hp.gov.cn/gzjg/qzfgwhgzbm/qgyhxxhj/xxgk/content/post_8171935.html",
-      "certainty": "confirmed"
-    },
-    {
       "city": "苏州",
       "province": "江苏",
-      "dept": "科创科委口",
+      "dept": "市发改委、市科技局、市工信局、市数据局",
       "name": "苏州市进一步加快建设“人工智能+”城市的若干措施（2026年版）",
       "match": "条件匹配",
       "amount": "—",
       "unit": "按项目评估",
-      "url": "https://www.suzhou.gov.cn/szsrmzf/wzjd/202601/bab90715aaf3456981b802b6c59ec94d.shtml",
-      "certainty": "confirmed"
-    },
-    {
-      "city": "济南",
-      "province": "山东",
-      "dept": "工信局口",
-      "name": "济南市促进元宇宙产业创新发展行动计划（2022—2025年）",
-      "match": "条件匹配",
-      "amount": "—",
-      "unit": "按项目评估",
-      "url": "https://www.jinan.gov.cn/col113976/art/2022/art_113976_4936330.html",
+      "url": "https://www.suzhou.gov.cn/szsrmzf/szfgfxwjk/202512/859f7ff48e8d45fdb9f38ad5977294ac.shtml",
       "certainty": "confirmed"
     },
     {
@@ -631,25 +608,25 @@
       "certainty": "confirmed"
     },
     {
-      "city": "广州",
-      "province": "广东",
+      "city": "南京",
+      "province": "江苏",
       "dept": "文旅局口",
-      "name": "2026年度促进文旅消费—音乐类品牌系列活动项目申报指南",
+      "name": "南京市2026年第一批文旅消费政府补贴演出剧目",
       "match": "参考价值",
       "amount": "—",
       "unit": "按项目评估",
-      "url": "http://wglj.gz.gov.cn/gkmlpt/content/10/10679/post_10679329.html",
+      "url": "https://wlj.nanjing.gov.cn/njswhgdxwcbj/202602/t20260204_5787398.html",
       "certainty": "confirmed"
     },
     {
-      "city": "广东省",
+      "city": "广州",
       "province": "广东",
       "dept": "文旅局口",
-      "name": "2026年度广东省文艺精品（文艺人才）扶持专项资金微短剧、网络动画片项目",
+      "name": "2026年度促进文旅消费—音乐类品牌系列活动项目申报",
       "match": "参考价值",
       "amount": "—",
       "unit": "按项目评估",
-      "url": "http://www.jieyang.gov.cn/jywgdltj/gkmlpt/content/1/1010/post_1010492.html",
+      "url": "https://www.gz.gov.cn/gzzcwjk/gzdata/content/post_10679328.html",
       "certainty": "confirmed"
     }
   ]
