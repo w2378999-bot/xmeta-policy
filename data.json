@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-06-01",
-  "policy_count": 47,
+  "updated_at": "2026-07-01",
+  "policy_count": 46,
   "city_count": 12,
   "cities": [
     "深圳",
@@ -17,28 +17,28 @@
     "福州"
   ],
   "provinces": [
-    "湖北",
-    "广东",
     "江苏",
+    "广东",
     "山东",
-    "吉林",
-    "黑龙江",
     "上海",
+    "吉林",
     "福建",
-    "江西",
-    "湖南"
+    "湖南",
+    "湖北",
+    "黑龙江",
+    "江西"
   ],
   "city_stats": {
     "深圳": 16,
     "上海": 8,
-    "南京": 4,
+    "南京": 3,
     "哈尔滨": 4,
     "武汉": 3,
     "济南": 1,
-    "广州": 2,
+    "广州": 3,
     "南昌": 1,
     "国家级": 1,
-    "长春": 2,
+    "长春": 1,
     "苏州": 3,
     "湖南省": 1,
     "福州": 1
@@ -355,15 +355,15 @@
       "certainty": "confirmed"
     },
     {
-      "city": "长春",
-      "province": "吉林",
-      "dept": "商委口",
-      "name": "长春市关于开展消费新业态新模式新场景试点项目申报工作的通知",
+      "city": "广州",
+      "province": "广东",
+      "dept": "区级综合口",
+      "name": "广州市黄埔区 广州开发区促进元宇宙创新发展办法",
       "match": "高度匹配",
       "amount": "—",
       "unit": "按项目评估",
-      "url": "http://swj.changchun.gov.cn/sy/fzjs/sswj/202512/t20251229_3456133.html",
-      "certainty": "confirmed"
+      "url": "http://www.hp.gov.cn/gzjg/qzfgwhgzbm/qgyhxxhj/xxgk/content/post_8171935.html",
+      "certainty": "predicted"
     },
     {
       "city": "深圳",
@@ -588,12 +588,12 @@
     {
       "city": "苏州",
       "province": "江苏",
-      "dept": "市发改委、市科技局、市工信局、市数据局",
+      "dept": "市发改委, 市科技局, 市工信局",
       "name": "苏州市进一步加快建设“人工智能+”城市的若干措施（2026年版）",
       "match": "条件匹配",
       "amount": "—",
       "unit": "按项目评估",
-      "url": "https://www.suzhou.gov.cn/szsrmzf/szfgfxwjk/202512/859f7ff48e8d45fdb9f38ad5977294ac.shtml",
+      "url": "http://www.suzhou.gov.cn/szsrmzf/zfwj/202512/81ccb2edeec5426990646da3f59dfc4b.shtml",
       "certainty": "confirmed"
     },
     {
@@ -608,17 +608,6 @@
       "certainty": "confirmed"
     },
     {
-      "city": "南京",
-      "province": "江苏",
-      "dept": "文旅局口",
-      "name": "南京市2026年第一批文旅消费政府补贴演出剧目",
-      "match": "参考价值",
-      "amount": "—",
-      "unit": "按项目评估",
-      "url": "https://wlj.nanjing.gov.cn/njswhgdxwcbj/202602/t20260204_5787398.html",
-      "certainty": "confirmed"
-    },
-    {
       "city": "广州",
       "province": "广东",
       "dept": "文旅局口",
@@ -626,7 +615,7 @@
       "match": "参考价值",
       "amount": "—",
       "unit": "按项目评估",
-      "url": "https://www.gz.gov.cn/gzzcwjk/gzdata/content/post_10679328.html",
+      "url": "http://wglj.gz.gov.cn/xxgk/gzdt/tzgsgg/content/post_10678940.html",
       "certainty": "confirmed"
     }
   ]
