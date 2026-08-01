@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-07-01",
-  "policy_count": 46,
+  "updated_at": "2026-08-01",
+  "policy_count": 71,
   "city_count": 12,
   "cities": [
     "深圳",
@@ -11,37 +11,41 @@
     "济南",
     "广州",
     "南昌",
-    "长春",
     "苏州",
     "湖南省",
-    "福州"
+    "福州",
+    "长春"
   ],
   "provinces": [
+    "湖北",
+    "山东",
+    "黑龙江",
+    "江西",
     "江苏",
     "广东",
-    "山东",
-    "上海",
-    "吉林",
     "福建",
     "湖南",
-    "湖北",
-    "黑龙江",
-    "江西"
+    "上海",
+    "吉林"
   ],
   "city_stats": {
-    "深圳": 16,
-    "上海": 8,
+    "深圳": 17,
+    "上海": 10,
     "南京": 3,
     "哈尔滨": 4,
-    "武汉": 3,
-    "济南": 1,
-    "广州": 3,
+    "武汉": 4,
+    "济南": 3,
+    "广州": 1,
     "南昌": 1,
-    "国家级": 1,
-    "长春": 1,
-    "苏州": 3,
+    "国家级": 6,
+    "苏州": 6,
     "湖南省": 1,
-    "福州": 1
+    "福州": 1,
+    "长春": 5,
+    "江苏省": 3,
+    "黑龙江省": 2,
+    "广东省": 1,
+    "全国": 3
   },
   "top_policies": [
     {
@@ -344,28 +348,6 @@
       "certainty": "confirmed"
     },
     {
-      "city": "长春",
-      "province": "吉林",
-      "dept": "商委口,文旅局口",
-      "name": "长春市消费新业态新模式新场景试点项目管理办法（试行）",
-      "match": "高度匹配",
-      "amount": "—",
-      "unit": "按项目评估",
-      "url": "http://swj.changchun.gov.cn/sy/fzjs/sswj/202604/t20260410_3479784.html",
-      "certainty": "confirmed"
-    },
-    {
-      "city": "广州",
-      "province": "广东",
-      "dept": "区级综合口",
-      "name": "广州市黄埔区 广州开发区促进元宇宙创新发展办法",
-      "match": "高度匹配",
-      "amount": "—",
-      "unit": "按项目评估",
-      "url": "http://www.hp.gov.cn/gzjg/qzfgwhgzbm/qgyhxxhj/xxgk/content/post_8171935.html",
-      "certainty": "predicted"
-    },
-    {
       "city": "深圳",
       "province": "广东",
       "dept": "科创科委口",
@@ -586,17 +568,6 @@
       "certainty": "confirmed"
     },
     {
-      "city": "苏州",
-      "province": "江苏",
-      "dept": "市发改委, 市科技局, 市工信局",
-      "name": "苏州市进一步加快建设“人工智能+”城市的若干措施（2026年版）",
-      "match": "条件匹配",
-      "amount": "—",
-      "unit": "按项目评估",
-      "url": "http://www.suzhou.gov.cn/szsrmzf/zfwj/202512/81ccb2edeec5426990646da3f59dfc4b.shtml",
-      "certainty": "confirmed"
-    },
-    {
       "city": "南京",
       "province": "江苏",
       "dept": "文旅局口",
@@ -608,14 +579,322 @@
       "certainty": "confirmed"
     },
     {
-      "city": "广州",
-      "province": "广东",
+      "city": "长春",
+      "province": "吉林",
       "dept": "文旅局口",
-      "name": "2026年度促进文旅消费—音乐类品牌系列活动项目申报",
+      "name": "关于印发《2024—2025年度雪季冰雪直通车补贴细则》的通知",
       "match": "参考价值",
       "amount": "—",
-      "unit": "按项目评估",
-      "url": "http://wglj.gz.gov.cn/xxgk/gzdt/tzgsgg/content/post_10678940.html",
+      "unit": "待人工确认",
+      "url": "http://whhlyt.jl.gov.cn/zwgk/tzgg/202412/t20241212_9008958.html",
+      "certainty": "confirmed"
+    },
+    {
+      "city": "长春",
+      "province": "吉林",
+      "dept": "商委口",
+      "name": "关于印发《长春市消费新业态新模式新场景试点项目管理办法（试行）》《长春市消费新业态新模式新场景试点项目资金管理办法（试行）》的通知",
+      "match": "参考价值",
+      "amount": "—",
+      "unit": "待人工确认",
+      "url": "http://swj.changchun.gov.cn/sy/fzjs/sswj/202604/t20260410_3479784.html",
+      "certainty": "confirmed"
+    },
+    {
+      "city": "长春",
+      "province": "吉林",
+      "dept": "商委口",
+      "name": "2026年吉林省汽车置换更新补贴实施细则",
+      "match": "参考价值",
+      "amount": "—",
+      "unit": "待人工确认",
+      "url": "http://swj.changchun.gov.cn/sy/fzjs/sswj/202601/t20260122_3463315.html",
+      "certainty": "confirmed"
+    },
+    {
+      "city": "国家级",
+      "province": "—",
+      "dept": "科创科委口",
+      "name": "市政府关于印发苏州市进一步加快建设“人工智能+”城市的若干措施（2026年版）的通知",
+      "match": "参考价值",
+      "amount": "—",
+      "unit": "待人工确认",
+      "url": "http://www.suzhou.gov.cn/szsrmzf/zfwj/202512/81ccb2edeec5426990646da3f59dfc4b.shtml",
+      "certainty": "confirmed"
+    },
+    {
+      "city": "国家级",
+      "province": "—",
+      "dept": "科创科委口",
+      "name": "济南市人民政府关于印发济南市2026年国民经济和社会发展计划的通知",
+      "match": "参考价值",
+      "amount": "—",
+      "unit": "待人工确认",
+      "url": "https://www.jinan.gov.cn/col/col111438/art/2026/art_dee0eb7cea2d4ea78633e4bd5519ee1e.html?type=FUaRhQW7Lo9974tywtQmQ",
+      "certainty": "confirmed"
+    },
+    {
+      "city": "国家级",
+      "province": "—",
+      "dept": "科创科委口",
+      "name": "关于“2025年元宇宙典型案例”入选案例名单的公示",
+      "match": "参考价值",
+      "amount": "—",
+      "unit": "待人工确认",
+      "url": "https://www.ncsti.gov.cn/kjdt/tzgg/202601/t20260107_234576.html",
+      "certainty": "confirmed"
+    },
+    {
+      "city": "国家级",
+      "province": "—",
+      "dept": "文旅局口",
+      "name": "山西省人民政府办公厅关于印发山西省文旅产业融合发展2026年行动计划的通知",
+      "match": "参考价值",
+      "amount": "—",
+      "unit": "待人工确认",
+      "url": "https://www.sxgp.gov.cn/xwzx_358/szfwj_1327/202606/t20260601_2355734.shtml",
+      "certainty": "confirmed"
+    },
+    {
+      "city": "国家级",
+      "province": "—",
+      "dept": "文旅局口",
+      "name": "微信分享“扫一扫”",
+      "match": "参考价值",
+      "amount": "—",
+      "unit": "待人工确认",
+      "url": "https://www.mct.gov.cn/whzx/zsdw/whbxxzx_bnsj/202604/t20260413_965413.html",
+      "certainty": "confirmed"
+    },
+    {
+      "city": "江苏省",
+      "province": "江苏",
+      "dept": "文旅局口",
+      "name": "政策详情",
+      "match": "参考价值",
+      "amount": "—",
+      "unit": "待人工确认",
+      "url": "https://yqlb.jszwfw.gov.cn:1718/jssyqlb/epointystmhwz/pages/policynew/policy_detail?policyguid=45102684-E2AC-4D64-84AC-E0EB6AB1AF04",
+      "certainty": "confirmed"
+    },
+    {
+      "city": "江苏省",
+      "province": "江苏",
+      "dept": "科创科委口",
+      "name": "《江苏省元宇宙产业发展行动计划》发布，2026年产业规模将突破1000亿元",
+      "match": "参考价值",
+      "amount": "—",
+      "unit": "待人工确认",
+      "url": "https://www.jswx.gov.cn/xinxi/qiangsheng/202310/t20231024_123991.shtml",
+      "certainty": "confirmed"
+    },
+    {
+      "city": "江苏省",
+      "province": "江苏",
+      "dept": "科创科委口",
+      "name": "福建省数据管理局 福建省工业和信息化厅关于印发《福建省元宇宙产业发展行动计划（2024—2026年）》的通知",
+      "match": "参考价值",
+      "amount": "—",
+      "unit": "待人工确认",
+      "url": "https://fgw.fujian.gov.cn/zwgk/gsgg/202408/t20240826_6506869.htm",
+      "certainty": "confirmed"
+    },
+    {
+      "city": "黑龙江省",
+      "province": "黑龙江",
+      "dept": "文旅局口",
+      "name": "关于公开征选2026年文旅消费券发放平台的公告",
+      "match": "参考价值",
+      "amount": "—",
+      "unit": "待人工确认",
+      "url": "https://www.mohe.gov.cn/mohe/c101075/202607/c13_342156.shtml",
+      "certainty": "confirmed"
+    },
+    {
+      "city": "黑龙江省",
+      "province": "黑龙江",
+      "dept": "文旅局口",
+      "name": "关于做好2026年度黑龙江省家电、数码等消费补贴政策参与市场主体报名的通知",
+      "match": "参考价值",
+      "amount": "—",
+      "unit": "待人工确认",
+      "url": "https://suifenhe.gov.cn/sfh/c100960/202601/c03_1030975.shtml",
+      "certainty": "confirmed"
+    },
+    {
+      "city": "上海",
+      "province": "上海",
+      "dept": "文旅局口",
+      "name": "武汉市文旅元宇宙创新发展三年行动方案 （2025—2027年）",
+      "match": "参考价值",
+      "amount": "—",
+      "unit": "待人工确认",
+      "url": "https://www.wuhan.gov.cn/gwfbpt/sbm/swhhlyj_79506/202412/t20241218_2501366.shtml",
+      "certainty": "confirmed"
+    },
+    {
+      "city": "上海",
+      "province": "上海",
+      "dept": "文旅局口",
+      "name": "《上海打造文旅元宇宙新賽道行動方案》發布來源：上海市文化和旅游局官網編輯：發布時間：2023.06.30 17:13",
+      "match": "参考价值",
+      "amount": "—",
+      "unit": "待人工确认",
+      "url": "https://www.mct.gov.cn/gtb/index.jsp?url=https%3A%2F%2Fwww.mct.gov.cn%2Fwlbphone%2Fwlbydd%2Fxxfb%2Fqglb%2Fsh%2F202306%2Ft20230630_945533.html",
+      "certainty": "confirmed"
+    },
+    {
+      "city": "深圳",
+      "province": "广东",
+      "dept": "科创科委口",
+      "name": "深圳市工业和信息化局政府信息公开",
+      "match": "参考价值",
+      "amount": "—",
+      "unit": "待人工确认",
+      "url": "http://gxj.sz.gov.cn/gkmlpt/content/12/12645/post_12645602.html",
+      "certainty": "confirmed"
+    },
+    {
+      "city": "广东省",
+      "province": "广东",
+      "dept": "文旅局口",
+      "name": "关于开展2026年度促进文旅消费—音乐类品牌系列活动项目申报工作的通知",
+      "match": "参考价值",
+      "amount": "—",
+      "unit": "待人工确认",
+      "url": "https://www.gz.gov.cn/gzzcwjk/gzdata/content/post_10679328.html",
+      "certainty": "confirmed"
+    },
+    {
+      "city": "全国",
+      "province": "",
+      "dept": "综合",
+      "name": "对区政协十五届四次会议第99号提案的答复",
+      "match": "参考价值",
+      "amount": "—",
+      "unit": "待人工确认",
+      "url": "https://www.wuchang.gov.cn/zwgk_37/fdzdgknr/qtzdgknr/jytabl_1/qjytan/taq/202510/t20251030_2669636.html",
+      "certainty": "confirmed"
+    },
+    {
+      "city": "全国",
+      "province": "",
+      "dept": "综合",
+      "name": "武汉市文化和旅游局",
+      "match": "参考价值",
+      "amount": "—",
+      "unit": "待人工确认",
+      "url": "http://wlj.wuhan.gov.cn/zfxxgk/fdzdgknr/qtzdgknr/jcygk_2021/jcca/casm/202507/t20250725_2625073.shtml",
+      "certainty": "confirmed"
+    },
+    {
+      "city": "全国",
+      "province": "",
+      "dept": "商委口",
+      "name": "泉州市商务局关于公开征集第二批消费 新业态新模式新场景重点建设项目的通知",
+      "match": "参考价值",
+      "amount": "—",
+      "unit": "待人工确认",
+      "url": "https://qzbofcom.quanzhou.gov.cn/zwgk/tzgg/202607/t20260730_3313891.htm",
+      "certainty": "draft"
+    },
+    {
+      "city": "苏州",
+      "province": "江苏",
+      "dept": "科创科委口",
+      "name": "市政府办公室关于印发苏州市加快建设“人工智能+”城市行动方案（2025～2026年）的通知",
+      "match": "参考价值",
+      "amount": "—",
+      "unit": "待人工确认",
+      "url": "https://www.suzhou.gov.cn/szsrmzf/zfbgswj/202509/95a8e52a6db5414db93a1fbc2d559e39.shtml",
+      "certainty": "confirmed"
+    },
+    {
+      "city": "苏州",
+      "province": "江苏",
+      "dept": "科创科委口",
+      "name": "2026年苏州市首批“人工智能+”典型应用场景发布！园区四案例入选！",
+      "match": "参考价值",
+      "amount": "—",
+      "unit": "待人工确认",
+      "url": "https://www.sipac.gov.cn/szgyyq/dthg202604/202604/b906e63d46644c9d82f49ed3332bf242.shtml",
+      "certainty": "confirmed"
+    },
+    {
+      "city": "苏州",
+      "province": "江苏",
+      "dept": "科创科委口",
+      "name": "《苏州市加快推进“AI+制造”创新发展行动方案（2025-2026年）》",
+      "match": "参考价值",
+      "amount": "—",
+      "unit": "待人工确认",
+      "url": "https://www.wujiang.gov.cn/zgwj/zcfg/202512/d891c619801247058d6fbd623b8d0b28.shtml",
+      "certainty": "confirmed"
+    },
+    {
+      "city": "苏州",
+      "province": "江苏",
+      "dept": "科创科委口",
+      "name": "2026苏州（长沙）数字文化产业交流活动暨相城区文化产业招商推介会举办",
+      "match": "参考价值",
+      "amount": "—",
+      "unit": "待人工确认",
+      "url": "http://www.szxc.gov.cn/szxcrmzf/xcyw/202606/07b0a93681004a259a61b7a436885a18.shtml",
+      "certainty": "confirmed"
+    },
+    {
+      "city": "武汉",
+      "province": "湖北",
+      "dept": "文旅局口",
+      "name": "湖北省文化和旅游厅",
+      "match": "参考价值",
+      "amount": "—",
+      "unit": "待人工确认",
+      "url": "http://wlt.hubei.gov.cn/zfxxgk/zc/qtzdgkwj/202601/t20260127_5864487.shtml",
+      "certainty": "confirmed"
+    },
+    {
+      "city": "济南",
+      "province": "山东",
+      "dept": "商委口",
+      "name": "济南市文化和旅游局2026年优化营商环境工作方案",
+      "match": "参考价值",
+      "amount": "—",
+      "unit": "待人工确认",
+      "url": "https://jnwl.jinan.gov.cn/col/col67110/art/2026/art_163f600489ac491ea0215a956c91b6ee.html",
+      "certainty": "confirmed"
+    },
+    {
+      "city": "济南",
+      "province": "山东",
+      "dept": "文旅局口",
+      "name": "济南市历城区文化和旅游局2025年工作总结和2026年工作计划",
+      "match": "参考价值",
+      "amount": "—",
+      "unit": "待人工确认",
+      "url": "http://www.licheng.gov.cn/gongkai/site_lichengquqwhlyjr/channel_63899cd83759918282629d02/doc_698aeb28d5e4131905c2aab3.html",
+      "certainty": "confirmed"
+    },
+    {
+      "city": "长春",
+      "province": "吉林",
+      "dept": "文旅局口",
+      "name": "正式官宣：吉林文旅1亿元冰雪消费券发放时间确定！",
+      "match": "参考价值",
+      "amount": "—",
+      "unit": "待人工确认",
+      "url": "http://wglj.changchun.gov.cn/sy_44789/bmdt/202511/t20251112_3439962.html",
+      "certainty": "confirmed"
+    },
+    {
+      "city": "长春",
+      "province": "吉林",
+      "dept": "文旅局口",
+      "name": "武汉市文化和旅游局  武汉市财政局  关于印发支持文化和旅游产业高质量发展若干奖补政策的通知",
+      "match": "参考价值",
+      "amount": "—",
+      "unit": "待人工确认",
+      "url": "https://www.wuhan.gov.cn/gwfbpt/sbm/swhhlyj_79506/202512/t20251231_2705417.shtml",
       "certainty": "confirmed"
     }
   ]
